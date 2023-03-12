@@ -119,8 +119,11 @@ function Femalle(props){
               
 
 
-                 <div style={{"display":"none","position":"fixed","top":"0",'bottom':'0','left':'0','right':'0',zIndex:20000,"opacity":".9",background:"black"}} id={`delete-alert-${props.id}`} >
-                <div  class=" col-11   m-2 p-2"   style={{"position":"relative","top":"50%","opacity":"1","background":"#FFFFFF","borderRadius":"10px"}} >
+                 <div style={{"display":"none","position":"fixed","top":"0",'bottom':'0','left':'0','right':'0',zIndex:20000,"background": "rgba(0, 0, 0, 0.6)"}} id={`delete-alert-${props.id}`} >
+                 <div className="justify-content-end row">
+                          <button onClick={()=>document.getElementById(`delete-alert-${props.id}`).style.display='none'} className="col-4 button-hiden mt-2"><img style={{width:25+'px',}} src={close}></img></button>
+                  </div>
+                <div  class=" row   m-2 p-2"   style={{"position":"relative","top":"20%","background":"#FFFFFF","borderRadius":"10px"}} >
                     <div class="">
                       <div class="modal-content">
                         <div class="modal-header flex-column">
@@ -143,45 +146,18 @@ function Femalle(props){
 
 
 
-                 <div className="card-footer bg-success bg-opacity-50 row m-0 justify-content-around">
-                   <button onClick={()=>document.getElementById(`delails-${props.id}`).style.display='block'} className="col-2 button-hiden"><img style={{width:25+'px',}} src={details}></img></button>
-                   <Link to={"/managment/parents/femalles/update/"+props.id+"/"+props.cage} className="col-2"><img style={{width:25+'px',}} src={update} ></img></Link>
-                   <button onClick={()=>document.getElementById(`delete-alert-${props.id}`).style.display='block'} className="col-2 button-hiden"><img style={{width:25+'px',}} src={deleteFemalle} ></img></button>
-                   <Link  to={"/managment/parents/femalles/vent/"+props.id+"/"+props.cage} className="col-2"><img style={{width:25+'px',}} src={market} ></img></Link>
-                   <Link  to={"/managment/parents/femalles/morte/"+props.id+"/"+props.cage} cage={props.cage} className="col-2"><img style={{width:25+'px',}} src={mort} ></img></Link>
 
-                </div>
-                <div className="card-body ">
-                  <div className="text-center">
-                    {message}
-                      <h5 className="m-0">lapin : {props.cage}</h5>
-                      {props.race ? <p className="text-body m-0">race:{props.race}</p> :""}
-                      age: {props.ageMois} 
-                    </div>
-                </div>
+
+
+
+
+                 <div style={{"display":"none","position":"fixed","top":"0",'bottom':'0','left':'0','right':'0',zIndex:200,"background": "rgba(0, 0, 0, 0.6)"}} id={`statistique-${props.id}`} >
+                 <div className="justify-content-end row">
+                          <button onClick={()=>document.getElementById(`statistique-${props.id}`).style.display='none'} className="col-4 button-hiden mt-2"><img style={{width:25+'px',}} src={close}></img></button>
+                  </div>
                 
-                
-                <div className="card bg-info bg-opacity-25 m-2 p-2" id={`delails-${props.id}`} style={{"display":"none"}}>
-                      <div className="justify-content-end row">
-                          <button onClick={()=>document.getElementById(`delails-${props.id}`).style.display='none'} className="col-2 button-hiden m-2"><img style={{width:25+'px',}} src={close}></img></button>
-                      </div>
-                      <h1>statistique</h1>
-                      <div>la productivité :</div>
-                      <div >{((TP*100)/8)}%</div>
-                      <div>les mortalité :</div>
-                      <div >{((TM*100)/3)}%</div>
-                      
-
-                      <div>les poid des lapins produits a la naissance :</div>
-                      <div >{((MPN*100)/50)}%</div>
-
-
-
-                </div>
-             
-
-
-              <div style={{overflowY:"scroll",overflowX:"hidden",height:370+"px"}}>  
+                <div  class="row m-2 p-2"   style={{"width":"90%","opacity":"1","background":"#FFFFFF","borderRadius":"10px"}} >
+                <div style={{overflowY:"scroll",overflowX:"hidden",height:370+"px"}}>  
                 <div className="m-auto mt-2 rounded p-1 bg-success bg-opacity-25 border border-danger"  style={{"width":90+"%"}}>
                     <h3 className="text-danger">consomation d'alimantation :</h3>
                     <table class="table table-striped">                   
@@ -282,6 +258,62 @@ function Femalle(props){
                 </div>
                
               </div>
+                 </div>     
+
+                 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                 <div className="card-footer bg-success bg-opacity-50 row m-0 justify-content-around">
+                   <button onClick={()=>document.getElementById(`statistique-${props.id}`).style.display='block'} className="col-2 button-hiden"><img style={{width:25+'px',}} src={details}></img></button>
+                   <Link to={"/managment/parents/femalles/update/"+props.id+"/"+props.cage} className="col-2"><img style={{width:25+'px',}} src={update} ></img></Link>
+                   <button onClick={()=>document.getElementById(`delete-alert-${props.id}`).style.display='block'} className="col-2 button-hiden"><img style={{width:25+'px',}} src={deleteFemalle} ></img></button>
+                   <Link  to={"/managment/parents/femalles/vent/"+props.id+"/"+props.cage} className="col-2"><img style={{width:25+'px',}} src={market} ></img></Link>
+                   <Link  to={"/managment/parents/femalles/morte/"+props.id+"/"+props.cage} cage={props.cage} className="col-2"><img style={{width:25+'px',}} src={mort} ></img></Link>
+
+                </div>
+                <div className="card-body ">
+                  <div className="text-center">
+                    {message}
+                      <h5 className="m-0">lapin : {props.cage}</h5>
+                      {props.race ? <p className="text-body m-0">race:{props.race}</p> :""}
+                      age: {props.ageMois} 
+                    </div>
+                </div>
+                
+                
+                <div className="card bg-info bg-opacity-25 m-2 p-2" id={`delails-${props.id}`} style={{"display":"none"}}>
+                      <div className="justify-content-end row">
+                          <button onClick={()=>document.getElementById(`delails-${props.id}`).style.display='none'} className="col-2 button-hiden m-2"><img style={{width:25+'px',}} src={close}></img></button>
+                      </div>
+                      <h1>statistique</h1>
+                      <div>la productivité :</div>
+                      <div >{((TP*100)/8)}%</div>
+                      <div>les mortalité :</div>
+                      <div >{((TM*100)/3)}%</div>
+                      
+
+                      <div>les poid des lapins produits a la naissance :</div>
+                      <div >{((MPN*100)/50)}%</div>
+
+
+
+                </div>
+             
+
+
+          
 
 
                 
