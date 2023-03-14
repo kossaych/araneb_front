@@ -16,7 +16,7 @@ function MalleUpdate(){
 
 
     useEffect(()=>{
-        fetch("https://kossay.pythonanywhere.com/parents/api/malle/"+id,{
+        fetch("http://127.0.0.1:8000/parents/api/malle/"+id,{
             method:'get',
             headers: {
             'Content-Type': 'application/json',
@@ -46,7 +46,7 @@ function MalleUpdate(){
 
     function MalleUpdate(id){
         
-    fetch("https://kossay.pythonanywhere.com/parents/api/malle/"+id,{
+    fetch("http://127.0.0.1:8000/parents/api/malle/"+id,{
     method:'put',
     headers: {
     'Content-Type': 'application/json',

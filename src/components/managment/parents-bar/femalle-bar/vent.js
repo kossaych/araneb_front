@@ -21,7 +21,7 @@ function FemalleVent(props){
   const {id}=useParams()
   const {cage}=useParams()
   useEffect(()=>{
-    fetch("https://kossay.pythonanywhere.com/parents/api/femalle/"+id,{
+    fetch("http://127.0.0.1:8000/parents/api/femalle/"+id,{
         method:'get',
         headers: {
         'Content-Type': 'application/json',
@@ -50,7 +50,7 @@ function FemalleVent(props){
 },[])
   function FemalleVent(id){
     
-    fetch("https://kossay.pythonanywhere.com/parents/api/femalle/"+id,{
+    fetch("http://127.0.0.1:8000/parents/api/femalle/"+id,{
   method:'put',
   headers: {
   'Content-Type': 'application/json',

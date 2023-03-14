@@ -16,7 +16,7 @@ function FemalleUpdate(){
 
 
     useEffect(()=>{
-        fetch("https://kossay.pythonanywhere.com/parents/api/femalle/"+id,{
+        fetch("http://127.0.0.1:8000/parents/api/femalle/"+id,{
             method:'get',
             headers: {
             'Content-Type': 'application/json',
@@ -46,7 +46,7 @@ function FemalleUpdate(){
 
     function FemalleUpdate(id){
         
-    fetch("https://kossay.pythonanywhere.com/parents/api/femalle/"+id,{
+    fetch("http://127.0.0.1:8000/parents/api/femalle/"+id,{
     method:'put',
     headers: {
     'Content-Type': 'application/json',

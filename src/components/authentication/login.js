@@ -12,7 +12,7 @@ function Login(){
   function sendLoginData(){
     setIsWait(false)
 
-    fetch("https://kossay.pythonanywhere.com/accounts/api/login/",{
+    fetch("http://127.0.0.1:8000/accounts/api/login/",{
   method:'post',
   headers: {
   'Content-Type': 'application/json',

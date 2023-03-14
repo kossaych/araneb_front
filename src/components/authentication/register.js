@@ -13,7 +13,7 @@ function Register(){
   const [codeMessage,setCodeMessage]=useState("")
   function sendRegistrationData(){
     setIsWait(false)
-      fetch("https://kossay.pythonanywhere.com/accounts/api/register/",{
+      fetch("http://127.0.0.1:8000/accounts/api/register/",{
   method:'post',
   headers: {
     'Content-Type': 'application/json',
@@ -55,7 +55,7 @@ else if(response.status==500){
 function sendVirificationData(){
   setIsWait(false)
 
-  fetch("https://kossay.pythonanywhere.com/accounts/api/activate/",{
+  fetch("http://127.0.0.1:8000/accounts/api/activate/",{
 method:'post',
 headers: {
 'Content-Type': 'application/json',

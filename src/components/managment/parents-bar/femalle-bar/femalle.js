@@ -36,7 +36,7 @@ function Femalle(props){
 
 
  useEffect(()=>{
-    fetch("https://kossay.pythonanywhere.com/parents/api/femalle/"+id,{
+    fetch("http://127.0.0.1:8000/parents/api/femalle/"+id,{
         method:'get',
         headers: {
         'Content-Type': 'application/json',
@@ -83,7 +83,7 @@ function Femalle(props){
 
   function deleteFemalleApi(id){
     
-    fetch(`https://kossay.pythonanywhere.com/parents/api/femalle/${id.toString()}`,{
+    fetch(`http://127.0.0.1:8000/parents/api/femalle/${id.toString()}`,{
   method:'delete',
   headers: {
   'Content-Type': 'application/json',
@@ -274,8 +274,9 @@ function Femalle(props){
 
                 </div>
                 <div className="card-body ">
+                <img style={{'width':'100%'}}src={"http://127.0.0.1:8000/media/"+props.img}></img>
                   <div className="text-center">
-                    {message}
+                      {message}
                       <h5 className="m-0">lapin : {props.cage}</h5>
                       {props.race ? <p className="text-body m-0">race:{props.race}</p> :""}
                       age: {props.ageMois} 

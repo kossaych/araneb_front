@@ -10,7 +10,7 @@ function CreateMalle(){
     const [id,setId]=useState('')
     function createMalle(){
         setIsWait(false)
-        fetch("https://kossay.pythonanywhere.com/parents/api/malles",{
+        fetch("http://127.0.0.1:8000/parents/api/malles",{
       method:'post',
       headers: {
       'Content-Type': 'application/json',
@@ -41,7 +41,7 @@ function CreateMalle(){
 
           var data2 = new FormData()
           data2.append('file', img )
-          fetch('https://kossay.pythonanywhere.com/parents/api/malle/img/'+data.id, {
+          fetch('http://127.0.0.1:8000/parents/api/malle/img/'+data.id, {
             method: 'put',
            
             body: data2,
@@ -53,13 +53,17 @@ function CreateMalle(){
             }
           }).then(data =>{
             if (data==true){
-              setIsWait(true)
               window.location.href='/managment/parents/malles'
+            }else{
+              setIsWait(true)
+              document.getElementById('message').style.display='block';
+              setMessage('choisir une photo')
             }
           })
         
           
       }else {
+        setIsWait(true)
         document.getElementById('message').style.display='block';
         setMessage(data)
       }
@@ -103,7 +107,7 @@ function CreateMalle(){
                     <h4 className="text-dark">ajouter un malle</h4>
                     <h4 id="message" style={{display:"none"}} className="alert alert-danger">{message}</h4>
                     <label>date naissance</label>
-                    <input onChange={e => setDateNaissance(e.target.value)} className="border border-success bg-success bg-opacity-25 " style={{borderRadius:5+'px',}} type="date" />
+                    <input onChange={e => setDateNaissance(e.target.value)} className="border border-success bg-success bg-opacity-25 " style={{borderRadius:5+'px',}} type="date" /><br></br>
                     <input onChange={e => setImg(e.target.files[0])} className="border border-success bg-success bg-opacity-25 " style={{borderRadius:5+'px',}} type="file" />
 
                     <label >race</label>
