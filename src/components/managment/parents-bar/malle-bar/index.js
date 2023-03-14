@@ -18,7 +18,7 @@ function MallesBar(){
         }
         
 
-      fetch("http://127.0.0.1:8000/parents/api/malles",{
+      fetch("https://kossay.pythonanywhere.com/parents/api/malles",{
         method:'get',
         headers: {
           

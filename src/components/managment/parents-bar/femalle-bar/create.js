@@ -12,7 +12,7 @@ function CreateFemalle(){
 
       
       setIsWait(false)
-      fetch("http://127.0.0.1:8000/parents/api/femalles",{
+      fetch("https://kossay.pythonanywhere.com/parents/api/femalles",{
       method:'post',
       headers: {
       'Content-Type': 'application/json',
@@ -69,7 +69,7 @@ function CreateFemalle(){
 
 
     useEffect(()=>{
-      fetch("http://127.0.0.1:8000/parents/api/femalle/cage_vide",{
+      fetch("https://kossay.pythonanywhere.com/parents/api/femalle/cage_vide",{
           method:'get',
           headers: {
           'Content-Type': 'application/json',

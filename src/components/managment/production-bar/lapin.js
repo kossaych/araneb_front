@@ -14,7 +14,7 @@ function Lapin(props){
 
   function deleteFemalleApi(id){
     
-    fetch(`http://127.0.0.1:8000/production/lapins_productions/${id.toString()}`,{
+    fetch(`https://kossay.pythonanywhere.com/production/lapins_productions/${id.toString()}`,{
   method:'delete',
   headers: {
   'Content-Type': 'application/json',

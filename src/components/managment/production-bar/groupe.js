@@ -39,7 +39,7 @@ function Groupe(props){
 
   function deleteAcc(id){
     
-    fetch(`http://127.0.0.1:8000/production/groupes/${id.toString()}`,{
+    fetch(`https://kossay.pythonanywhere.com/production/groupes/${id.toString()}`,{
   method:'delete',
   headers: {
   'Content-Type': 'application/json',
