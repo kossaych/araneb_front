@@ -7,7 +7,6 @@ function CreateMalle(){
     const [message,setMessage]=useState(true)
     const [race,setRace]=useState('Gaint Flander')
     const [img,setImg]=useState('')
-    const [id,setId]=useState('')
     function createMalle(){
         setIsWait(false)
         fetch("http://127.0.0.1:8000/parents/api/malles",{

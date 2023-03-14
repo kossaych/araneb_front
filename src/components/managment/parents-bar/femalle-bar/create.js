@@ -44,7 +44,6 @@ function CreateFemalle(){
           data2.append('file', img )
           fetch('http://127.0.0.1:8000/parents/api/femalle/img/'+data.id, {
             method: 'put',
-           
             body: data2,
           }).then(response =>{
             if (response.status==202){
@@ -54,7 +53,7 @@ function CreateFemalle(){
             }
           }).then(data =>{
             if (data==true){
-              window.location.href='/managment/parents/malles'
+              window.location.href='/managment/parents/femalles'
             }else{
               setIsWait(true)
               document.getElementById('message').style.display='block';
