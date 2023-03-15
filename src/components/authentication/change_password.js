@@ -12,7 +12,7 @@ function ChangePassword(){
 
 
 function sendData(){
-    fetch("http://127.0.0.1:8000/accounts/api/change_password/",{
+    fetch("https://kossay.pythonanywhere.com/accounts/api/change_password/",{
 method:'post',
 headers: {
   'Content-Type': 'application/json',

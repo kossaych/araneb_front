@@ -9,9 +9,10 @@ function FemalleVent(props){
   
   const [message,setMessage]=useState(true)
   const [dateMort,setDateMort]=useState(yyyy+"-"+mm+"-"+dd)
+  const [race,setRace]=useState(true)
+  
   const [state,setState]=useState(true)
   const [dateNaissance,setDateNaissance]=useState(true)
-  const [race,setRace]=useState(true)
   const [dateVent,setDateVent]=useState(true)
   const [prix,setPrix]=useState(true)
   
@@ -21,7 +22,7 @@ function FemalleVent(props){
   const {id}=useParams()
   const {cage}=useParams()
   useEffect(()=>{
-    fetch("http://127.0.0.1:8000/parents/api/femalle/"+id,{
+    fetch("https://kossay.pythonanywhere.com/parents/api/femalle/"+id,{
         method:'get',
         headers: {
         'Content-Type': 'application/json',
@@ -50,7 +51,7 @@ function FemalleVent(props){
 },[])
   function FemalleVent(id){
     
-    fetch("http://127.0.0.1:8000/parents/api/femalle/"+id,{
+    fetch("https://kossay.pythonanywhere.com/parents/api/femalle/"+id,{
   method:'put',
   headers: {
   'Content-Type': 'application/json',

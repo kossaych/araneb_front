@@ -20,7 +20,7 @@ function UpdateGroupeProduction(props){
 
 
   useEffect(()=>{
-    fetch("http://127.0.0.1:8000/production/groupes/"+id,{
+    fetch("https://kossay.pythonanywhere.com/production/groupes/"+id,{
         method:'get',
         headers: {
         'Content-Type': 'application/json',
@@ -49,7 +49,7 @@ function UpdateGroupeProduction(props){
 
   function Update(id){
 
-    fetch("http://127.0.0.1:8000/production/groupes/"+id,{
+    fetch("https://kossay.pythonanywhere.com/production/groupes/"+id,{
   method:'put',
   headers: {
   'Content-Type': 'application/json',

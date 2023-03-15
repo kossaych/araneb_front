@@ -8,13 +8,11 @@ function CreateFemalle(){
     const [race,setRace]=useState('Gaint Flander')
     const [cage,setCage]=useState('')
     const [img,setImg]=useState('')
-
-
     function createFemalle(){
 
       
       setIsWait(false)
-      fetch("http://127.0.0.1:8000/parents/api/femalles",{
+      fetch("https://kossay.pythonanywhere.com/parents/api/femalles",{
       method:'post',
       headers: {
       'Content-Type': 'application/json',
@@ -42,7 +40,7 @@ function CreateFemalle(){
         if (data !=  "server error 500" && data !=  "le femalle que vous voulez ajouter a un age trés petit" && data !='invalid data' ){
           var data2 = new FormData()
           data2.append('file', img )
-          fetch('http://127.0.0.1:8000/parents/api/femalle/img/'+data.id, {
+          fetch('https://kossay.pythonanywhere.com/parents/api/femalle/img/'+data.id, {
             method: 'put',
             body: data2,
           }).then(response =>{
@@ -96,7 +94,7 @@ function CreateFemalle(){
 
 
     useEffect(()=>{
-      fetch("http://127.0.0.1:8000/parents/api/femalle/cage_vide",{
+      fetch("https://kossay.pythonanywhere.com/parents/api/femalle/cage_vide",{
           method:'get',
           headers: {
           'Content-Type': 'application/json',
@@ -118,15 +116,6 @@ function CreateFemalle(){
           }
           })
   },[])
-  
-  
-
-
-
-
-
-
-
     return(
         <div>
             <HeaderManagment></HeaderManagment>

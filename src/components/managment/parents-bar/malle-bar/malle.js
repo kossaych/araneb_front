@@ -12,7 +12,7 @@ function Malle(props){
 
   function deleteMalleApi(id){
     
-    fetch(`http://127.0.0.1:8000/parents/api/malle/${id.toString()}`,{
+    fetch(`https://kossay.pythonanywhere.com/parents/api/malle/${id.toString()}`,{
   method:'delete',
   headers: {
   'Content-Type': 'application/json',
@@ -96,7 +96,7 @@ function Malle(props){
 
              
                 <div className="card-body ">
-                  <img style={{'width':'100%'}}src={"http://127.0.0.1:8000/media/"+props.img}></img>
+                  <img style={{'width':'100%'}}src={"https://kossay.pythonanywhere.com/media/"+props.img}></img>
                   <div className="text-center">
                     {message}
                       <h5 className="m-0">lapin : {props.cage}</h5>
