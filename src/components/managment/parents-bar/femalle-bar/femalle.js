@@ -6,10 +6,11 @@ import mort from "./icons/mort.png";
 import details from "./icons/details.png";
 import close from "./icons/close.png"
 import { Link } from "react-router-dom";
-import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 function Femalle(props){
   const [message,setMessage]=useState("")
+  const [isWait,setIsWait]=useState(true)
+
 
   const [TP,setTP]=useState("")
   const [TM,setTM]=useState("")
@@ -44,10 +45,12 @@ function Femalle(props){
   const [dateMort,setDateMort]=useState(yyyy+"-"+mm+"-"+dd)
   const [race,setRace]=useState("")
   const [cage,setCage]=useState("")
+  
+
 
 
   useEffect(()=>{
-      fetch("https://kossay.pythonanywhere.com/parents/api/femalle/"+id,{
+      fetch("http://127.0.0.1:8000/parents/api/femalle/"+id,{
           method:'get',
           headers: {
           'Content-Type': 'application/json',
@@ -89,15 +92,14 @@ function Femalle(props){
               setRace(data.race)
               setCage(data.cage)
 
+
           }
           })
   },[])
 
-
-
-  function deleteFemalleApi(id){
-    
-    fetch(`https://kossay.pythonanywhere.com/parents/api/femalle/${id.toString()}`,{
+  function FemalleDelete(id){
+    setIsWait(false)
+    fetch(`http://127.0.0.1:8000/parents/api/femalle/${id.toString()}`,{
   method:'delete',
   headers: {
   'Content-Type': 'application/json',
@@ -125,18 +127,34 @@ function Femalle(props){
   }
   })}
   function FemalleVent(id){
+    if(prix===""){
+      console.log('test1')
+      document.getElementById('prix').focus()
+      document.getElementById('prix').className="border border-danger bg-success bg-opacity-25 rounded"
+      document.getElementById('cage').className="border border-success bg-success bg-opacity-25 rounded"
+
+    }
+    else if(dateVent===""){
+      console.log('test2')
+      document.getElementById('dateVent').focus()
+      document.getElementById('prix').className="border border-success bg-success bg-opacity-25 rounded"
+      document.getElementById('dateVent').className="border border-danger bg-success bg-opacity-25 rounded"
+    }
+    else{
+      document.getElementById('prix').className="border border-success bg-success bg-opacity-25 rounded"
+      document.getElementById('dateVent').className="border border-success bg-success bg-opacity-25 rounded"
     
-    fetch("https://kossay.pythonanywhere.com/parents/api/femalle/"+id,{
+
+    
+    setIsWait(false)
+
+    fetch("http://127.0.0.1:8000/parents/api/femalle/"+id,{
   method:'put',
   headers: {
   'Content-Type': 'application/json',
   'Authorization': 'token ' + JSON.parse(localStorage.getItem('token')),
   },
   body:JSON.stringify({
-    "cage":cage,
-    "date_mort":"",
-    "date_naissance":dateNaissance,
-    "race":race,
     "prix":prix,
     "date_vent":dateVent,
     "state":"vendue",
@@ -159,22 +177,18 @@ function Femalle(props){
     document.getElementById('message').style.display='block';
     setMessage(data)
   }
-  })}
+  })}}
   function FemalleMorte(id){
-    
-    fetch("https://kossay.pythonanywhere.com/parents/api/femalle/"+id,{
+    setIsWait(false)
+
+    fetch("http://127.0.0.1:8000/parents/api/femalle/"+id,{
   method:'put',
   headers: {
   'Content-Type': 'application/json',
   'Authorization': 'token ' + JSON.parse(localStorage.getItem('token')),
   },
   body:JSON.stringify({
-    "cage":cage,
     "date_mort":dateMort,
-    "date_naissance":dateNaissance,
-    "race":race,
-    "prix":prix,
-    "date_vent":dateVent,
     "state":"mort",
   })
   },
@@ -196,20 +210,83 @@ function Femalle(props){
     setMessage(data)
   }
   })}
+  function FemalleUpdate(id){
+    setIsWait(false)
+    fetch("http://127.0.0.1:8000/parents/api/femalle/"+id,{
+    method:'put',
+    headers: {
+    'Content-Type': 'application/json',
+    'Authorization': 'token ' + JSON.parse(localStorage.getItem('token')),
+    },
+    body:JSON.stringify({
+        
+        "date_naissance":dateNaissance,
+        "race":race,
+    })
+    },
+    )
+    .then(response =>{
+    if (response.status==202){
+        return true
+    }else if(response.status==500){
+      setIsWait(true)
+        return "server error 500"
+    }else{
+      setIsWait(true)
+        return response.json()
+    }
+    })
+    .then(data =>{
+        if (data === true){
+        window.location.href="/managment/parents/femalles"
+    }else {
+
+        document.getElementById('message').style.display='block';
+        setMessage(data)
+    }
+  })}
+  function Races  ()  {
+    const options=[
+        
+        {label:race,value:race},
+        {label:'Gaint Flander',value:'Gaint Flander'},
+        {label:'Flemish Giant',value:'Flemish Giant'},
+        {label:'Chinchilla',value:'Chinchilla'},
+        {label:'New Zealand White',value:'New Zealand White'},
+        {label:'California',value:'California'},
+        {label:'Rex',value:'Rex'},
+
+]
+    return (
+        <select value={race} onChange={e => setRace(e.target.value)} className="border border-success bg-success bg-opacity-25 rounded">
+           <option key={options[0].value} value={options[0].value} >{options[0].label}</option>
+          {options.map(o => (
+           
+           (o.value!=race) ?<option key={o.value} value={o.value} >{o.label}</option>:""
+            
+          ))}
+           
+        </select>
+    );
+    };
  
 
 
 
-  function deleteHandler(id){
+  let deleteHandler =(id)=>{
     document.getElementById("delete-alert-"+id).style.display='block';
     document.getElementById("layer-"+id).style.display='block'
   }
   function hidenAlerts(id){
+
+
     document.getElementById("delete-alert-"+id).style.display='none';
+    document.getElementById("update-"+id).style.display='none';
     document.getElementById("layer-"+id).style.display='none'
     document.getElementById("statistique-"+id).style.display='none';
     document.getElementById("vent-"+id).style.display='none'
     document.getElementById("mort-"+id).style.display='none'
+
 
   }
   function statistiqueHandler(id){
@@ -219,10 +296,18 @@ function Femalle(props){
   function ventHandler(id){
     document.getElementById("vent-"+id).style.display='block';
     document.getElementById("layer-"+id).style.display='block'
+
+
   }
   function mortHandler(id){
     document.getElementById("mort-"+id).style.display='block';
     document.getElementById("layer-"+id).style.display='block'
+  }
+  function updateHandler(id){
+    document.getElementById("update-"+id).style.display='block';
+    document.getElementById("layer-"+id).style.display='block'
+
+
   }
 
 
@@ -233,7 +318,7 @@ function Femalle(props){
                  <div onClick={()=>hidenAlerts(props.id)} style={{"display":"none","position":"fixed","top":"0",'bottom':'0','left':'0','right':'0',zIndex:20,"background": "rgba(0, 0, 0, 0.6)"}} id={`layer-${props.id}`} >
                  </div>
 
-                <div style={{"display":"none","position":"fixed","top":'35%','left':'0','right':'0',zIndex:20000,"background": "rgba(0, 0, 0, 0.0)"}} id={`delete-alert-${props.id}`} className="col-12 col-sm-6 col-md-4 col-lg-3 m-auto ">
+                <div style={{"display":"none","position":"fixed","top":'35%','left':'0','right':'0',zIndex:20000,"background": "rgba(0, 0, 0, 0.0)"}} id={`delete-alert-${props.id}`} className=" col-12 col-sm-6 col-md-4 col-lg-3 m-auto ">
                 <div className="justify-content-end row" style={{"position":"relative","top":"35%"}}>
                                 <button onClick={()=>hidenAlerts(props.id)} className="col-4 button-hiden mt-2"><img style={{width:25+'px',}} src={close}></img></button>
                         </div>
@@ -241,13 +326,12 @@ function Femalle(props){
                           <div class="">
                             <div class="modal-content">
                               <div class="modal-header flex-column mb-3">
-                                        
-                                <h4 class="modal-title w-100">delete : {props.cage} </h4>	
+                                <h4 class="modal-title w-100">delete : {cage} </h4>	
                               </div>
                             
                               <div class="modal-footer justify-content-center">
                                 <button type="button" class="btn btn-secondary m-1" onClick={()=> hidenAlerts(props.id)}>Cancel</button>
-                                <button type="button" class="btn btn-danger" onClick={() => deleteFemalleApi(props.id)}>Delete</button>
+                                <button type="button" class="btn btn-danger" onClick={() => FemalleDelete(props.id)}>Delete</button>
                               </div>
                             </div>
                           </div>
@@ -364,7 +448,7 @@ function Femalle(props){
 
                 </div>
 
-                <div className="col-12 m-auto  "  style={{"display":"none","position":"fixed","top":'20%','left':'0','right':'0',zIndex:20000,"background": "rgba(0, 0, 0,0.0)","height":"10%","alignItems":"center"}} id={`vent-${props.id}`}  >
+                <div className="col-12 m-auto  animate__animated  animate__backInUp "  style={{"display":"none","position":"fixed","top":'20%','left':'0','right':'0',zIndex:20000,"background": "rgba(0, 0, 0,0.0)","height":"10%","alignItems":"center"}} id={`vent-${props.id}`}  >
                         <div className="justify-content-end row" style={{"position":"relative","top":"10%"}}>
                                     <button onClick={()=>hidenAlerts(props.id)} className="col-4 button-hiden mt-2"><img style={{width:25+'px',}} src={close}></img></button>
                         </div>
@@ -375,9 +459,9 @@ function Femalle(props){
                           <h3>{message}</h3>
                         <br/>
                         <label>date de mort     :</label>
-                        <input   value={dateVent} onChange={e=>setDateVent(e.target.value)}  className="border border-success bg-success bg-opacity-25 m-2 " style={{borderRadius:5+'px',}}   type="date" /> <br/>
+                        <input id="dateVent"  value={dateVent} onChange={e=>setDateVent(e.target.value)}  className="border border-success bg-success bg-opacity-25 m-2 " style={{borderRadius:5+'px',}}   type="date" /> <br/>
                         <label>date de mort en dinar:</label> 
-                        <input   value={prix} onChange={e=>setPrix(e.target.value)}  className="border border-success bg-success bg-opacity-25 m-2 " style={{borderRadius:5+'px',}}   type="number" />
+                        <input   id='prix' value={prix} onChange={e=>setPrix(e.target.value)}  className="border border-success bg-success bg-opacity-25 m-2 " style={{borderRadius:5+'px',}}   type="number" />
                         </div>
 
 
@@ -391,8 +475,7 @@ function Femalle(props){
                                   </div >
                         </div>
                 </div>
-
-                <div className="col-12 m-auto  "  style={{"display":"none","position":"fixed","top":'20%','left':'0','right':'0',zIndex:20000,"background": "rgba(0, 0, 0,0.0)","height":"10%","alignItems":"center"}} id={`mort-${props.id}`}  >
+                <div className="col-12 m-auto  animate__animated  animate__backInUp "  style={{"display":"none","position":"fixed","top":'20%','left':'0','right':'0',zIndex:20000,"background": "rgba(0, 0, 0,0.0)","height":"10%","alignItems":"center"}} id={`mort-${props.id}`}  >
                         <div className="justify-content-end row" style={{"position":"relative","top":"10%"}}>
                                     <button onClick={()=>hidenAlerts(props.id)} className="col-4 button-hiden mt-2"><img style={{width:25+'px',}} src={close}></img></button>
                         </div>
@@ -417,6 +500,42 @@ function Femalle(props){
                         </div>
                 </div>
 
+                <div className="col-12 m-auto  animate__animated  animate__backInUp "  style={{"display":"none","position":"fixed","top":'20%','left':'0','right':'0',zIndex:20000,"background": "rgba(0, 0, 0,0.0)","height":"10%","alignItems":"center"}} id={`update-${props.id}`}  >
+                        <div className="justify-content-end row" style={{"position":"relative","top":"10%"}}>
+                                    <button onClick={()=>hidenAlerts(props.id)} className="col-4 button-hiden mt-2"><img style={{width:25+'px',}} src={close}></img></button>
+                        </div>
+                        <div className="alert alert-primary m-3" style={{background:"white","height":"500px"}} role="alert">
+                            <div className=" row card bg-success bg-opacity-50 p-1 col-12 m-auto">
+                                        
+                                        <h4 className="text-dark">modifier la femalle {cage}</h4>
+                                        <h4 id="message" style={{display:"none"}} className="alert alert-danger">{message}</h4>
+                                        
+
+                                        
+                                        <label>date naissance</label>
+                                        <input value={dateNaissance} onChange={e => setDateNaissance(e.target.value)} className="border border-success bg-success bg-opacity-25 " style={{borderRadius:5+'px',}} type="date" />
+                                        
+                                        <label >race</label>
+                                        <Races/>
+                                        
+                                        <div className="row justify-content-around mt-2 col-12 m-auto"> 
+                                                      
+                                          
+                                          {isWait ? <button  className="col-5 m-1 btn btn-success" onClick={()=>FemalleUpdate(id)}>ajoputer</button>:<button  className="col-5 m-1 btn btn-success" disabled >
+                                              <div className="spinner-border text-primary" role="status">
+                                            <span className="sr-only"></span>
+                                          </div>
+                                                
+                                                </button>}
+                                          <Link to='/managment/parents/femalles'  className="col-5 m-1 btn btn-danger">anuler</Link>
+                                        </div >
+
+                            </div>
+                        </div>
+                       
+                     
+                </div>
+
 
 
 
@@ -433,18 +552,17 @@ function Femalle(props){
 
                 <div className="card-footer bg-success bg-opacity-75 row m-0 justify-content-around">
                   <button onClick={()=>statistiqueHandler(props.id)} className="col-2 button-hiden"><img style={{width:25+'px',}} src={details}></img></button>
-                  <Link to={"/managment/parents/femalles/update/"+props.id+"/"+props.cage} className="col-2"><img style={{width:25+'px',}} src={update} ></img></Link>
+                  <button onClick={()=>updateHandler(props.id)} className="col-2 button-hiden"><img style={{width:25+'px',}} src={update} ></img></button>
                   <button onClick={()=>deleteHandler(props.id)} className="col-2 button-hiden"><img style={{width:25+'px',}} src={deleteFemalle} ></img></button>
                   <button onClick={()=>ventHandler(props.id)} className="col-2 button-hiden"><img style={{width:25+'px',}} src={market} ></img></button>
                   <button onClick={()=>mortHandler(props.id)} className="col-2 button-hiden"><img style={{width:25+'px',}} src={mort} ></img></button>
                 </div>
-                <div className="card-body ">
-                <img style={{'width':'100%'}}src={"https://kossay.pythonanywhere.com/media/"+props.img}></img>
+                <div className="card-body p-0">
+                <img style={{'width':'100%'}}src={"http://127.0.0.1:8000/media/"+props.img}></img>
                   <div className="text-center">
-                      {message}
                       <h5 className="m-0">lapin : {props.cage}</h5>
                       {props.race ? <p className="text-body m-0">race:{props.race}</p> :""}
-                      age: {props.ageMois} 
+                      age: {props.age} 
                     </div>
                 </div>
                 

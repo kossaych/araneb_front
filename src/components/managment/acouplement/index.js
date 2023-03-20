@@ -19,7 +19,7 @@ function AcouplementBar(){
       }
       
 
-    fetch("https://kossay.pythonanywhere.com/production/acouplements",{
+    fetch("http://127.0.0.1:8000/production/acouplements",{
       method:'get',
       headers: {
         

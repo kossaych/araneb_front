@@ -19,7 +19,7 @@ function FemallesBar(){
     }
     
 
-  fetch("https://kossay.pythonanywhere.com/parents/api/femalles",{
+  fetch("http://127.0.0.1:8000/parents/api/femalles",{
     method:'get',
     headers: {
       
@@ -55,7 +55,7 @@ setIsWait(false)
   
        { isWait ? <div className="text-center"><div className="spinner-border" role="status"><span className="sr-only"></span></div></div> : ""}
        {femalles && femalles.map((femalle)=>(
-            <Femalle img={femalle.img} key={femalle.id} id={femalle.id} consAujourdhui={femalle.cons_aujourdhui} race={femalle.race} ageMois={femalle.age} cage={femalle.cage} />
+            <Femalle img={femalle.img} key={femalle.id} id={femalle.id}  race={femalle.race} age={femalle.age}  />
         ))}
                 
          

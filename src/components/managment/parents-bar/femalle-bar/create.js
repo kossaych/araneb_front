@@ -12,7 +12,8 @@ function CreateFemalle(){
 
       
       setIsWait(false)
-      fetch("https://kossay.pythonanywhere.com/parents/api/femalles",{
+      
+      fetch("http://127.0.0.1:8000/parents/api/femalles",{
       method:'post',
       headers: {
       'Content-Type': 'application/json',
@@ -31,16 +32,23 @@ function CreateFemalle(){
       if (response.status==201){
           return response.json()
       }else if(response.status==500){
-        return "server error 500"
+        setIsWait(true)
+        document.getElementById('message').style.display='block';
+        setMessage('server error 500')
       }else{
         return response.json()
       }
       })
       .then(data =>{
-        if (data !=  "server error 500" && data !=  "le femalle que vous voulez ajouter a un age trés petit" && data !='invalid data' ){
+        if (data ==  "server error 500" || data =="la femalle que vous voulez ajouter a un age trés petit" || data =='invalid data' ){
+          setIsWait(true)
+          document.getElementById('message').style.display='block';
+          setMessage(data)
+        }else {
+          /// send the photo 
           var data2 = new FormData()
           data2.append('file', img )
-          fetch('https://kossay.pythonanywhere.com/parents/api/femalle/img/'+data.id, {
+          fetch('http://127.0.0.1:8000/parents/api/femalle/img/'+data.id, {
             method: 'put',
             body: data2,
           }).then(response =>{
@@ -59,11 +67,6 @@ function CreateFemalle(){
             }
           })
         
-          
-        }else {
-        setIsWait(true)
-        document.getElementById('message').style.display='block';
-        setMessage(data)
       }
       })
       
@@ -92,9 +95,9 @@ function CreateFemalle(){
     };
 
 
-
+    /// function to prpose a cage for a the rabbit
     useEffect(()=>{
-      fetch("https://kossay.pythonanywhere.com/parents/api/femalle/cage_vide",{
+      fetch("http://127.0.0.1:8000/parents/api/femalle/cage_vide",{
           method:'get',
           headers: {
           'Content-Type': 'application/json',
@@ -115,7 +118,9 @@ function CreateFemalle(){
               setCage(data.cage_vide)
           }
           })
-  },[])
+    },[])
+    
+    
     return(
         <div>
             <HeaderManagment></HeaderManagment>

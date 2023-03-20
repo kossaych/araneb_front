@@ -13,7 +13,7 @@ function LapinProductionUpdate(){
 
 
     useEffect(()=>{
-        fetch("https://kossay.pythonanywhere.com/production/lapins_productions/"+id,{
+        fetch("http://127.0.0.1:8000/production/lapins_productions/"+id,{
             method:'get',
             headers: {
             'Content-Type': 'application/json',
@@ -39,7 +39,7 @@ function LapinProductionUpdate(){
 
     function LapinProductionUpdate(id){
         
-    fetch("https://kossay.pythonanywhere.com/production/lapins_productions/"+id,{
+    fetch("http://127.0.0.1:8000/production/lapins_productions/"+id,{
     method:'put',
     headers: {
     'Content-Type': 'application/json',

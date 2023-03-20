@@ -28,7 +28,7 @@ function VaccinLapins(props){
 
 
   useEffect(()=>{
-    fetch("https://kossay.pythonanywhere.com/production/groupes/"+id,{
+    fetch("http://127.0.0.1:8000/production/groupes/"+id,{
         method:'get',
         headers: {
         'Content-Type': 'application/json',
@@ -77,7 +77,7 @@ function VaccinLapins(props){
         lapins.push(listLapins[i].id)
       }
     }
-    fetch("https://kossay.pythonanywhere.com/production/groupes/vaccin",{
+    fetch("http://127.0.0.1:8000/production/groupes/vaccin",{
   method:'post',
   headers: {
   'Content-Type': 'application/json',

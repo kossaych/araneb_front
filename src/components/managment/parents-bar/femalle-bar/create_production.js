@@ -6,8 +6,6 @@ function CreateFemalleProduction(){
     const [message,setMessage]=useState('')
     const [race,setRace]=useState('')
     const [cage,setCage]=useState('')
-
-
     const [lapin,setLapin]=useState("")
     const [lapins,setLapins]=useState([])
 
@@ -15,10 +13,28 @@ function CreateFemalleProduction(){
 
 
     function createFemalle(){
+      if(race===""){
+        document.getElementById('race').focus()
+        document.getElementById('race').className="border border-danger bg-success bg-opacity-25 rounded"
+        document.getElementById('cage').className="border border-success bg-success bg-opacity-25 rounded"
+        document.getElementById('date_acouplage').className="border border-success bg-success bg-opacity-25 rounded"
+
+      }
+      else if(cage===""){
+        document.getElementById('cage').focus()
+        document.getElementById('race').className="border border-success bg-success bg-opacity-25 rounded"
+        document.getElementById('cage').className="border border-danger bg-success bg-opacity-25 rounded"
+        document.getElementById('date_acouplage').className="border border-success bg-success bg-opacity-25 rounded"
+      }
+      else{
+        document.getElementById('race').className="border border-success bg-success bg-opacity-25 rounded"
+        document.getElementById('cage').className="border border-success bg-success bg-opacity-25 rounded"
+        document.getElementById('date_acouplage').className="border border-success bg-success bg-opacity-25 rounded"
+      
 
       
       setIsWait(false)
-      fetch("https://kossay.pythonanywhere.com/parents/api/femalles/production",{
+      fetch("http://127.0.0.1:8000/parents/api/femalles/production",{
       method:'post',
       headers: {
       'Content-Type': 'application/json',
@@ -49,7 +65,7 @@ function CreateFemalleProduction(){
         document.getElementById('message').style.display='block';
         setMessage(data)
       }
-      })
+      })}
     }
 
     function Races  ()  {
@@ -74,7 +90,7 @@ function CreateFemalleProduction(){
 
 
     useEffect(()=>{
-      fetch("https://kossay.pythonanywhere.com/parents/api/femalle/cage_vide",{
+      fetch("http://127.0.0.1:8000/parents/api/femalle/cage_vide",{
           method:'get',
           headers: {
           'Content-Type': 'application/json',
@@ -99,7 +115,7 @@ function CreateFemalleProduction(){
 
 
   useEffect(()=>{
-    fetch("https://kossay.pythonanywhere.com/parents/api/femalles/production",{
+    fetch("http://127.0.0.1:8000/parents/api/femalles/production",{
         method:'get',
         headers: {
         'Content-Type': 'application/json',
