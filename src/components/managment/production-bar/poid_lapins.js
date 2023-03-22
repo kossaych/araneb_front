@@ -43,7 +43,7 @@ function PoidLapins(props){
         })
         .then(data =>{
         if (data === false){
-          window.location.href="/managment/parents/femalles"
+          window.location.href="/managment/manager/femalles"
         }else { 
            
           setLapins(data.lapins)
@@ -154,7 +154,7 @@ function MesureHandler(valeur,lapin){
                     
         <button  onClick={()=>Poid(id)} className="col-5 btn btn-success"  >oui</button>
         
-        <Link to={"/managment/parents/femalles"} className="col-5 btn btn-danger">non</Link>
+        <Link to={"/managment/manager/femalles"} className="col-5 btn btn-danger">non</Link>
       </div >
       </div>
       

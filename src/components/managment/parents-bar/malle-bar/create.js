@@ -9,7 +9,7 @@ function CreateMalle(){
     const [img,setImg]=useState('')
     function createMalle(){
         setIsWait(false)
-        fetch("http://127.0.0.1:8000/parents/api/malles",{
+        fetch("http://127.0.0.1:8000/manager/api/malles",{
       method:'post',
       headers: {
       'Content-Type': 'application/json',
@@ -40,7 +40,7 @@ function CreateMalle(){
 
           var data2 = new FormData()
           data2.append('file', img )
-          fetch('http://127.0.0.1:8000/parents/api/malle/img/'+data.id, {
+          fetch('http://127.0.0.1:8000/manager/api/malle/img/'+data.id, {
             method: 'put',
            
             body: data2,
@@ -52,7 +52,7 @@ function CreateMalle(){
             }
           }).then(data =>{
             if (data==true){
-              window.location.href='/managment/parents/malles'
+               window.location.href='/managment/manager/malles'
             }else{
               setIsWait(true)
               document.getElementById('message').style.display='block';

@@ -34,7 +34,7 @@ function CreateFemalleProduction(){
 
       
       setIsWait(false)
-      fetch("http://127.0.0.1:8000/parents/api/femalles/production",{
+      fetch("http://127.0.0.1:8000/manager/api/femalles/production",{
       method:'post',
       headers: {
       'Content-Type': 'application/json',
@@ -60,7 +60,7 @@ function CreateFemalleProduction(){
       })
       .then(data =>{
         if (data === true){
-        window.location.href='/managment/parents/femalles'
+        window.location.href='/managment/manager/femalles'
       }else {
         document.getElementById('message').style.display='block';
         setMessage(data)
@@ -90,7 +90,7 @@ function CreateFemalleProduction(){
 
 
     useEffect(()=>{
-      fetch("http://127.0.0.1:8000/parents/api/femalle/cage_vide",{
+      fetch("http://127.0.0.1:8000/manager/api/femalle/cage_vide",{
           method:'get',
           headers: {
           'Content-Type': 'application/json',
@@ -106,7 +106,7 @@ function CreateFemalleProduction(){
           })
           .then(data =>{
           if (data === false){
-               window.location.href="/managment/parents/femalles"
+               window.location.href="/managment/manager/femalles"
           }else { 
               setCage(data.cage_vide)
           }
@@ -115,7 +115,7 @@ function CreateFemalleProduction(){
 
 
   useEffect(()=>{
-    fetch("http://127.0.0.1:8000/parents/api/femalles/production",{
+    fetch("http://127.0.0.1:8000/manager/api/femalles/production",{
         method:'get',
         headers: {
         'Content-Type': 'application/json',
@@ -131,7 +131,7 @@ function CreateFemalleProduction(){
         })
         .then(data =>{
         if (data === false){
-             window.location.href="/managment/parents/femalles"
+             window.location.href="/managment/manager/femalles"
         }else { 
             setLapins(data)
             setLapin(data[0].id)
@@ -189,7 +189,7 @@ function CreateFemalleProduction(){
         </div>
               
               </button>}
-        <Link to='/managment/parents/femalles'  className="col-5 m-1 btn btn-danger">anuler</Link>
+        <Link to='/managment/manager/femalles'  className="col-5 m-1 btn btn-danger">anuler</Link>
        </div >
     
     </div>

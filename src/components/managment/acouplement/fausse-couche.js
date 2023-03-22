@@ -117,7 +117,7 @@ function FauseCoucheAcouplement(props){
                     
         <button onClick={()=>Test(id)}   className="col-5 btn btn-success"  >oui</button>
         
-        <Link to={"/managment/parents/femalles"} className="col-5 btn btn-danger">non</Link>
+        <Link to={"/managment/manager/femalles"} className="col-5 btn btn-danger">non</Link>
       </div >
       </div>
       

@@ -26,8 +26,8 @@ function HeaderManagment(){
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li className="nav-item"><Link className="nav-link  text-dark" to="/"><img style={iconStyle} src={home}/>Home</Link></li>
-                        <li className="nav-item"><Link className="nav-link  text-dark" to="/managment/parents/malles"><img style={iconStyle} src={malle}/><span className="text-dark">malles</span></Link></li>
-                        <li className="nav-item"><Link className="nav-link  text-dark" to="/managment/parents/femalles"><img style={iconStyle} src={parent}/><span className="text-dark">femalles</span></Link></li>
+                        <li className="nav-item"><Link className="nav-link  text-dark" to="/managment/manager/malles"><img style={iconStyle} src={malle}/><span className="text-dark">malles</span></Link></li>
+                        <li className="nav-item"><Link className="nav-link  text-dark" to="/managment/manager/femalles"><img style={iconStyle} src={parent}/><span className="text-dark">femalles</span></Link></li>
                         <li className="nav-item"><Link className="nav-link  text-dark" to="/managment/production"><img style={iconStyle} src={production}/>production</Link></li>
                         <li className="nav-item"><Link className="nav-link  text-dark" to="/managment/acouplement"><img style={iconStyle} src={acouplement}/>acouplement</Link></li>
                         <li className="nav-item"><Link className="nav-link  text-dark" to="/managment/statistique"><img style={iconStyle} src={statistique}/>statistiques</Link></li>

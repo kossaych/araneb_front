@@ -19,7 +19,7 @@ function FemallesBar(){
     }
     
 
-  fetch("http://127.0.0.1:8000/parents/api/femalles",{
+  fetch("http://127.0.0.1:8000/manager/api/femalles",{
     method:'get',
     headers: {
       
@@ -50,7 +50,7 @@ setIsWait(false)
     <div  className="row border-danger m-1">
         <div className="col-10 m-auto row justify-content-between">
             <h4 className="text-danger col-1 p-0">femalles</h4>
-            <Link to="/managment/parents/femalles/create" className="col-1 p-0"><img style={{width:25+'px',margin:5+'px',}} src={add} ></img></Link>
+            <Link to="/managment/manager/femalles/create" className="col-1 p-0"><img style={{width:25+'px',margin:5+'px',}} src={add} ></img></Link>
         </div>   
   
        { isWait ? <div className="text-center"><div className="spinner-border" role="status"><span className="sr-only"></span></div></div> : ""}

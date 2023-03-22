@@ -16,7 +16,7 @@ function MalleUpdate(){
 
 
     useEffect(()=>{
-        fetch("http://127.0.0.1:8000/parents/api/malle/"+id,{
+        fetch("http://127.0.0.1:8000/manager/api/malle/"+id,{
             method:'get',
             headers: {
             'Content-Type': 'application/json',
@@ -32,7 +32,7 @@ function MalleUpdate(){
             })
             .then(data =>{
             if (data === false){
-                window.location.href="/managment/parents/malles"
+                window.location.href="/managment/manager/malles"
             }else {
                 setRace(data.race)
                 setDateNaissance(data.date_naissance)
@@ -46,7 +46,7 @@ function MalleUpdate(){
 
     function MalleUpdate(id){
         
-    fetch("http://127.0.0.1:8000/parents/api/malle/"+id,{
+    fetch("http://127.0.0.1:8000/manager/api/malle/"+id,{
     method:'put',
     headers: {
     'Content-Type': 'application/json',
@@ -74,7 +74,7 @@ function MalleUpdate(){
     })
     .then(data =>{
         if (data === true){
-        window.location.href="/managment/parents/malles"
+        window.location.href="/managment/manager/malles"
     }else {
         document.getElementById('message').style.display='block';
         setMessage(data)
@@ -145,7 +145,7 @@ return(
     </div>
           
           </button>}
-    <Link to='/managment/parents/malles'  className="col-5 m-1 btn btn-danger">anuler</Link>
+    <Link to='/managment/manager/malles'  className="col-5 m-1 btn btn-danger">anuler</Link>
    </div >
 
 </div>

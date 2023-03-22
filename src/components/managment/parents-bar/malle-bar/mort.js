@@ -21,7 +21,7 @@ function MalleMorte(props){
   const {id}=useParams()
   const {cage}=useParams()
   useEffect(()=>{
-    fetch("http://127.0.0.1:8000/parents/api/malle/"+id,{
+    fetch("http://127.0.0.1:8000/manager/api/malle/"+id,{
         method:'get',
         headers: {
         'Content-Type': 'application/json',
@@ -37,7 +37,7 @@ function MalleMorte(props){
         })
         .then(data =>{
         if (data === false){
-          window.location.href="/managment/parents/malles"
+          window.location.href="/managment/manager/malles"
         }else {
             setRace(data.race)
             setDateNaissance(data.date_naissance)
@@ -50,7 +50,7 @@ function MalleMorte(props){
 },[])
   function MalleMorte(id){
     
-    fetch("http://127.0.0.1:8000/parents/api/malle/"+id,{
+    fetch("http://127.0.0.1:8000/manager/api/malle/"+id,{
   method:'put',
   headers: {
   'Content-Type': 'application/json',
@@ -78,7 +78,7 @@ function MalleMorte(props){
   })
   .then(data =>{
     if (data === true){
-      window.location.href="/managment/parents/malles"
+      window.location.href="/managment/manager/malles"
   }else {
     document.getElementById('message').style.display='block';
     setMessage(data)
@@ -104,7 +104,7 @@ function MalleMorte(props){
                     
         <button onClick={()=>MalleMorte(id)}   className="col-5 btn btn-success"  >oui</button>
         
-        <Link to={"/managment/parents/malles"} className="col-5 btn btn-danger">non</Link>
+        <Link to={"/managment/manager/malles"} className="col-5 btn btn-danger">non</Link>
       </div >
       </div>
       

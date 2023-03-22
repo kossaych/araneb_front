@@ -30,7 +30,7 @@ function    VenteMasse(props){
           })
           .then(data =>{
           if (data === false){
-            window.location.href="/managment/parents/femalles"
+            window.location.href="/managment/manager/femalles"
           }else { 
               let lapins=data.lapins
               for (let i=0;i<lapins.length;i++){
@@ -194,7 +194,7 @@ function    VenteMasse(props){
                     
         <button  onClick={()=>Vente(id)} className="col-5 btn btn-success"  >oui</button>
         
-        <Link to={"/managment/parents/femalles"} className="col-5 btn btn-danger">non</Link>
+        <Link to={"/managment/manager/femalles"} className="col-5 btn btn-danger">non</Link>
       </div >
       </div>
       

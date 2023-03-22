@@ -12,7 +12,7 @@ function Malle(props){
 
   function deleteMalleApi(id){
     
-    fetch(`http://127.0.0.1:8000/parents/api/malle/${id.toString()}`,{
+    fetch(`http://127.0.0.1:8000/manager/api/malle/${id.toString()}`,{
   method:'delete',
   headers: {
   'Content-Type': 'application/json',
@@ -106,10 +106,10 @@ function Malle(props){
                   </div>
              
                  <div className="card-footer bg-success bg-opacity-50 row m-0 justify-content-around">
-                   <Link to={"/managment/parents/malles/update/"+props.id+"/"+props.cage} className="col-2"><img style={{width:25+'px',}} src={update} ></img></Link>
+                   <Link to={"/managment/manager/malles/update/"+props.id+"/"+props.cage} className="col-2"><img style={{width:25+'px',}} src={update} ></img></Link>
                    <button onClick={()=>deleteHandler(props.id)} className="col-2 button-hiden"><img style={{width:25+'px',}} src={deleteMalle} ></img></button>
-                   <Link  to={"/managment/parents/malles/vent/"+props.id+"/"+props.cage} className="col-2"><img style={{width:25+'px',}} src={market} ></img></Link>
-                   <Link  to={"/managment/parents/malles/morte/"+props.id+"/"+props.cage} cage={props.cage} className="col-2"><img style={{width:25+'px',}} src={mort} ></img></Link>
+                   <Link  to={"/managment/manager/malles/vent/"+props.id+"/"+props.cage} className="col-2"><img style={{width:25+'px',}} src={market} ></img></Link>
+                   <Link  to={"/managment/manager/malles/morte/"+props.id+"/"+props.cage} cage={props.cage} className="col-2"><img style={{width:25+'px',}} src={mort} ></img></Link>
 
                 </div>
               </div>

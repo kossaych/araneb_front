@@ -18,7 +18,7 @@ function MallesBar(){
         }
         
 
-      fetch("http://127.0.0.1:8000/parents/api/malles",{
+      fetch("http://127.0.0.1:8000/manager/api/malles",{
         method:'get',
         headers: {
           
@@ -48,7 +48,7 @@ function MallesBar(){
     <div  className="row border-danger m-2">
         <div className="col-10 m-auto row justify-content-between">
             <h4 className="text-danger col-1 p-0">malles</h4>
-            <Link to="/managment/parents/malles/create" className="col-1 p-0"><img style={{width:25+'px',margin:5+'px',}} src={add} ></img></Link>
+            <Link to="/managment/manager/malles/create" className="col-1 p-0"><img style={{width:25+'px',margin:5+'px',}} src={add} ></img></Link>
         </div>   
   
        { isWait ? <div className="text-center"><div className="spinner-border" role="status"><span className="sr-only"></span></div></div> : ""}

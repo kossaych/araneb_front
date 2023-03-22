@@ -13,7 +13,7 @@ function CreateFemalle(){
       
       setIsWait(false)
       
-      fetch("http://127.0.0.1:8000/parents/api/femalles",{
+      fetch("http://127.0.0.1:8000/manager/api/femalles",{
       method:'post',
       headers: {
       'Content-Type': 'application/json',
@@ -48,7 +48,7 @@ function CreateFemalle(){
           /// send the photo 
           var data2 = new FormData()
           data2.append('file', img )
-          fetch('http://127.0.0.1:8000/parents/api/femalle/img/'+data.id, {
+          fetch('http://127.0.0.1:8000/manager/api/femalle/img/'+data.id, {
             method: 'put',
             body: data2,
           }).then(response =>{
@@ -59,7 +59,7 @@ function CreateFemalle(){
             }
           }).then(data =>{
             if (data==true){
-              window.location.href='/managment/parents/femalles'
+              window.location.href='/managment/manager/femalles'
             }else{
               setIsWait(true)
               document.getElementById('message').style.display='block';
@@ -97,7 +97,7 @@ function CreateFemalle(){
 
     /// function to prpose a cage for a the rabbit
     useEffect(()=>{
-      fetch("http://127.0.0.1:8000/parents/api/femalle/cage_vide",{
+      fetch("http://127.0.0.1:8000/manager/api/femalle/cage_vide",{
           method:'get',
           headers: {
           'Content-Type': 'application/json',
@@ -113,7 +113,7 @@ function CreateFemalle(){
           })
           .then(data =>{
           if (data === false){
-               window.location.href="/managment/parents/femalles"
+               window.location.href="/managment/manager/femalles"
           }else { 
               setCage(data.cage_vide)
           }
@@ -148,7 +148,7 @@ function CreateFemalle(){
       
 
 
-       <Link to='/managment/parents/femalles/create/production'  className="col-11 mt-2 mb-2  m-auto alert alert-success">ajouter une femalle a partir des lapins de production</Link>
+       <Link to='/managment/manager/femalles/create/production'  className="col-11 mt-2 mb-2  m-auto alert alert-success">ajouter une femalle a partir des lapins de production</Link>
 
        <div className="row justify-content-around mt-2 col-12 m-auto"> 
                     
@@ -159,7 +159,7 @@ function CreateFemalle(){
         </div>
               
               </button>}
-        <Link to='/managment/parents/femalles'  className="col-5 m-1 btn btn-danger">anuler</Link>
+        <Link to='/managment/manager/femalles'  className="col-5 m-1 btn btn-danger">anuler</Link>
        </div >
     
     </div>

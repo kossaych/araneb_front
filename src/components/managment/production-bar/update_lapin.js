@@ -29,7 +29,7 @@ function LapinProductionUpdate(){
             })
             .then(data =>{
             if (data === false){
-               // window.location.href="/managment/parents/femalles"
+               // window.location.href="/managment/manager/femalles"
             }else {
                 setRace(data.race)
                 setSex(data.sex)
@@ -64,7 +64,7 @@ function LapinProductionUpdate(){
     })
     .then(data =>{
         if (data === true){
-        window.location.href="/managment/parents/femalles"
+        window.location.href="/managment/manager/femalles"
     }else {
         document.getElementById('message').style.display='block';
         setMessage(data)
@@ -136,7 +136,7 @@ return(
     </div>
           
           </button>}
-    <Link to='/managment/parents/femalles'  className="col-5 m-1 btn btn-danger">anuler</Link>
+    <Link to='/managment/manager/femalles'  className="col-5 m-1 btn btn-danger">anuler</Link>
    </div >
 
 </div>

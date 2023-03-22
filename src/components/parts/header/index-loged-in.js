@@ -29,7 +29,7 @@ function HeaderLogIn(){
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li className="nav-item"><Link className="nav-link text-dark" aria-current="page" to="/"><img style={iconStyle} src={home} />Home</Link></li>
-                        <li className="nav-item"><Link className="nav-link  text-dark" to="managment/parents/femalles"><img style={iconStyle} src={managment} />managment</Link></li>
+                        <li className="nav-item"><Link className="nav-link  text-dark" to="managment/manager/femalles"><img style={iconStyle} src={managment} />managment</Link></li>
                         <li className="nav-item"><Link className="nav-link  text-dark" to="blog"><img style={iconStyle} src={blog} />blogs</Link></li>
                         <li className="nav-item"><Link className="nav-link  text-dark" to="product"><img style={iconStyle} src={market} />market</Link></li>
                         <li className="nav-item"><Link className="nav-link  text-dark" to="profil"><img style={iconStyle} src={user} />kossay</Link></li>

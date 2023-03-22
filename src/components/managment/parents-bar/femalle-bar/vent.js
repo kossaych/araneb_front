@@ -22,7 +22,7 @@ function FemalleVent(props){
   const {id}=useParams()
   const {cage}=useParams()
   useEffect(()=>{
-    fetch("http://127.0.0.1:8000/parents/api/femalle/"+id,{
+    fetch("http://127.0.0.1:8000/manager/api/femalle/"+id,{
         method:'get',
         headers: {
         'Content-Type': 'application/json',
@@ -38,7 +38,7 @@ function FemalleVent(props){
         })
         .then(data =>{
         if (data === false){
-          window.location.href="/managment/parents/femalles"
+          window.location.href="/managment/manager/femalles"
         }else {
             setRace(data.race)
             setDateNaissance(data.date_naissance)
@@ -51,7 +51,7 @@ function FemalleVent(props){
 },[])
   function FemalleVent(id){
     
-    fetch("http://127.0.0.1:8000/parents/api/femalle/"+id,{
+    fetch("http://127.0.0.1:8000/manager/api/femalle/"+id,{
   method:'put',
   headers: {
   'Content-Type': 'application/json',
@@ -79,7 +79,7 @@ function FemalleVent(props){
   })
   .then(data =>{
     if (data === true){
-      window.location.href="/managment/parents/femalles"
+      window.location.href="/managment/manager/femalles"
   }else {
     document.getElementById('message').style.display='block';
     setMessage(data)
@@ -108,7 +108,7 @@ function FemalleVent(props){
                     
         <button onClick={()=>FemalleVent(id)}   className="col-5 btn btn-success"  >oui</button>
         
-        <Link to={"/managment/parents/femalles"} className="col-5 btn btn-danger">non</Link>
+        <Link to={"/managment/manager/femalles"} className="col-5 btn btn-danger">non</Link>
       </div >
       </div>
       

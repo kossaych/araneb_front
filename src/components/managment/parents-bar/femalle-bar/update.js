@@ -16,7 +16,7 @@ function FemalleUpdate(){
 
 
     useEffect(()=>{
-        fetch("http://127.0.0.1:8000/parents/api/femalle/"+id,{
+        fetch("http://127.0.0.1:8000/manager/api/femalle/"+id,{
             method:'get',
             headers: {
             'Content-Type': 'application/json',
@@ -32,7 +32,7 @@ function FemalleUpdate(){
             })
             .then(data =>{
             if (data === false){
-                window.location.href="/managment/parents/femalles"
+                window.location.href="/managment/manager/femalles"
             }else {
                 setRace(data.race)
                 setDateNaissance(data.date_naissance)
@@ -46,7 +46,7 @@ function FemalleUpdate(){
 
     function FemalleUpdate(id){
         
-    fetch("http://127.0.0.1:8000/parents/api/femalle/"+id,{
+    fetch("http://127.0.0.1:8000/manager/api/femalle/"+id,{
     method:'put',
     headers: {
     'Content-Type': 'application/json',
@@ -74,7 +74,7 @@ function FemalleUpdate(){
     })
     .then(data =>{
         if (data === true){
-        window.location.href="/managment/parents/femalles"
+        window.location.href="/managment/manager/femalles"
     }else {
         document.getElementById('message').style.display='block';
         setMessage(data)
@@ -136,7 +136,7 @@ return(
     </div>
           
           </button>}
-    <Link to='/managment/parents/femalles'  className="col-5 m-1 btn btn-danger">anuler</Link>
+    <Link to='/managment/manager/femalles'  className="col-5 m-1 btn btn-danger">anuler</Link>
    </div >
 
 </div>

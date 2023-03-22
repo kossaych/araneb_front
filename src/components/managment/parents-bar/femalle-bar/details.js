@@ -50,7 +50,7 @@ function FemalleDetails(){
     const {cage}=useParams()
 
     useEffect(()=>{
-        fetch("http://127.0.0.1:8000/parents/api/femalle/"+id,{
+        fetch("http://127.0.0.1:8000/manager/api/femalle/"+id,{
             method:'get',
             headers: {
             'Content-Type': 'application/json',
@@ -66,7 +66,7 @@ function FemalleDetails(){
             })
             .then(data =>{
             if (data === false){
-              window.location.href="/managment/parents/femalles"
+              window.location.href="/managment/manager/femalles"
             }else { 
                 setTP(data.info.TP)
                 setTM(data.info.TM)

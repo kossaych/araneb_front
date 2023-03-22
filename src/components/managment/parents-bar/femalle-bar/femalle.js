@@ -45,12 +45,14 @@ function Femalle(props){
   const [dateMort,setDateMort]=useState(yyyy+"-"+mm+"-"+dd)
   const [race,setRace]=useState("")
   const [cage,setCage]=useState("")
+  const [age,setAge]=useState("")
+
   
 
 
 
   useEffect(()=>{
-      fetch("http://127.0.0.1:8000/parents/api/femalle/"+id,{
+      fetch("http://127.0.0.1:8000/manager/api/femalle/"+id,{
           method:'get',
           headers: {
           'Content-Type': 'application/json',
@@ -66,7 +68,7 @@ function Femalle(props){
           })
           .then(data =>{
           if (data === false){
-            //window.location.href="/managment/parents/femalles"
+            //window.location.href="/managment/manager/femalles"
           }else { 
               setTP(data.info.TP)
               setTM(data.info.TM)
@@ -91,6 +93,8 @@ function Femalle(props){
               setDateNaissance(data.date_naissance)
               setRace(data.race)
               setCage(data.cage)
+              setAge(data.age)
+
 
 
           }
@@ -99,7 +103,7 @@ function Femalle(props){
 
   function FemalleDelete(id){
     setIsWait(false)
-    fetch(`http://127.0.0.1:8000/parents/api/femalle/${id.toString()}`,{
+    fetch(`http://127.0.0.1:8000/manager/api/femalle/${id.toString()}`,{
   method:'delete',
   headers: {
   'Content-Type': 'application/json',
@@ -148,7 +152,7 @@ function Femalle(props){
     
     setIsWait(false)
 
-    fetch("http://127.0.0.1:8000/parents/api/femalle/"+id,{
+    fetch("http://127.0.0.1:8000/manager/api/femalle/"+id,{
   method:'put',
   headers: {
   'Content-Type': 'application/json',
@@ -172,7 +176,7 @@ function Femalle(props){
   })
   .then(data =>{
     if (data === true){
-      window.location.href="/managment/parents/femalles"
+      window.location.href="/managment/manager/femalles"
   }else {
     document.getElementById('message').style.display='block';
     setMessage(data)
@@ -181,7 +185,7 @@ function Femalle(props){
   function FemalleMorte(id){
     setIsWait(false)
 
-    fetch("http://127.0.0.1:8000/parents/api/femalle/"+id,{
+    fetch("http://127.0.0.1:8000/manager/api/femalle/"+id,{
   method:'put',
   headers: {
   'Content-Type': 'application/json',
@@ -204,7 +208,7 @@ function Femalle(props){
   })
   .then(data =>{
     if (data === true){
-      window.location.href="/managment/parents/femalles"
+      window.location.href="/managment/manager/femalles"
   }else {
     document.getElementById('message').style.display='block';
     setMessage(data)
@@ -212,7 +216,7 @@ function Femalle(props){
   })}
   function FemalleUpdate(id){
     setIsWait(false)
-    fetch("http://127.0.0.1:8000/parents/api/femalle/"+id,{
+    fetch("http://127.0.0.1:8000/manager/api/femalle/"+id,{
     method:'put',
     headers: {
     'Content-Type': 'application/json',
@@ -238,7 +242,7 @@ function Femalle(props){
     })
     .then(data =>{
         if (data === true){
-        window.location.href="/managment/parents/femalles"
+        window.location.href="/managment/manager/femalles"
     }else {
 
         document.getElementById('message').style.display='block';
@@ -471,7 +475,7 @@ function Femalle(props){
                                     
                                     <button onClick={()=>FemalleVent(id)}   className="col-5 btn btn-success"  >oui</button>
                                     
-                                    <Link to={"/managment/parents/femalles"} className="col-5 btn btn-danger">non</Link>
+                                    <Link to={"/managment/manager/femalles"} className="col-5 btn btn-danger">non</Link>
                                   </div >
                         </div>
                 </div>
@@ -495,7 +499,7 @@ function Femalle(props){
                  
      <button onClick={()=>FemalleMorte(id)}   className="col-5 btn btn-success"  >oui</button>
      
-     <Link to={"/managment/parents/femalles"} className="col-5 btn btn-danger">non</Link>
+     <Link to={"/managment/manager/femalles"} className="col-5 btn btn-danger">non</Link>
    </div >
                         </div>
                 </div>
@@ -527,7 +531,7 @@ function Femalle(props){
                                           </div>
                                                 
                                                 </button>}
-                                          <Link to='/managment/parents/femalles'  className="col-5 m-1 btn btn-danger">anuler</Link>
+                                          <Link to='/managment/manager/femalles'  className="col-5 m-1 btn btn-danger">anuler</Link>
                                         </div >
 
                             </div>
@@ -560,9 +564,9 @@ function Femalle(props){
                 <div className="card-body p-0">
                 <img style={{'width':'100%'}}src={"http://127.0.0.1:8000/media/"+props.img}></img>
                   <div className="text-center">
-                      <h5 className="m-0">lapin : {props.cage}</h5>
+                      <h5 className="m-0">lapin : {cage}</h5>
                       {props.race ? <p className="text-body m-0">race:{props.race}</p> :""}
-                      age: {props.age} 
+                      age: {age} 
                     </div>
                 </div>
                 

@@ -21,7 +21,7 @@ function Sevrage(props){
   const {id}=useParams()
   const {cage}=useParams()
   useEffect(()=>{
-    fetch("http://127.0.0.1:8000/parents/api/femalle/"+id,{
+    fetch("http://127.0.0.1:8000/manager/api/femalle/"+id,{
         method:'get',
         headers: {
         'Content-Type': 'application/json',
@@ -37,7 +37,7 @@ function Sevrage(props){
         })
         .then(data =>{
         if (data === false){
-          //window.location.href="/managment/parents/femalles"
+          //window.location.href="/managment/manager/femalles"
         }else {
             setRace(data.race)
             setDateNaissance(data.date_naissance)
@@ -99,7 +99,7 @@ function Sevrage(props){
                     
         <button onClick={()=>Sevrage(id)}   className="col-5 btn btn-success"  >oui</button>
         
-        <Link to={"/managment/parents/femalles"} className="col-5 btn btn-danger">non</Link>
+        <Link to={"/managment/manager/femalles"} className="col-5 btn btn-danger">non</Link>
       </div >
       </div>
       

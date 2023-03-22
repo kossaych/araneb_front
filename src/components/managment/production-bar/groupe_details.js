@@ -30,7 +30,7 @@ function ProductionDetails(){
             })
             .then(data =>{
             if (data === false){
-              window.location.href="/managment/parents/femalles"
+              window.location.href="/managment/manager/femalles"
             }else { 
                
               setGroupe(data)

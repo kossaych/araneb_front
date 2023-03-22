@@ -50,18 +50,18 @@ function App()  {
           <Route path="change_password" element={<ChangePassword/>}></Route>
           
           
-          <Route path="managment/parents/femalles" element={<FemallesBar/>}></Route>
-          <Route path="managment/parents/malles" element={<MallesBar/>}></Route>
-          <Route path="managment/parents/femalles/create" element={<CreateFemalle/>}></Route>
-          <Route path="managment/parents/femalles/create/production" element={<CreateFemalleProduction/>}></Route>
-          <Route path="managment/parents/malles/create" element={<CreateMalle/>}></Route>
-          <Route path="managment/parents/femalles/morte/:id/:cage" element={<FemalleMorte/>}></Route>
-          <Route path="managment/parents/malles/morte/:id/:cage" element={<MalleMorte/>}></Route>
-          <Route path="managment/parents/femalles/update/:id/:cage" element={<FemalleUpdate/>}></Route>
-          <Route path="managment/parents/malles/update/:id/:cage" element={<MalleUpdate/>}></Route>
-          <Route path="managment/parents/femalles/vent/:id/:cage" element={<FemalleVent/>}></Route>
-          <Route path="managment/parents/malles/vent/:id/:cage" element={<MalleVent/>}></Route>
-          <Route path="managment/parents/femalles/details/:id/:cage" element={<FemalleDetails/>}></Route>
+          <Route path="managment/manager/femalles" element={<FemallesBar/>}></Route>
+          <Route path="managment/manager/malles" element={<MallesBar/>}></Route>
+          <Route path="managment/manager/femalles/create" element={<CreateFemalle/>}></Route>
+          <Route path="managment/manager/femalles/create/production" element={<CreateFemalleProduction/>}></Route>
+          <Route path="managment/manager/malles/create" element={<CreateMalle/>}></Route>
+          <Route path="managment/manager/femalles/morte/:id/:cage" element={<FemalleMorte/>}></Route>
+          <Route path="managment/manager/malles/morte/:id/:cage" element={<MalleMorte/>}></Route>
+          <Route path="managment/manager/femalles/update/:id/:cage" element={<FemalleUpdate/>}></Route>
+          <Route path="managment/manager/malles/update/:id/:cage" element={<MalleUpdate/>}></Route>
+          <Route path="managment/manager/femalles/vent/:id/:cage" element={<FemalleVent/>}></Route>
+          <Route path="managment/manager/malles/vent/:id/:cage" element={<MalleVent/>}></Route>
+          <Route path="managment/manager/femalles/details/:id/:cage" element={<FemalleDetails/>}></Route>
 
          
          
