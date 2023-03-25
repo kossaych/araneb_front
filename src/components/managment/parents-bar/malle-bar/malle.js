@@ -29,7 +29,7 @@ function Malle(props){
 
 
   useEffect(()=>{
-      fetch("http://127.0.0.1:8000/manager/api/malle/"+id,{
+      fetch("https://kossay.pythonanywhere.com/manager/api/malle/"+id,{
           method:'get',
           headers: {
           'Content-Type': 'application/json',
@@ -62,7 +62,7 @@ function Malle(props){
 
   function malleDelete(id){
     setIsWait(false)
-    fetch(`http://127.0.0.1:8000/manager/api/malle/${id.toString()}`,{
+    fetch(`https://kossay.pythonanywhere.com/manager/api/malle/${id.toString()}`,{
   method:'delete',
   headers: {
   'Content-Type': 'application/json',
@@ -109,7 +109,7 @@ function Malle(props){
     
     setIsWait(false)
 
-    fetch("http://127.0.0.1:8000/manager/api/malle/vent/"+id,{
+    fetch("https://kossay.pythonanywhere.com/manager/api/malle/vent/"+id,{
   method:'put',
   headers: {
   'Content-Type': 'application/json',
@@ -141,7 +141,7 @@ function Malle(props){
   function malleMorte(id){
     setIsWait(false)
 
-    fetch("http://127.0.0.1:8000/manager/api/malle/mort/"+id,{
+    fetch("https://kossay.pythonanywhere.com/manager/api/malle/mort/"+id,{
   method:'put',
   headers: {
   'Content-Type': 'application/json',
@@ -172,7 +172,7 @@ function Malle(props){
   })}
   function malleUpdate(id){
     setIsWait(false)
-    fetch("http://127.0.0.1:8000/manager/api/malle/"+id,{
+    fetch("https://kossay.pythonanywhere.com/manager/api/malle/"+id,{
     method:'put',
     headers: {
     'Content-Type': 'application/json',
@@ -389,7 +389,7 @@ function Malle(props){
 
 
                 <div className="card-body p-0">
-                <img style={{'width':'100%'}}src={"http://127.0.0.1:8000/media/"+props.img}></img>
+                <img style={{'width':'100%'}}src={"https://kossay.pythonanywhere.com/media/"+props.img}></img>
                   <div className="text-center">
                       <h5 className="m-0">lapin : {cage}</h5>
                       {props.race ? <p className="text-body m-0">race:{props.race}</p> :""}

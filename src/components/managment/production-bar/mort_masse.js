@@ -27,7 +27,7 @@ function MorteMasse(props){
 
 
   useEffect(()=>{
-    fetch("http://127.0.0.1:8000/manager/groupes/"+id,{
+    fetch("https://kossay.pythonanywhere.com/manager/groupes/"+id,{
         method:'get',
         headers: {
         'Content-Type': 'application/json',
@@ -76,7 +76,7 @@ function MorteMasse(props){
         lapins.push(listLapins[i].id)
       }
     }
-    fetch("http://127.0.0.1:8000/manager/groupes/mort_masse",{
+    fetch("https://kossay.pythonanywhere.com/manager/groupes/mort_masse",{
   method:'post',
   headers: {
   'Content-Type': 'application/json',

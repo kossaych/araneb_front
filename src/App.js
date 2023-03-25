@@ -26,6 +26,7 @@ import PoidLapins from "./components/managment/production-bar/poid_lapins";
 import VaccinLapins from "./components/managment/production-bar/vaccins";
 import LapinProductionUpdate from "./components/managment/production-bar/update_lapin";
 import CreateMalleProduction from "./components/managment/parents-bar/malle-bar/create_production";
+import OFFLINE from "./components/pages/ofline";
 
 function App()  {
 
@@ -33,8 +34,7 @@ function App()  {
 
 
     <div className="App ">
-   
-      <BrowserRouter>
+      {window.navigator.onLine ?       <BrowserRouter>
       <Routes>
           <Route path="/" element={<Home/>}></Route>
           <Route path="register" element={<Register/>}></Route>
@@ -79,7 +79,8 @@ function App()  {
       </Routes>
 
       <Footer />
-      </BrowserRouter>
+      </BrowserRouter>: <OFFLINE />}
+
     </div>
   );
 }

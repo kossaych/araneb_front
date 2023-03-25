@@ -21,7 +21,7 @@ function CreateMalle() {
       malle.append('race',race)
       malle.append('date_naissance',dateNaissance)
   
-      fetch("http://127.0.0.1:8000/manager/api/malles",{
+      fetch("https://kossay.pythonanywhere.com/manager/api/malles",{
       method:'post',
       headers: {
       'Authorization': 'token ' + JSON.parse(localStorage.getItem('token')),
@@ -73,7 +73,7 @@ function CreateMalle() {
     };
     /// function to prpose a cage for a the rabbit
     useEffect(()=>{
-      fetch("http://127.0.0.1:8000/manager/api/malle/cage_vide",{
+      fetch("https://kossay.pythonanywhere.com/manager/api/malle/cage_vide",{
           method:'get',
           headers: {
           'Content-Type': 'application/json',

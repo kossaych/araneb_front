@@ -17,7 +17,7 @@ function MallesBar(){
     const [isWait,setIsWait]=useState(true)
   useEffect(()=>{    
 
-      fetch("http://127.0.0.1:8000/manager/api/malles",{
+      fetch("https://kossay.pythonanywhere.com/manager/api/malles",{
         method:'get',
         headers: {
           

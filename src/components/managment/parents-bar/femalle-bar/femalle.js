@@ -41,7 +41,7 @@ function Femalle(props){
 
 
   useEffect(()=>{
-      fetch("http://127.0.0.1:8000/manager/api/femalle/"+id,{
+      fetch("https://kossay.pythonanywhere.com/manager/api/femalle/"+id,{
           method:'get',
           headers: {
           'Content-Type': 'application/json',
@@ -94,7 +94,7 @@ function Femalle(props){
 
   function FemalleDelete(id){
     setIsWait(false)
-    fetch(`http://127.0.0.1:8000/manager/api/femalle/${id.toString()}`,{
+    fetch(`https://kossay.pythonanywhere.com/manager/api/femalle/${id.toString()}`,{
   method:'delete',
   headers: {
   'Content-Type': 'application/json',
@@ -141,7 +141,7 @@ function Femalle(props){
     
     setIsWait(false)
 
-    fetch("http://127.0.0.1:8000/manager/api/femalle/vent/"+id,{
+    fetch("https://kossay.pythonanywhere.com/manager/api/femalle/vent/"+id,{
   method:'put',
   headers: {
   'Content-Type': 'application/json',
@@ -173,7 +173,7 @@ function Femalle(props){
   function FemalleMorte(id){
     setIsWait(false)
 
-    fetch("http://127.0.0.1:8000/manager/api/femalle/mort/"+id,{
+    fetch("https://kossay.pythonanywhere.com/manager/api/femalle/mort/"+id,{
   method:'put',
   headers: {
   'Content-Type': 'application/json',
@@ -204,7 +204,7 @@ function Femalle(props){
   })}
   function FemalleUpdate(id){
     setIsWait(false)
-    fetch("http://127.0.0.1:8000/manager/api/femalle/"+id,{
+    fetch("https://kossay.pythonanywhere.com/manager/api/femalle/"+id,{
     method:'put',
     headers: {
     'Content-Type': 'application/json',
@@ -298,45 +298,7 @@ function Femalle(props){
 
   }
 
-  const showProduction=()=>{
-    document.getElementById("production").style.display="block"
-    document.getElementById("vendue").style.display="none"
-    document.getElementById("mort").style.display="none"
 
-
-    document.getElementById('prod-button').style.borderBottom ='solid 1px'
-    document.getElementById('ven-button').style.borderBottom ='none'
-    document.getElementById('mort-button').style.borderBottom ='none'
-
-
-
-  }
-  const showVendue=()=>{
-    document.getElementById("production").style.display="none"
-    document.getElementById("vendue").style.display="block"
-    document.getElementById("mort").style.display="none"
-
-
-    document.getElementById("ven-button").style.borderBottom ='solid 1px'
-    document.getElementById('prod-button').style.borderBottom ='none'
-    document.getElementById("mort-button").style.borderBottom ='none'
-
-
-
-  }
-  const showMort=()=>{
-    document.getElementById("production").style.display="none"
-    document.getElementById("vendue").style.display="none"
-    document.getElementById("mort").style.display="block"
-
-
-
-    document.getElementById("mort-button").style.borderBottom ='solid 1px'
-    document.getElementById('prod-button').style.borderBottom ='none'
-    document.getElementById('ven-button').style.borderBottom ='none'
-
-    
-  }
 
     return(
             <div className="col-12 col-sm-6 col-md-4 col-lg-3 mb-5 " id={`femalle-${props.id}`} >
@@ -563,20 +525,6 @@ function Femalle(props){
                      
                 </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                 <div className="card-footer bg-success bg-opacity-75 row m-0 justify-content-around">
                   { state=== "production" ? <button onClick={()=>statistiqueHandler(props.id)} className="col-2 button-hiden"><img style={{width:25+'px',}} src={details}></img></button>:""}
                   { state=== "production" ? <button onClick={()=>updateHandler(props.id)} className="col-2 button-hiden"><img style={{width:25+'px',}} src={update} ></img></button>:""}
@@ -586,7 +534,7 @@ function Femalle(props){
                 
                 </div>
                 <div className="card-body p-0">
-                <img style={{'width':'100%'}}src={"http://127.0.0.1:8000/media/"+props.img}></img>
+                <img style={{'width':'100%'}}src={"https://kossay.pythonanywhere.com/media/"+props.img}></img>
                   <div className="text-center">
                       <h5 className="m-0">lapin : {cage}</h5>
                       {props.race ? <p className="text-body m-0">race:{props.race}</p> :""}

@@ -23,7 +23,7 @@ function FauseCoucheAcouplement(props){
   const {num}=useParams()
 
   useEffect(()=>{
-    fetch("http://127.0.0.1:8000/manager/accouplements/"+id,{
+    fetch("https://kossay.pythonanywhere.com/manager/accouplements/"+id,{
         method:'get',
         headers: {
         'Content-Type': 'application/json',
@@ -58,7 +58,7 @@ function FauseCoucheAcouplement(props){
 
   function Test(id){
     
-    fetch("http://127.0.0.1:8000/manager/accouplements/fause-couche/"+id,{
+    fetch("https://kossay.pythonanywhere.com/manager/accouplements/fause-couche/"+id,{
   method:'put',
   headers: {
   'Content-Type': 'application/json',

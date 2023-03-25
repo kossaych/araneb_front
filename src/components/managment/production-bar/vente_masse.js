@@ -14,7 +14,7 @@ function    VenteMasse(props){
   const {id}=useParams()
   const {cage}=useParams()
   useEffect(()=>{
-      fetch("http://127.0.0.1:8000/manager/groupes/"+id,{
+      fetch("https://kossay.pythonanywhere.com/manager/groupes/"+id,{
           method:'get',
           headers: {
           'Content-Type': 'application/json',
@@ -87,7 +87,7 @@ function    VenteMasse(props){
       }
     }
     
-    fetch("http://127.0.0.1:8000/manager/groupes/vente_masse",{
+    fetch("https://kossay.pythonanywhere.com/manager/groupes/vente_masse",{
   method:'post',
   headers: {
   'Content-Type': 'application/json',

@@ -22,7 +22,7 @@ function FemallesBar(){
     }
     
 
-  fetch("http://127.0.0.1:8000/manager/api/femalles",{
+  fetch("https://kossay.pythonanywhere.com/manager/api/femalles",{
     method:'get',
     headers: {
       

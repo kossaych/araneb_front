@@ -14,7 +14,7 @@ function ProductionDetails(){
 
 
     useEffect(()=>{
-        fetch("http://127.0.0.1:8000/manager/groupes/"+id,{
+        fetch("https://kossay.pythonanywhere.com/manager/groupes/"+id,{
             method:'get',
             headers: {
             'Content-Type': 'application/json',

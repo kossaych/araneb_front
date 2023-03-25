@@ -21,7 +21,7 @@ function Sevrage(props){
   const {id}=useParams()
   const {cage}=useParams()
   useEffect(()=>{
-    fetch("http://127.0.0.1:8000/manager/api/femalle/"+id,{
+    fetch("https://kossay.pythonanywhere.com/manager/api/femalle/"+id,{
         method:'get',
         headers: {
         'Content-Type': 'application/json',
@@ -50,7 +50,7 @@ function Sevrage(props){
 },[])
   function Sevrage(id){
     
-    fetch("http://127.0.0.1:8000/manager/groupes/groupe_sevrage/"+id,{
+    fetch("https://kossay.pythonanywhere.com/manager/groupes/groupe_sevrage/"+id,{
   method:'post',
   headers: {
   'Content-Type': 'application/json',

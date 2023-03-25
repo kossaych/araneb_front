@@ -28,7 +28,7 @@ function VaccinLapins(props){
 
 
   useEffect(()=>{
-    fetch("http://127.0.0.1:8000/manager/groupes/"+id,{
+    fetch("https://kossay.pythonanywhere.com/manager/groupes/"+id,{
         method:'get',
         headers: {
         'Content-Type': 'application/json',
@@ -77,7 +77,7 @@ function VaccinLapins(props){
         lapins.push(listLapins[i].id)
       }
     }
-    fetch("http://127.0.0.1:8000/manager/groupes/vaccin",{
+    fetch("https://kossay.pythonanywhere.com/manager/groupes/vaccin",{
   method:'post',
   headers: {
   'Content-Type': 'application/json',
