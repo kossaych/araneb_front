@@ -12,7 +12,7 @@ function Acouplement(props){
 
   function deleteAcc(id){
     
-    fetch(`http://127.0.0.1:8000/production/accouplements/${id.toString()}`,{
+    fetch(`http://127.0.0.1:8000/manager/accouplements/${id.toString()}`,{
   method:'delete',
   headers: {
   'Content-Type': 'application/json',
@@ -118,7 +118,7 @@ function Acouplement(props){
             
                    <button onClick={()=>document.getElementById(`delete-alert-${props.id}`).style.display='block'} className="col-2 button-hiden"><img style={{width:25+'px',}} src={deleteFemalle} ></img> delete</button>
                   {props.test==="enceinte" || props.test==="non_vérifié" ? <Link  to={"/managment/acouplement/fause-couche/"+props.id+"/"+props.num}  className="col-2"><img src={mort} style={{width:25+"px"}}  ></img>fausse-couche</Link> :""}
-                  {props.age>=27 & props.test==="enceinte" ? <Link  to={"/managment/production/create/"+props.id+"/"+props.num}  className="col-2"><img src={birth} style={{width:25+"px"}}  ></img>naissance</Link> :""}
+                  {props.age>=27 & props.test==="enceinte" ? <Link  to={"/managment/manager/create/"+props.id+"/"+props.num}  className="col-2"><img src={birth} style={{width:25+"px"}}  ></img>naissance</Link> :""}
                 </div>
            
                 </div>

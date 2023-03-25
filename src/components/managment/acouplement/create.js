@@ -12,10 +12,7 @@ function CreateAcouplement(){
 
     const [isWait,setIsWait]=useState(true)
     const [message,setMessage]=useState(true)
-
-  
-
-
+    
     function createAcouplement(){
       if(mère===""){
         document.getElementById('mère').focus()
@@ -41,7 +38,7 @@ function CreateAcouplement(){
         document.getElementById('père').className="border border-success bg-success bg-opacity-25 rounded"
         document.getElementById('date_acouplage').className="border border-success bg-success bg-opacity-25 rounded"
       setIsWait(false)
-        fetch("http://127.0.0.1:8000/production/acouplements",{
+        fetch("http://127.0.0.1:8000/manager/acouplements",{
       method:'post',
       headers: {
       'Content-Type': 'application/json',
@@ -76,11 +73,8 @@ function CreateAcouplement(){
       })
     }
     }   
-
-
-
     useEffect(()=>{
-      fetch("http://127.0.0.1:8000/production/femalles_acouplements",{
+      fetch("http://127.0.0.1:8000/manager/femalles_acouplements",{
         method:'get',
         headers: {
         'Content-Type': 'application/json',
@@ -117,7 +111,7 @@ function CreateAcouplement(){
 
 
     useEffect(()=>{
-      fetch("http://127.0.0.1:8000/production/malles_acouplements",{
+      fetch("http://127.0.0.1:8000/manager/malles_acouplements",{
         method:'get',
         headers: {
         'Content-Type': 'application/json',

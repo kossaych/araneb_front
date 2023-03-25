@@ -50,7 +50,7 @@ function Sevrage(props){
 },[])
   function Sevrage(id){
     
-    fetch("http://127.0.0.1:8000/production/groupes/groupe_sevrage/"+id,{
+    fetch("http://127.0.0.1:8000/manager/groupes/groupe_sevrage/"+id,{
   method:'post',
   headers: {
   'Content-Type': 'application/json',

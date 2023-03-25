@@ -1,82 +1,57 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 import { Link } from "react-router-dom";
 import HeaderManagment from "../../../parts/header/index-managment";
-function CreateMalle(){
+function CreateMalle() {
+  if (localStorage.getItem('token')==null){
+    window.location.href = "/login"
+
+  }
     const [dateNaissance,setDateNaissance]=useState("")
     const [isWait,setIsWait]=useState(true)
     const [message,setMessage]=useState(true)
     const [race,setRace]=useState('Gaint Flander')
+    const [cage,setCage]=useState('')
     const [img,setImg]=useState('')
-    function createMalle(){
-        setIsWait(false)
-        fetch("http://127.0.0.1:8000/manager/api/malles",{
+
+    function sendData(event){
+      event.preventDefault()
+      setIsWait(false)
+      var malle = new FormData()
+      malle.append('file', img )
+      malle.append('race',race)
+      malle.append('date_naissance',dateNaissance)
+  
+      fetch("http://127.0.0.1:8000/manager/api/malles",{
       method:'post',
       headers: {
-      'Content-Type': 'application/json',
       'Authorization': 'token ' + JSON.parse(localStorage.getItem('token')),
-
       },
-      body:JSON.stringify({
-        "date_naissance":dateNaissance,
-        "race":race,
-
-      })
-      
+      body:malle
       },
       )
       .then(response =>{
         
       if (response.status==201){
-          return response.json()
+          return true
       }else if(response.status==500){
-        return "server error 500"
+        return response.json()
       }else{
         return response.json()
       }
       })
       .then(data =>{
-        if (data !=  "server error 500" && data !=  "le malle que vous voulez ajouter a un age trés petit" && data !='invalid data' ){
-          
-
-          var data2 = new FormData()
-          data2.append('file', img )
-          fetch('http://127.0.0.1:8000/manager/api/malle/img/'+data.id, {
-            method: 'put',
-           
-            body: data2,
-          }).then(response =>{
-            if (response.status==202){
-              return true
-            }else{
-              return false
-            }
-          }).then(data =>{
-            if (data==true){
-               window.location.href='/managment/manager/malles'
-            }else{
-              setIsWait(true)
-              document.getElementById('message').style.display='block';
-              setMessage('choisir une photo')
-            }
-          })
-        
-          
-      }else {
-        setIsWait(true)
-        document.getElementById('message').style.display='block';
-        setMessage(data)
+        if (data === true){
+          window.location.href='/managment/manager/malles' 
+        }else {
+          setIsWait(true)
+          document.getElementById('message').style.display='block';
+          setMessage(data)
       }
       })
       
     
     
     }
-
-
-
-
-
-
     function Races  ()  {
         const options=[
             {label:'Gaint Flander',value:'Gaint Flander'},
@@ -95,39 +70,69 @@ function CreateMalle(){
               
             </select>
         );
-      };
-
+    };
+    /// function to prpose a cage for a the rabbit
+    useEffect(()=>{
+      fetch("http://127.0.0.1:8000/manager/api/malle/cage_vide",{
+          method:'get',
+          headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'token ' + JSON.parse(localStorage.getItem('token')),
+          },},
+          )
+          .then(response =>{
+          if (response.status==200){
+              return response.json()
+          }else{
+          return false
+          }
+          })
+          .then(data =>{
+          if (data === false){
+               window.location.href="/managment/manager/malles"
+          }else { 
+              setCage(data.cage_vide)
+          }
+          })
+    },[])
+    
+    
     return(
         <div>
-            <HeaderManagment></HeaderManagment>
-            <form >
-                    <div className="mt-2 mb-2 row card bg-success bg-opacity-50 p-1 col-12 col-sm-6 m-auto">
-                    
-                    <h4 className="text-dark">ajouter un malle</h4>
-                    <h4 id="message" style={{display:"none"}} className="alert alert-danger">{message}</h4>
-                    <label>date naissance</label>
-                    <input onChange={e => setDateNaissance(e.target.value)} className="border border-success bg-success bg-opacity-25 " style={{borderRadius:5+'px',}} type="date" /><br></br>
-                    <input onChange={e => setImg(e.target.files[0])} className="border border-success bg-success bg-opacity-25 " style={{borderRadius:5+'px',}} type="file" />
-
-                    <label >race</label>
-                    <Races/>
-                    
-                    <div className="row justify-content-around mt-2 col-12 m-auto"> 
-                                  
-                      
-                      {isWait ? <button onClick={createMalle} className="col-5 m-1 btn btn-success" >ajoputer</button>:<button  className="col-5 m-1 btn btn-success" disabled >
-                          <div className="spinner-border text-primary" role="status">
-                        <span className="sr-only"></span>
-                      </div>
-                            
-                            </button>}
-                      <Link to='/managment/parents/malles'  className="col-5 m-1 btn btn-danger">anuler</Link>
-                    </div >
-                  
-                  </div>
-            </form>
-
+          <HeaderManagment></HeaderManagment>
+          <form onSubmit={sendData}>
+            <div className="mt-2 mb-2 row card bg-success bg-opacity-50 p-1 col-12 col-sm-6 m-auto">
             
+              <h4 className="text-dark">ajouter une malle</h4>
+              <h4 id="message" style={{display:"none"}} className="alert alert-danger">{message}</h4>
+              
+              <label>cage : (tu peux pas le changer)</label>
+              <input disabled className="border border-success bg-success bg-opacity-25 " style={{borderRadius:5+'px',}} value={cage} />
+              
+              <label>date naissance *</label>
+              <input onChange={e => setDateNaissance(e.target.value)} className="border border-success bg-success bg-opacity-25 " style={{borderRadius:5+'px',}} type="date" />
+              
+              <label >race *</label>
+              <Races/>
+              <br></br>
+              <input onChange={e => setImg(e.target.files[0])} className="border border-success bg-success bg-opacity-25 " style={{borderRadius:5+'px',}} type="file" />
+ 
+              <Link to='/managment/manager/malles/create/production'  className="col-11 mt-2 mb-2  m-auto alert alert-success">ajouter une malle a partir des lapins de production</Link>
+
+              <div className="row justify-content-around mt-2 col-12 m-auto"> 
+                            
+                
+                {isWait ? <button type="submit" className="col-5 m-1 btn btn-success" >ajoputer</button>:<button  className="col-5 m-1 btn btn-success" disabled >
+                    <div className="spinner-border text-primary" role="status">
+                  <span className="sr-only"></span>
+                </div>
+                      
+                      </button>}
+                <Link to='/managment/manager/malles'  className="col-5 m-1 btn btn-danger">anuler</Link>
+              </div >
+            
+            </div>
+          </form>  
     </div>
       
     );

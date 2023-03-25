@@ -15,7 +15,7 @@ function CreateGroupe(){
     const [message,setMessage]=useState(true)
     function createGroupe(){
         setIsWait(false)
-        fetch("http://127.0.0.1:8000/production/groupes",{
+        fetch("http://127.0.0.1:8000/manager/groupes",{
       method:'post',
       headers: {
       'Content-Type': 'application/json',

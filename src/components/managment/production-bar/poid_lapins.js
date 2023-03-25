@@ -27,7 +27,7 @@ function PoidLapins(props){
 
 
   useEffect(()=>{
-    fetch("http://127.0.0.1:8000/production/groupes/"+id,{
+    fetch("http://127.0.0.1:8000/manager/groupes/"+id,{
         method:'get',
         headers: {
         'Content-Type': 'application/json',
@@ -79,7 +79,7 @@ function MesureHandler(valeur,lapin){
             }
           }
         
-    fetch("http://127.0.0.1:8000/production/groupes/groupe_poid/",{
+    fetch("http://127.0.0.1:8000/manager/groupes/groupe_poid/",{
   method:'post',
   headers: {
   'Content-Type': 'application/json',

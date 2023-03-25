@@ -18,7 +18,7 @@ function ProductionBar(){
       }
       
 
-    fetch("http://127.0.0.1:8000/production/groupes",{
+    fetch("http://127.0.0.1:8000/manager/groupes",{
       method:'get',
       headers: {
         

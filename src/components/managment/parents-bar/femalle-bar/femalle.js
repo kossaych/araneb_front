@@ -10,31 +10,22 @@ import { useEffect } from "react";
 function Femalle(props){
   const [message,setMessage]=useState("")
   const [isWait,setIsWait]=useState(true)
-
-
   const [TP,setTP]=useState("")
   const [TM,setTM]=useState("")
   const [TMN,setTMN]=useState("")
   const [TPNet,setTPNet]=useState("")
   const [DG,setDG]=useState("")
-
   const [MPN,setMPN]=useState("")
-
-
   const [TV,setTV]=useState("")
   const [totalePrix,settoTalePrix]=useState("")
   const [basPrix,setBasPrix]=useState("")
   const [moyennePrix,setMoyennePrix]=useState("")
   const [grandPrix,setGrandPrix]=useState("")
-  
-
   const [consMoi,setConsMoi]=useState("")
   const [consAujourdhui,setConsAujourdhui]=useState("")
   const [coupConsMoi,setCoupConsMoi]=useState("")
   const [coupConsAujourdhui,setCoupConsAujourdhui]=useState("")
-
   const id=props.id
-
   var today = new Date();
   var dd = String(today.getDate()).padStart(2, '0');
   var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
@@ -46,9 +37,7 @@ function Femalle(props){
   const [race,setRace]=useState("")
   const [cage,setCage]=useState("")
   const [age,setAge]=useState("")
-
-  
-
+  const [state,setSate]=useState("")
 
 
   useEffect(()=>{
@@ -94,6 +83,8 @@ function Femalle(props){
               setRace(data.race)
               setCage(data.cage)
               setAge(data.age)
+              setSate(data.state)
+
 
 
 
@@ -148,11 +139,9 @@ function Femalle(props){
       document.getElementById('prix').className="border border-success bg-success bg-opacity-25 rounded"
       document.getElementById('dateVent').className="border border-success bg-success bg-opacity-25 rounded"
     
-
-    
     setIsWait(false)
 
-    fetch("http://127.0.0.1:8000/manager/api/femalle/"+id,{
+    fetch("http://127.0.0.1:8000/manager/api/femalle/vent/"+id,{
   method:'put',
   headers: {
   'Content-Type': 'application/json',
@@ -161,7 +150,6 @@ function Femalle(props){
   body:JSON.stringify({
     "prix":prix,
     "date_vent":dateVent,
-    "state":"vendue",
   })
   },
   )
@@ -185,7 +173,7 @@ function Femalle(props){
   function FemalleMorte(id){
     setIsWait(false)
 
-    fetch("http://127.0.0.1:8000/manager/api/femalle/"+id,{
+    fetch("http://127.0.0.1:8000/manager/api/femalle/mort/"+id,{
   method:'put',
   headers: {
   'Content-Type': 'application/json',
@@ -273,10 +261,6 @@ function Femalle(props){
         </select>
     );
     };
- 
-
-
-
   let deleteHandler =(id)=>{
     document.getElementById("delete-alert-"+id).style.display='block';
     document.getElementById("layer-"+id).style.display='block'
@@ -314,6 +298,45 @@ function Femalle(props){
 
   }
 
+  const showProduction=()=>{
+    document.getElementById("production").style.display="block"
+    document.getElementById("vendue").style.display="none"
+    document.getElementById("mort").style.display="none"
+
+
+    document.getElementById('prod-button').style.borderBottom ='solid 1px'
+    document.getElementById('ven-button').style.borderBottom ='none'
+    document.getElementById('mort-button').style.borderBottom ='none'
+
+
+
+  }
+  const showVendue=()=>{
+    document.getElementById("production").style.display="none"
+    document.getElementById("vendue").style.display="block"
+    document.getElementById("mort").style.display="none"
+
+
+    document.getElementById("ven-button").style.borderBottom ='solid 1px'
+    document.getElementById('prod-button').style.borderBottom ='none'
+    document.getElementById("mort-button").style.borderBottom ='none'
+
+
+
+  }
+  const showMort=()=>{
+    document.getElementById("production").style.display="none"
+    document.getElementById("vendue").style.display="none"
+    document.getElementById("mort").style.display="block"
+
+
+
+    document.getElementById("mort-button").style.borderBottom ='solid 1px'
+    document.getElementById('prod-button').style.borderBottom ='none'
+    document.getElementById('ven-button').style.borderBottom ='none'
+
+    
+  }
 
     return(
             <div className="col-12 col-sm-6 col-md-4 col-lg-3 mb-5 " id={`femalle-${props.id}`} >
@@ -403,7 +426,7 @@ function Femalle(props){
                                 <td colspan="2" className="text-danger">{TPNet}</td>
                                 
                               </tr>
-                              {DG==false ? "" : <Link  to={"/managment/production/details/"+DG} className="col-2 text-dark" style={{"fontSize":18+"px","margin":10+"px"}}>le groupe de production</Link>}
+                              {DG==false ? "" : <Link  to={"/managment/manager/details/"+DG} className="col-2 text-dark" style={{"fontSize":18+"px","margin":10+"px"}}>le groupe de production</Link>}
 
                             </tbody>
                           </table>
@@ -555,11 +578,12 @@ function Femalle(props){
 
 
                 <div className="card-footer bg-success bg-opacity-75 row m-0 justify-content-around">
-                  <button onClick={()=>statistiqueHandler(props.id)} className="col-2 button-hiden"><img style={{width:25+'px',}} src={details}></img></button>
-                  <button onClick={()=>updateHandler(props.id)} className="col-2 button-hiden"><img style={{width:25+'px',}} src={update} ></img></button>
+                  { state=== "production" ? <button onClick={()=>statistiqueHandler(props.id)} className="col-2 button-hiden"><img style={{width:25+'px',}} src={details}></img></button>:""}
+                  { state=== "production" ? <button onClick={()=>updateHandler(props.id)} className="col-2 button-hiden"><img style={{width:25+'px',}} src={update} ></img></button>:""}
+                  { state=== "production" ? <button onClick={()=>ventHandler(props.id)} className="col-2 button-hiden"><img style={{width:25+'px',}} src={market} ></img></button> :""}
+                  { state=== "production" ? <button onClick={()=>mortHandler(props.id)} className="col-2 button-hiden"><img style={{width:25+'px',}} src={mort} ></img></button> :""}
                   <button onClick={()=>deleteHandler(props.id)} className="col-2 button-hiden"><img style={{width:25+'px',}} src={deleteFemalle} ></img></button>
-                  <button onClick={()=>ventHandler(props.id)} className="col-2 button-hiden"><img style={{width:25+'px',}} src={market} ></img></button>
-                  <button onClick={()=>mortHandler(props.id)} className="col-2 button-hiden"><img style={{width:25+'px',}} src={mort} ></img></button>
+                
                 </div>
                 <div className="card-body p-0">
                 <img style={{'width':'100%'}}src={"http://127.0.0.1:8000/media/"+props.img}></img>
@@ -567,6 +591,10 @@ function Femalle(props){
                       <h5 className="m-0">lapin : {cage}</h5>
                       {props.race ? <p className="text-body m-0">race:{props.race}</p> :""}
                       age: {age} 
+                      {dateMort ? <p className="text-body m-0">date mort:{dateMort}</p> :""}
+                      {dateVent ? <p className="text-body m-0">date vent:{dateVent}</p> :""}
+
+                     
                     </div>
                 </div>
                 

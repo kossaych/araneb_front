@@ -23,7 +23,7 @@ function FauseCoucheAcouplement(props){
   const {num}=useParams()
 
   useEffect(()=>{
-    fetch("http://127.0.0.1:8000/production/accouplements/"+id,{
+    fetch("http://127.0.0.1:8000/manager/accouplements/"+id,{
         method:'get',
         headers: {
         'Content-Type': 'application/json',
@@ -58,7 +58,7 @@ function FauseCoucheAcouplement(props){
 
   function Test(id){
     
-    fetch("http://127.0.0.1:8000/production/accouplements/fause-couche/"+id,{
+    fetch("http://127.0.0.1:8000/manager/accouplements/fause-couche/"+id,{
   method:'put',
   headers: {
   'Content-Type': 'application/json',
