@@ -1,4 +1,4 @@
-/* // Define cache names and versions
+// Define cache names and versions
 const staticCacheName = 'my-static-cache-v1';
 const dynamicCacheName = 'my-dynamic-cache-v1';
 
@@ -55,4 +55,3 @@ self.addEventListener('fetch', event => {
       })
   );
 });
- */
