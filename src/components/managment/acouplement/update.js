@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import HeaderManagment from "../../parts/header/index-managment";
+import HeaderLogIn from "../../parts/header/index-loged-in";
 function UpdateAcouplement(props){
   var today = new Date();
   var dd = String(today.getDate()).padStart(2, '0');
@@ -177,7 +177,7 @@ function UpdateAcouplement(props){
 
     return(
         <div>
-            <HeaderManagment></HeaderManagment>
+            <HeaderLogIn></HeaderLogIn>
 
     <div className="mt-2 mb-2 row card bg-success bg-opacity-50 p-1 col-12 col-sm-6 m-auto">
      

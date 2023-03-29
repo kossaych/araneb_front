@@ -1,6 +1,6 @@
 import React, { useState ,useEffect} from "react";
 import { Link } from "react-router-dom";
-import HeaderManagment from "../../../parts/header/index-managment";
+import HeaderLogIn from "../../../parts/header/index-loged-in";
 function CreateMalle() {
   if (localStorage.getItem('token')==null){
     window.location.href = "/login"
@@ -41,7 +41,7 @@ function CreateMalle() {
       })
       .then(data =>{
         if (data === true){
-          window.location.href='/managment/manager/malles' 
+          window.location.href='/managment/manager/parents' 
         }else {
           setIsWait(true)
           document.getElementById('message').style.display='block';
@@ -89,7 +89,7 @@ function CreateMalle() {
           })
           .then(data =>{
           if (data === false){
-               window.location.href="/managment/manager/malles"
+               window.location.href="/managment/manager/parents"
           }else { 
               setCage(data.cage_vide)
           }
@@ -99,8 +99,8 @@ function CreateMalle() {
     
     return(
         <div>
-          <HeaderManagment></HeaderManagment>
-          <form onSubmit={sendData}>
+          <HeaderLogIn></HeaderLogIn>
+          <form onSubmit={sendData} >
             <div className="mt-2 mb-2 row card bg-success bg-opacity-50 p-1 col-12 col-sm-6 m-auto">
             
               <h4 className="text-dark">ajouter une malle</h4>
@@ -117,7 +117,7 @@ function CreateMalle() {
               <br></br>
               <input onChange={e => setImg(e.target.files[0])} className="border border-success bg-success bg-opacity-25 " style={{borderRadius:5+'px',}} type="file" />
  
-              <Link to='/managment/manager/malles/create/production'  className="col-11 mt-2 mb-2  m-auto alert alert-success">ajouter une malle a partir des lapins de production</Link>
+              <Link to='/managment/manager//create/production'  className="col-11 mt-2 mb-2  m-auto alert alert-success">ajouter une malle a partir des lapins de production</Link>
 
               <div className="row justify-content-around mt-2 col-12 m-auto"> 
                             
@@ -128,7 +128,7 @@ function CreateMalle() {
                 </div>
                       
                       </button>}
-                <Link to='/managment/manager/malles'  className="col-5 m-1 btn btn-danger">anuler</Link>
+                <Link to='/managment/manager/parents'  className="col-5 m-1 btn btn-danger">anuler</Link>
               </div >
             
             </div>

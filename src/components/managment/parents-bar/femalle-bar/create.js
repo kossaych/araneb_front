@@ -1,6 +1,6 @@
 import React, { useState ,useEffect} from "react";
 import { Link } from "react-router-dom";
-import HeaderManagment from "../../../parts/header/index-managment";
+import HeaderLogIn from "../../../parts/header/index-loged-in";
 function CreateFemalle() {
     const [dateNaissance,setDateNaissance]=useState("")
     const [isWait,setIsWait]=useState(true)
@@ -37,7 +37,7 @@ function CreateFemalle() {
       })
       .then(data =>{
         if (data === true){
-          window.location.href='/managment/manager/femalles' 
+          window.location.href='/managment/manager/parents' 
         }else {
           setIsWait(true)
           document.getElementById('message').style.display='block';
@@ -85,7 +85,7 @@ function CreateFemalle() {
           })
           .then(data =>{
           if (data === false){
-               window.location.href="/managment/manager/femalles"
+               window.location.href="/managment/manager/parents"
           }else { 
               setCage(data.cage_vide)
           }
@@ -95,7 +95,7 @@ function CreateFemalle() {
     
     return(
         <div>
-          <HeaderManagment></HeaderManagment>
+          <HeaderLogIn></HeaderLogIn>
      
           <form onSubmit={sendData}>
             <div className="mt-2 mb-2 row card bg-success bg-opacity-50 p-1 col-12 col-sm-6 m-auto">
@@ -113,7 +113,7 @@ function CreateFemalle() {
           <br></br>
           <input onChange={e => setImg(e.target.files[0])} className="border border-success bg-success bg-opacity-25 " style={{borderRadius:5+'px',}} type="file" />
 
-          <Link to='/managment/manager/femalles/create/production'  className="col-11 mt-2 mb-2  m-auto alert alert-success">إضافة أنثى من خلال أرانب الإنتاج</Link>
+          <Link to='/managment/manager/femalle/create/production'  className="col-11 mt-2 mb-2  m-auto alert alert-success">إضافة أنثى من خلال أرانب الإنتاج</Link>
 
           <div className="row justify-content-around mt-2 col-12 m-auto"> 
             {isWait ? 
@@ -125,7 +125,7 @@ function CreateFemalle() {
                 </div>
               </button>
             }
-            <Link to='/managment/manager/femalles'  className="col-5 m-1 btn btn-danger">إلغاء</Link>
+            <Link to='/managment/manager/parents'  className="col-5 m-1 btn btn-danger">إلغاء</Link>
           </div>
             </div>
           </form>

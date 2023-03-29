@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import HeaderManagment from "../../parts/header/index-managment";
+import HeaderLogIn from "../../parts/header/index-loged-in";
 function Sevrage(props){
   var today = new Date();
   var dd = String(today.getDate()).padStart(2, '0');
@@ -9,18 +9,15 @@ function Sevrage(props){
   
   const [message,setMessage]=useState(true)
   const [dateSevrage,setdateSevrage]=useState(yyyy+"-"+mm+"-"+dd)
-  const [state,setState]=useState(true)
+/*   const [state,setState]=useState(true)
   const [dateNaissance,setDateNaissance]=useState(true)
   const [race,setRace]=useState(true)
   const [dateVent,setDateVent]=useState(true)
-  const [prix,setPrix]=useState(true)
-  
-
-
+  const [prix,setPrix]=useState(true) */
 
   const {id}=useParams()
   const {cage}=useParams()
-  useEffect(()=>{
+/*   useEffect(()=>{
     fetch("https://kossay.pythonanywhere.com/manager/api/femalle/"+id,{
         method:'get',
         headers: {
@@ -37,7 +34,7 @@ function Sevrage(props){
         })
         .then(data =>{
         if (data === false){
-          //window.location.href="/managment/manager/femalles"
+          //window.location.href="/managment/manager/production"
         }else {
             setRace(data.race)
             setDateNaissance(data.date_naissance)
@@ -47,7 +44,7 @@ function Sevrage(props){
             setPrix(data.prix)
         }
         })
-},[])
+},[]) */
   function Sevrage(id){
     
     fetch("https://kossay.pythonanywhere.com/manager/groupes/groupe_sevrage/"+id,{
@@ -83,7 +80,7 @@ function Sevrage(props){
  
     return(
       <div>
-        <HeaderManagment/>
+        <HeaderLogIn/>
         <div className=" card p-2 col-12 "  >
      
         
@@ -99,7 +96,7 @@ function Sevrage(props){
                     
         <button onClick={()=>Sevrage(id)}   className="col-5 btn btn-success"  >oui</button>
         
-        <Link to={"/managment/manager/femalles"} className="col-5 btn btn-danger">non</Link>
+        <Link to={"/managment/manager/production"} className="col-5 btn btn-danger">non</Link>
       </div >
       </div>
       

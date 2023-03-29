@@ -1,8 +1,6 @@
 import Footer from "./components/parts/footer";
 import Home from "./components/pages/home";
 import { BrowserRouter,Routes,Route } from "react-router-dom";
-import FemallesBar from "./components/managment/parents-bar/femalle-bar";
-import MallesBar from "./components/managment/parents-bar/malle-bar";
 import Register from "./components/authentication/register";
 import ResetPassword from "./components/authentication/reset-password";
 import Login from "./components/authentication/login";
@@ -27,6 +25,7 @@ import VaccinLapins from "./components/managment/production-bar/vaccins";
 import LapinProductionUpdate from "./components/managment/production-bar/update_lapin";
 import CreateMalleProduction from "./components/managment/parents-bar/malle-bar/create_production";
 import OFFLINE from "./components/pages/ofline";
+import Parents from "./components/managment/parents-bar/femalle-bar";
 
 function App()  {
 
@@ -43,12 +42,10 @@ function App()  {
           <Route path="change_password" element={<ChangePassword/>}></Route>
           
           
-          <Route path="managment/manager/femalles" element={<FemallesBar/>}></Route>
-          <Route path="managment/manager/malles" element={<MallesBar/>}></Route>
+          <Route path="managment/manager/parents" element={<Parents/>}></Route>
           <Route path="managment/manager/femalles/create" element={<CreateFemalle/>}></Route>
           <Route path="managment/manager/femalles/create/production" element={<CreateFemalleProduction/>}></Route>
           <Route path="managment/manager/malles/create/production" element={<CreateMalleProduction/>}></Route>
-
           <Route path="managment/manager/malles/create" element={<CreateMalle/>}></Route>
 
          
@@ -70,11 +67,8 @@ function App()  {
           <Route path="managment/groupe/lapin/update/:id/:cage" element={<LapinProductionUpdate/>}></Route>
 
 
-
-
           <Route path="home/statistique" element={<home/>}></Route>
-          <Route path="blog" element={<Home/>}></Route>
-          <Route path="market" element={<Home/>}></Route>
+
       
       </Routes>
 

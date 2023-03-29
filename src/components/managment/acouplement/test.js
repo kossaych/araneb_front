@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import HeaderManagment from "../../parts/header/index-managment";
+import HeaderLogIn from "../../parts/header/index-loged-in";
 function TestAcouplement(props){
   var today = new Date();
   var dd = String(today.getDate()).padStart(2, '0');
@@ -131,7 +131,7 @@ function TestAcouplement(props){
 
     return(
       <div>
-        <HeaderManagment/>
+        <HeaderLogIn/>
         <div className=" card p-2 col-12 "  >
      
         

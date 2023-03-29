@@ -2,9 +2,8 @@ import React from "react";
 import {useState,useEffect} from "react";
 
 import { Link } from "react-router-dom";
-import HeaderManagment from "../../parts/header/index-managment";
+import HeaderLogIn from "../../parts/header/index-loged-in";
 import Groupe from "./groupe";
-import Lapin from "./lapin";
 function ProductionBar(){
     const [groupes,setGroupes]=useState([]);
     const [isWait,setIsWait]=useState(true)
@@ -45,7 +44,7 @@ function ProductionBar(){
     
     return(
     <div className="" style={{width:99+"%"}}>
-<HeaderManagment/>
+<HeaderLogIn/>
 
 
 
@@ -58,8 +57,6 @@ function ProductionBar(){
 {groupes && groupes.map((groupe)=>(
             <Groupe key={groupe.id} vaccins={groupe.vaccins}  DateSevrage={groupe.date_souvrage} Mpoids={groupe.Mpoids} MoyPS={groupe.MoyPS} cons={groupe.cons} cons_auj={groupe.cons_auj} coup_cons={groupe.coup_cons} coup_cons_auj={groupe.coup_cons_auj} MoyPDM={groupe.MoyPDM} nbMalle={groupe.nbMalle} nbFemalle={groupe.nbFemalle} DateDMP={groupe.DateDMP} TM={groupe.TM} MoyPN={groupe.MoyPN} mère={groupe.mère} acc={groupe.acc_num} père={groupe.père} id={groupe.id}  acouplement={groupe.acouplement} date_naissance={groupe.date_naissance} date_souvrage={groupe.date_souvrage} nb_lapins_nées={groupe.nb_lapins_nées} nb_lapins_mortes_naissances={groupe.nb_lapins_mortes_naissances} ageMois={groupe.age} cage={groupe.cage} lapins={groupe.lapins} />
         ))}
-
-
 
     </div>
     </div>

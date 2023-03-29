@@ -1,12 +1,15 @@
 import React from "react";
 // import images
 import logo from "./icons/logo.png"
-import managment from "./icons/managment.png"
-import blog from "./icons/blog.png"
-import market from "./icons/market.png"
+
 import home from "./icons/home.png"
 import logoutimg from "./icons/logout.png"
 import user from "./icons/user.png"
+import parent from "../../icons/parent.png"
+import statistique from "../../icons/statistique-2.png"
+import production from "../../icons/production.png"
+import acouplement from "../..//icons/acouplement.png"
+
 // end import images
 import { Link} from "react-router-dom";
 
@@ -29,9 +32,13 @@ function HeaderLogIn(){
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li className="nav-item"><Link className="nav-link text-dark" aria-current="page" to="/"><img style={iconStyle} src={home} />Home</Link></li>
-                        <li className="nav-item"><Link className="nav-link  text-dark" to="managment/manager/femalles"><img style={iconStyle} src={managment} />managment</Link></li>
-                        <li className="nav-item"><Link className="nav-link  text-dark" to="blog"><img style={iconStyle} src={blog} />blogs</Link></li>
-                        <li className="nav-item"><Link className="nav-link  text-dark" to="product"><img style={iconStyle} src={market} />market</Link></li>
+
+                        <li className="nav-item"><Link className="nav-link  text-dark" to="/managment/manager/parents"><img style={iconStyle} src={parent}/><span className="text-dark">parents</span></Link></li>
+                        <li className="nav-item"><Link className="nav-link  text-dark" to="/managment/production"><img style={iconStyle} src={production}/>production</Link></li>
+                        <li className="nav-item"><Link className="nav-link  text-dark" to="/managment/acouplement"><img style={iconStyle} src={acouplement}/>acouplement</Link></li>
+                        <li className="nav-item"><Link className="nav-link  text-dark" to="/managment/statistique"><img style={iconStyle} src={statistique}/>statistiques</Link></li>
+
+
                         <li className="nav-item"><Link className="nav-link  text-dark" to="profil"><img style={iconStyle} src={user} />kossay</Link></li>
                         <li className="nav-item nav-link  text-dark" onClick={logout}><img style={iconStyle} src={logoutimg} />logout</li>
                 </ul>

@@ -2,9 +2,10 @@ import React from "react";
 import {useState,useEffect} from "react";
 import Femalle from "./femalle";
 import add from "./icons/add.png";
-import HeaderManagment from "../../../parts/header/index-managment";
+import HeaderLogIn from "../../../parts/header/index-loged-in";
 import { Link } from "react-router-dom";
-function FemallesBar(){
+import Malle from "../malle-bar/malle";
+function Parents(){
     
     const [isWait,setIsWait]=useState(true)
 
@@ -12,7 +13,46 @@ function FemallesBar(){
     const [femallesVendue,setFemallesVendue]=useState([]);
     const [femallesMort,setFemallesMort]=useState([]);
 
+    const [malles,setMalles]=useState([]);
+    const [mallesProduction,setMallesProduction]=useState([]);
+    const [mallesVendue,setMallesVendue]=useState([]);
+    const [mallesMort,setMallesMort]=useState([]);
 
+  useEffect(()=>{    
+
+      fetch("https://kossay.pythonanywhere.com/manager/api/malles",{
+        method:'get',
+        headers: {
+          
+          'Content-Type': 'application/json',
+          'Authorization': 'token ' + JSON.parse(localStorage.getItem('token')),
+          
+        }
+
+  },
+  )
+  .then(response =>{
+    if (response.status==200){
+    return response.json()
+    }else if (response.status==401){
+      window.location.href='/login';
+    } 
+  })
+  .then(data =>{
+    setMalles(data)
+    for(let i=0; i<data.length; i++){
+      if(data[i].state==="production"){
+        setMallesProduction(mallesProduction => [...mallesProduction,data[i]] );
+      }
+      if(data[i].state==="vendue"){
+        setMallesVendue(mallesVendue => [...mallesVendue,data[i]] );
+      }else if(data[i].state==="mort"){
+        setMallesMort(mallesMort => [...mallesMort,data[i]] );
+      }
+    }
+
+    setIsWait(false)
+  })},[])
      
   useEffect(()=>{
 
@@ -63,86 +103,158 @@ return response.json()
 setIsWait(false)
 })},[])
 
-const showProduction=()=>{
-  document.getElementById("production").style.display="block"
-  document.getElementById("vendue").style.display="none"
-  document.getElementById("mort").style.display="none"
+const showProductionFemalle=()=>{
+  document.getElementById("production-femalle").style.display="block"
+  document.getElementById("vendue-femalle").style.display="none"
+  document.getElementById("mort-femalle").style.display="none"
 
 
-  document.getElementById('prod-button').style.borderBottom ='solid 1px'
-  document.getElementById('ven-button').style.borderBottom ='none'
-  document.getElementById('mort-button').style.borderBottom ='none'
-
-
-
-}
-const showVendue=()=>{
-  document.getElementById("production").style.display="none"
-  document.getElementById("vendue").style.display="block"
-  document.getElementById("mort").style.display="none"
-
-
-  document.getElementById("ven-button").style.borderBottom ='solid 1px'
-  document.getElementById('prod-button').style.borderBottom ='none'
-  document.getElementById("mort-button").style.borderBottom ='none'
+  document.getElementById('prod-button-femalle').style.borderBottom ='solid 1px'
+  document.getElementById('ven-button-femalle').style.borderBottom ='none'
+  document.getElementById('mort-button-femalle').style.borderBottom ='none'
 
 
 
 }
-const showMort=()=>{
-  document.getElementById("production").style.display="none"
-  document.getElementById("vendue").style.display="none"
-  document.getElementById("mort").style.display="block"
+const showVendueFemalle=()=>{
+  document.getElementById("production-femalle").style.display="none"
+  document.getElementById("vendue-femalle").style.display="block"
+  document.getElementById("mort-femalle").style.display="none"
+
+
+  document.getElementById("ven-button-femalle").style.borderBottom ='solid 1px'
+  document.getElementById('prod-button-femalle').style.borderBottom ='none'
+  document.getElementById("mort-button-femalle").style.borderBottom ='none'
 
 
 
-  document.getElementById("mort-button").style.borderBottom ='solid 1px'
-  document.getElementById('prod-button').style.borderBottom ='none'
-  document.getElementById('ven-button').style.borderBottom ='none'
+}
+const showMortFemalle=()=>{
+  document.getElementById("production-femalle").style.display="none"
+  document.getElementById("vendue-femalle").style.display="none"
+  document.getElementById("mort-femalle").style.display="block"
+
+
+
+  document.getElementById("mort-button-femalle").style.borderBottom ='solid 1px'
+  document.getElementById('prod-button-femalle').style.borderBottom ='none'
+  document.getElementById('ven-button-femalle').style.borderBottom ='none'
+
+  
+}
+
+
+const showProductionMalle=()=>{
+  document.getElementById("production-malle").style.display="block"
+  document.getElementById("vendue-malle").style.display="none"
+  document.getElementById("mort-malle").style.display="none"
+
+
+  document.getElementById('prod-button-malle').style.borderBottom ='solid 1px'
+  document.getElementById('ven-button-malle').style.borderBottom ='none'
+  document.getElementById('mort-button-malle').style.borderBottom ='none'
+
+
+
+}
+const showVendueMalle=()=>{
+  document.getElementById("production-malle").style.display="none"
+  document.getElementById("vendue-malle").style.display="block"
+  document.getElementById("mort-malle").style.display="none"
+
+
+  document.getElementById("ven-button-malle").style.borderBottom ='solid 1px'
+  document.getElementById('prod-button-malle').style.borderBottom ='none'
+  document.getElementById("mort-button-malle").style.borderBottom ='none'
+
+
+
+}
+const showMortMalle=()=>{
+  document.getElementById("production-malle").style.display="none"
+  document.getElementById("vendue-malle").style.display="none"
+  document.getElementById("mort-malle").style.display="block"
+
+
+
+  document.getElementById("mort-button-malle").style.borderBottom ='solid 1px'
+  document.getElementById('prod-button-malle').style.borderBottom ='none'
+  document.getElementById('ven-button-malle').style.borderBottom ='none'
 
   
 }
     return(
     <div>
-<HeaderManagment></HeaderManagment>
+<HeaderLogIn></HeaderLogIn>
 
     <div  className="row border-danger m-1">
+
+      <div>
         <div className="col-10 m-auto row justify-content-between">
             <h4 className="text-danger col-1 p-0">femalles</h4>
-            <Link to="/managment/manager/femalles/create" className="col-1 p-0"><img style={{width:25+'px',margin:5+'px',}} src={add} ></img></Link>
+            <Link to="/managment/manager/femalle/create" className="col-1 p-0"><img style={{width:25+'px',margin:5+'px',}} src={add} ></img></Link>
         </div>   
-
-
-
         <div className="col-12 m-auto mb-2 row justify-content-between p-0 bg-secondary bg-opacity-25  rounded" style={{'border-bottom':'solid 1px'}}>
-          <button style={{'border':'none','width':"33.3333333%",'border-bottom':'solid 1px'}} className=""    id='prod-button'  onClick={showProduction} >prod</button>
-          <button style={{'border':'none','width':"33.3333333%"}} className=""    id='ven-button' onClick={showVendue} >vendue</button>
-          <button style={{'border':'none','width':"33.3333333%"}} className=""    id='mort-button'  onClick={showMort} >mort</button>
+          <button style={{'border':'none','width':"33.3333333%",'border-bottom':'solid 1px'}} className=""    id='prod-button-femalle'  onClick={showProductionFemalle} >prod</button>
+          <button style={{'border':'none','width':"33.3333333%"}} className=""    id='ven-button-femalle' onClick={showVendueFemalle} >vendue</button>
+          <button style={{'border':'none','width':"33.3333333%"}} className=""    id='mort-button-femalle'  onClick={showMortFemalle} >mort</button>
 
         </div> 
-       
-        <div id="production">
+        <div id="production-femalle">
        { isWait ? <div className="text-center"><div className="spinner-border" role="status"><span className="sr-only"></span></div></div> : ""}
        {femallesProduction && femallesProduction.map((femalle)=>(
-            <Femalle key={femalle.id} img={femalle.img} id={femalle.id} race={femalle.race} age={femalle.age}/>
+            <Femalle state={femalle.state} key={femalle.id} img={femalle.img} id={femalle.id} race={femalle.race} age={femalle.age}/>
         ))}
         </div>
-
-
-
-       <div id="mort" style={{'display':'none'}}>
+       <div id="mort-femalle" style={{'display':'none'}}>
        { isWait ? <div className="text-center"><div className="spinner-border" role="status"><span className="sr-only"></span></div></div> : ""}
        {femallesMort && femallesMort.map((femalle)=>(
-            <Femalle key={femalle.id} img={femalle.img} id={femalle.id} race={femalle.race} age={femalle.age}/>
+            <Femalle state={femalle.state} key={femalle.id} img={femalle.img} id={femalle.id} race={femalle.race} age={femalle.age}/>
         ))}
        </div>
-       <div id="vendue" style={{'display':'none'}}>
+       <div id="vendue-femalle" style={{'display':'none'}}>
        { isWait ? <div className="text-center"><div className="spinner-border" role="status"><span className="sr-only"></span></div></div> : ""}
        {femallesVendue && femallesVendue.map((femalle)=>(
-            <Femalle key={femalle.id} img={femalle.img} id={femalle.id} race={femalle.race} age={femalle.age}/>
+            <Femalle state={femalle.state} key={femalle.id} img={femalle.img} id={femalle.id} race={femalle.race} age={femalle.age}/>
         ))}
         
-        </div>    
+        </div>   
+      </div> 
+
+      <div>
+      <div className="col-12 m-auto row justify-content-between">
+            <h4 className="text-danger col-1 p-0">malles</h4>
+            <Link to="/managment/manager//create" className="col-1 p-0"><img style={{width:25+'px',margin:5+'px',}} src={add} ></img></Link>
+        </div>   
+        <div className="col-12 m-auto mb-2 row justify-content-between p-0 bg-secondary bg-opacity-25  rounded" style={{'border-bottom':'solid 1px'}}>
+          <button style={{'border':'none','width':"33.3333333%",'border-bottom':'solid 1px'}} className=""    id='prod-button-malle'  onClick={showProductionMalle} >prod</button>
+          <button style={{'border':'none','width':"33.3333333%"}} className=""    id='ven-button-malle' onClick={showVendueMalle} >vendue</button>
+          <button style={{'border':'none','width':"33.3333333%"}} className=""    id='mort-button-malle'  onClick={showMortMalle} >mort</button>
+
+        </div> 
+
+
+        <div id="production-malle">
+       { isWait ? <div className="text-center"><div className="spinner-border" role="status"><span className="sr-only"></span></div></div> : ""}
+       {mallesProduction && mallesProduction.map((malle)=>(
+            <Malle key={malle.id} img={malle.img} id={malle.id} race={malle.race} age={malle.age}/>
+        ))}
+        </div>
+       <div id="mort-malle" style={{'display':'none'}}>
+       { isWait ? <div className="text-center"><div className="spinner-border" role="status"><span className="sr-only"></span></div></div> : ""}
+       {mallesMort && mallesMort.map((malle)=>(
+            <Malle key={malle.id} img={malle.img} id={malle.id} race={malle.race} age={malle.age}/>
+        ))}
+       </div>
+       <div id="vendue-malle" style={{'display':'none'}}>
+       { isWait ? <div className="text-center"><div className="spinner-border" role="status"><span className="sr-only"></span></div></div> : ""}
+       {mallesVendue && mallesVendue.map((malle)=>(
+            <Malle key={malle.id} img={malle.img} id={malle.id} race={malle.race} age={malle.age}/>
+        ))}
+        
+        </div>         
+        
+      </div>
                 
          
             
@@ -150,7 +262,7 @@ const showMort=()=>{
     </div>
     );
 }
-export default FemallesBar
+export default Parents
 
 
 

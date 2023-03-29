@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import HeaderManagment from "../../parts/header/index-managment"; 
+import HeaderLogIn from "../../parts/header/index-loged-in"; 
 import remove from "./icons/remove.png";
 function PoidLapins(props){
     
@@ -43,7 +43,7 @@ function PoidLapins(props){
         })
         .then(data =>{
         if (data === false){
-          window.location.href="/managment/manager/femalles"
+          window.location.href="/managment/manager/production"
         }else { 
            
           setLapins(data.lapins)
@@ -115,7 +115,7 @@ function MesureHandler(valeur,lapin){
 
     return(
       <div>
-        <HeaderManagment/>
+        <HeaderLogIn/>
         <div className=" card p-2 col-12 "  >
      
         
@@ -154,7 +154,7 @@ function MesureHandler(valeur,lapin){
                     
         <button  onClick={()=>Poid(id)} className="col-5 btn btn-success"  >oui</button>
         
-        <Link to={"/managment/manager/femalles"} className="col-5 btn btn-danger">non</Link>
+        <Link to={"/managment/manager/production"} className="col-5 btn btn-danger">non</Link>
       </div >
       </div>
       

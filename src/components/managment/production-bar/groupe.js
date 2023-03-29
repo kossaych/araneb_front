@@ -1,41 +1,55 @@
 import React, { useEffect, useState } from "react";
 import update from"./icons/update.png";
-import deleteFemalle from "./icons/delete.png";
+import deleteIcon from "./icons/delete.png";
 import market from "./icons/market.png";
 import mort from "./icons/mort.png";
 import sevrage from "./icons/sevrage.jpg";
 import vaccin from "./icons/vaccin.png";
-
+import close from  "./icons/close.png";
 import poid from "./icons/poids.png";
-
-
+import details from "./icons/details.png";
 
 import { Link } from "react-router-dom";
-import Lapin from "./lapin";
 
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 function Groupe(props){
   const lapins=props.lapins
+  console.log(lapins)
   const [message,setMessage]=useState(true)
   const [isWait,setIsWait]=useState(true)
   const poids=props.Mpoids
 
 
+  function deleteFemalleApi(id){
+    
+    fetch(`https://kossay.pythonanywhere.com/manager/lapins_productions/${id.toString()}`,{
+  method:'delete',
+  headers: {
+  'Content-Type': 'application/json',
+  'Authorization': 'token ' + JSON.parse(localStorage.getItem('token')),
 
+  },
+  },
+  )
+  .then(response =>{
+  if (response.status==204){
+      return true
+  }else if(response.status==500){
+    return "server error 500"
+  }else{
+    return response.json()
+  }
+  })
+  .then(data =>{
+    if (data === true){
+      window.location.reload()
+  }else {
+    document.getElementById('message').style.display='block';
+    setMessage(data)
+  }
+  })}
  
-  
-
-
-
-
-
-
-
-
-
-
-
 
   function deleteAcc(id){
     
@@ -65,13 +79,33 @@ function Groupe(props){
     setMessage(data)
   }
   })}
- 
+
+
+
+
+  function hidenAlerts(id){
+    console.log(id,document.getElementById('lapin-delete-'+id))
+    document.getElementById("lapin-delete-"+id).style.display='none';
+    document.getElementById("lapin-details-"+id).style.display='none';
+  }
+  function updateLapinHandler(id){
+    document.getElementById("lapin-update-"+id).style.display='block';
+  }
+  function deleteLapinHandler(id){
+    document.getElementById("lapin-delete-"+id).style.display='block';
+  }
+  function detailsLapinHandler(id){
+    document.getElementById("lapin-details-"+id).style.display='block';
+  }
+
+
+
     return(
         <div className="border border-success row m-auto mb-3 mt-3 rounded " style={{background:"#9FE2BF"}}>
            
            
            
-                            <div style={{"display":"none","position":"fixed","top":"0",'bottom':'0','left':'0','right':'0',zIndex:20000,"opacity":".9",background:"black"}} id={`delete-alert-${props.id}`} >
+              <div style={{"display":"none","position":"fixed","top":"0",'bottom':'0','left':'0','right':'0',zIndex:20000,"opacity":".9",background:"black"}} id={`delete-alert-${props.id}`} >
                 <div  class=" col-11   m-2 p-2"   style={{"position":"relative","top":"50%","opacity":"1","background":"#FFFFFF","borderRadius":"10px"}} >
                   <div className="">
                     <div className="">
@@ -91,7 +125,7 @@ function Groupe(props){
            <div className="card-footer bg-success bg-opacity-50 row m-0 p-2 justify-content-around" >
                    <Link  to={"/managment/groupe/sevreage/"+props.id+"/"+props.cage}  className="col-2"><img style={{width:25+'px',}} src={sevrage} ></img></Link>
                    <Link to={"/managment/groupe/update/"+props.id} className="col-2"><img style={{width:25+'px',}} src={update} ></img></Link>
-                   <button onClick={()=>document.getElementById(`delete-alert-${props.id}`).style.display='block'} className="col-2 button-hiden"><img style={{width:25+'px',}} src={deleteFemalle} ></img></button>
+                   <button onClick={()=>document.getElementById(`delete-alert-${props.id}`).style.display='block'} className="col-2 button-hiden"><img style={{width:25+'px',}} src={deleteIcon} ></img></button>
                    <Link  to={"/managment/groupe/vente_masse/"+props.id+"/"+props.cage} className="col-2"><img style={{width:25+'px',}} src={market} ></img></Link>
                    <Link  to={"/managment/groupe/mort_masse/"+props.id+"/"+props.cage}  className="col-2"><img style={{width:25+'px',}} src={mort} ></img></Link>
                    <Link  to={"/managment/groupe/poid_mesure/"+props.id+"/"+props.cage} className="col-2"><img style={{width:25+'px',}} src={poid} ></img></Link>
@@ -235,29 +269,10 @@ function Groupe(props){
 
               </tbody>
             </table>
-
-
-
             <div className="col-12 text-danger">
                 <h3 className="">les mesure des poid </h3>
             </div>
             <div className="">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             <div>
             <table className="table table-striped col-11 rounded m-1 bg-succes bg-opacity-50" style={{width:97+"%"}}>
             < tbody>
@@ -335,59 +350,46 @@ function Groupe(props){
             </div>
         
 
+            <div className="col-12 row m-auto border bg-primary bg-opacity-25 text-primary p-1 border-primary rounded  d-flex justify-content-center " >
 
 
 
+                    <div className="m-auto row justify-content-between bg-success bg-opacity-25 rounded">
+                        <h4 className="text-danger col-10 p-0">les vaccins</h4>
+                        <Link to={"/managment/groupe/vaccin/"+props.id+"/"+props.cage} className="col-2 p-0 d-flex align-items-center"><img style={{width:30+'px',margin:5+'px',}} src={vaccin} ></img></Link>
+                    </div>
+                    <div className="">
+                    <table className="table table-striped">
+                    <thead>
+                      <tr>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Prix</th>
+                        <th scope="col">Nb lapins</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      
+                    
+
+                      {props.vaccins.map((vaccin)=>(
+                              <tr>
+                              <th scope="row">{vaccin.nom}</th>
+                              <td>{vaccin.maladie}</td>
+                              <td>{vaccin.date_vaccin}</td>
+                              <td>{vaccin.prix}dt</td>
+                              <td>{vaccin.lapins.length}</td>
+                              </tr>
+                          ))}
 
 
-  
+                    </tbody>
+                  </table>
+                    </div>
+                  
 
 
-
-
-
-
-<div className="col-12 row m-auto border bg-primary bg-opacity-25 text-primary p-2 border-primary rounded  d-flex justify-content-center mb-2 mt-2" >
-
-
-
-        <div className="m-auto row justify-content-between bg-success bg-opacity-25 rounded">
-            <h4 className="text-danger col-10 p-0">les vaccins</h4>
-            <Link to={"/managment/groupe/vaccin/"+props.id+"/"+props.cage} className="col-2 p-0 d-flex align-items-center"><img style={{width:30+'px',margin:5+'px',}} src={vaccin} ></img></Link>
-        </div>
-        <div className="">
-        <table className="table table-striped">
-        <thead>
-          <tr>
-            <th scope="col">Nom</th>
-            <th scope="col">Maladie</th>
-            <th scope="col">Date</th>
-            <th scope="col">Prix</th>
-            <th scope="col">Nb lapins</th>
-          </tr>
-        </thead>
-        <tbody>
-          
-        
-
-          {props.vaccins.map((vaccin)=>(
-                  <tr>
-                  <th scope="row">{vaccin.nom}</th>
-                  <td>{vaccin.maladie}</td>
-                  <td>{vaccin.date_vaccin}</td>
-                  <td>{vaccin.prix}dt</td>
-                  <td>{vaccin.lapins.length}</td>
-                  </tr>
-              ))}
-
-
-        </tbody>
-      </table>
-        </div>
-      
-
-
-      </div>
+            </div>
   
 
 
@@ -419,28 +421,215 @@ function Groupe(props){
           
           
             </div>
+         
             <h4>lapins du groupe :</h4>
           
           { lapins.length==0 ?  <div className="alert alert-danger" role="alert">
                         <p>toute les laperaux de ce groupe sont morte .</p>
 
-                      </div>: <div>
-          <div className="">
-            
-            <div className="row justify-content-around">
-      
-          {lapins && lapins.map((lapin)=>(
-              <Lapin key={lapin.id} id={lapin.id} cage={lapin.cage} sex={lapin.sex} race={lapin.race} vaccins={lapin.vaccin} poids={lapin.Poids} PDM={lapin.PDM} PS={lapin.PS} PN={lapin.PN}/>
-          ))}
+                      </div>:<div className="">
+
+                      <table class="table table-striped col-12 m-auto  p-0">
+                    
+                          <tbody className="col-12 m-0 p-0">
+                       
+                            {lapins && lapins.map((lapin)=>(
+                                <tr className="col-12 m-0 p-0">
+                                <th scope="row">{lapin.cage}</th>
+                                <td><Link to={'/managment/groupe/lapin/update/'+lapin.id+'/'+lapin.cage}><img style={{width:25+'px',}} src={update} /></Link></td>
+                                <td><button onClick={()=>deleteLapinHandler (lapin.id)} id={'delete-lapin-'+lapin.id} className='btn bg-danger  bg-opacity-50 m-0 p-0'><img style={{width:25+'px',}} src={deleteIcon} /></button></td>
+                                <td><button onClick={()=>detailsLapinHandler (lapin.id)} id={'details-lapin-'+lapin.id} className='btn bg-primary  bg-opacity-50 m-0 p-0'><img style={{width:25+'px',}} src={details} /></button></td>
+
+                              </tr>
+                              
+                            ))}
+                          </tbody>
+                      </table>
+
+
+                      {lapins && lapins.map((lapin)=>(
+
+                                          <div id={"lapin-details-"+lapin.id} className="col-12 m-0  animate__animated  animate__backInUp "  style={{"display":"none","position":"fixed","top":'20%','left':'0','right':'0',zIndex:20000,"background": "rgba(0, 0, 0,0.0)","height":"10%","alignItems":"center"}}   >
+                                              <div className="justify-content-end row" style={{"position":"relative","top":"10%"}}>
+                                                          <button onClick={()=>hidenAlerts(lapin.id)} className="col-4 button-hiden mt-2"><img style={{width:25+'px',}} src={close}></img></button>
+                                              </div>
+
+                                              <div  class="row mt-2 pt-2 "   style={{"position":"relative","top":"10%",'left':'2%',"width":"100%","opacity":"1","background":"#FFFFFF","borderRadius":"20px"}} >
+                                                  <div style={{overflowY:"scroll",overflowX:"hidden",height:430+"px"}} className='m-auto'>  
+                    
+                                                                    <div className="m-auto text-center">
+                                                                        <h5 className="m-0">lapin : {lapin.cage}</h5>
+                                                                        {lapin.race ? <p className="text-body m-0">race:{lapin.race}</p> :""}
+                                                                        {lapin.sex ? <p className="text-body m-0">sex:{lapin.sex}</p> :""}
+
+                                                                    </div>
+                                                                    <div className="m-auto col-12 row  border bg-primary bg-opacity-25 text-primary p-1 border-primary rounded  d-flex justify-content-center mb-2 mt-2" >
+
+
+
+                                                                        <div className="m-auto row justify-content-between bg-success bg-opacity-25 rounded">
+                                                                            <h4 className="text-danger col-10 p-0">les vaccins</h4>
+                                                                        </div>
+                                                                        <div className="">
+                                                                        <table className="table table-striped">
+                                                                        <thead>
+                                                                          <tr>
+                                                                            <th scope="col">Nom</th>
+                                                                            <th scope="col">Maladie</th>
+                                                                            <th scope="col">Date</th>
+                                                                            <th scope="col">Prix</th>
+                                                                          </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                    
+
+                                                                          {lapin.vaccin.map((vaccin)=>(
+                                                                                  <tr>
+                                                                                  <th scope="row">{vaccin.nom}</th>
+                                                                                  <td>{vaccin.maladie}</td>
+                                                                                  <td>{vaccin.date_vaccin}</td>
+                                                                                  <td>{vaccin.prix}dt</td>
+                                                                                  </tr>
+                                                                              ))}
+
+
+                                                                        </tbody>
+                                                                        </table>
+                                                                        </div>
+                                                               
+
+
+
+                                                                    </div>
+                                                                    <div className="col-12 m-auto">
+                                                                              <table className="table table-striped col-12 rounded m-auto bg-success bg-opacity-50" style={{width:97+"%"}}>
+                                                                              < tbody>
+                                                                                  <tr>
+                                                                                  <th scope="row"> poid a la naissance</th>
+                                                                                      <td>  
+                                                                                      <h5> <span className="text-dark" style={{marginLeft:50+"px"}}>{lapin.PN}</span></h5>
+
+                                                                                      </td>
+                                                                                    
+                                                                                  </tr>
+                                                                                  <tr>
+                                                                                    
+                                                                                  <th scope="row">poid a la dernier mesure date: {/* {lapin.DateDMP} */}</th>
+                                                                                      <td>  
+                                                                                      <h5> <span className="text-dark" style={{marginLeft:50+"px"}}>{lapin.PDM}</span></h5>
+
+                                                                                      </td>
+                                                                                  </tr>
+                                                                                  <tr>
+                                                                                    
+                                                                                    <th scope="row">moyenne des poids au souvrage: {/* {lapin.DateSevrage} */}</th>
+                                                                                        <td>  
+                                                                                        <h5> <span className="text-dark" style={{marginLeft:50+"px"}}>{lapin.PS}</span></h5>
+
+                                                                                        </td>
+                                                                                  </tr>
+                                                                                </tbody>
+                                                                              </table>                 
+                                                                    </div>
+                                                                    <div className="col-12 m-auto border bg-danger bg-opacity-25 text-danger border-danger rounded p-1  mb-2 mt-2" >
+
+                                                                      <h4 scope="row">moyenne des poids poid(t:wee):</h4><br></br>
+                                                                      <tr>
+                                                                        <td  > 
+                                                                          
+                                                                        { lapin.Poids.length==0 ? 
+                                                                        <div className="col-12 " >
+                                                                            <h4 className="alert-heading">OOPS !</h4><br></br>
+                                                                            <p>t'as pas encore ajouter des mesure de poid a ce groupe.</p><br></br>
+                                                                            
+
+                                                                            <Link  to={"/managment/groupe/poid_mesure/"+lapin.id+"/"+lapin.cage} cage={lapin.cage} className="col-7 m-auto"><img style={{width:50+'px',display:"block"}} src="{poid}" className="m-auto" ></img> <br></br> déterminer les poids des lapins</Link><br></br>
+
+
+
+
+
+
+
+                                                                          </div>:<div style={{overflowX:"scroll",overflowY:"hidden",width:window.screen.width-120}}>
+                                                                          <LineChart   width={((window.screen.width*100)/100)} height={400} data={lapin.poids}>
+                                                                            <Line type="monotone" dataKey="mesure" stroke="#930000" />
+                                                                            <CartesianGrid stroke="#47A0FF" />
+                                                                            <XAxis dataKey="date" />
+                                                                            <YAxis />
+                                                                          </LineChart>
+                                                                          </div>
+                                                                            }
+                                                                          
+
+                                                                          
+                                                                        </td>
+
+                                                                      </tr><br></br>
+
+                                                                    </div>
+                                                  </div>
+                
+                                              </div>
+
+
+
+
+
+
+
+
+
+
+
+                                          </div>
+                      ))}
+
+                      {lapins && lapins.map((lapin)=>(
+
+                        <div style={{"display":"none","position":"fixed","top":'35%','left':'0','right':'0',zIndex:20000,"background": "rgba(0, 0, 0, 0.0)"}} id={'lapin-delete-'+lapin.id} className=" col-12 col-sm-6 col-md-4 col-lg-3 m-auto ">
+                                <div className="justify-content-end row" style={{"position":"relative","top":"35%"}}>
+                                        <button onClick={()=>hidenAlerts(lapin.id)} className="col-4 button-hiden mt-2"><img style={{width:25+'px',}} src={close}></img></button>
+                                </div>
+                                <div  class=" row   m-2 p-2"   style={{"position":"relative","top":"35%","background":"#FFFFFF","borderRadius":"10px",'height':150+'px','alignItems':'center'}} >
+                                    <div class="">
+                                      <div class="modal-content">
+                                        <div class="modal-header flex-column mb-3">
+                                          <h4 class="modal-title w-100">delete : {lapin.cage} </h4>	
+                                        </div>
+                                      
+                                        <div class="modal-footer justify-content-center">
+                                          <button type="button" class="btn btn-secondary m-1" onClick={()=> hidenAlerts(lapin.id)}>Cancel</button>
+                                          <button type="button" class="btn btn-danger" onClick={() => deleteFemalleApi(lapin.id)}>Delete</button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                </div>  
+                        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                      ))}
+
+
+
+
+
         
-            </div>
-          </div>
-          </div>
-          
-                        
-                        }
-
-
+           
+         
+                            </div>
+          }
 
 
         </div>

@@ -45,7 +45,7 @@ function Malle(props){
           })
           .then(data =>{
           if (data === false){
-              window.location.href="/managment/manager/malles"
+              window.location.href="/managment/manager/parents"
           }else { 
 
               setDateVent(data.date_vent)
@@ -132,7 +132,7 @@ function Malle(props){
   })
   .then(data =>{
     if (data === true){
-      window.location.href="/managment/manager/malles"
+      window.location.href="/managment/manager/parents"
   }else {
     document.getElementById('message').style.display='block';
     setMessage(data)
@@ -164,7 +164,7 @@ function Malle(props){
   })
   .then(data =>{
     if (data === true){
-      window.location.href="/managment/manager/malles"
+      window.location.href="/managment/manager/parents"
   }else {
     document.getElementById('message').style.display='block';
     setMessage(data)
@@ -198,7 +198,7 @@ function Malle(props){
     })
     .then(data =>{
         if (data === true){
-        window.location.href="/managment/manager/malles"
+        window.location.href="/managment/manager/parents"
     }else {
 
         document.getElementById('message').style.display='block';
@@ -312,7 +312,7 @@ function Malle(props){
                                     
                                     <button onClick={()=>malleVent(id)}   className="col-5 btn btn-success"  >oui</button>
                                     
-                                    <Link to={"/managment/manager/malles"} className="col-5 btn btn-danger">non</Link>
+                                    <Link to={"/managment/manager/parents"} className="col-5 btn btn-danger">non</Link>
                                   </div >
                         </div>
                 </div>
@@ -337,7 +337,7 @@ function Malle(props){
                  
      <button onClick={()=>malleMorte(id)}   className="col-5 btn btn-success"  >oui</button>
      
-     <Link to={"/managment/manager/malles"} className="col-5 btn btn-danger">non</Link>
+     <Link to={"/managment/manager/parents"} className="col-5 btn btn-danger">non</Link>
    </div >
                         </div>
                 </div>
@@ -369,7 +369,7 @@ function Malle(props){
                                           </div>
                                                 
                                                 </button>}
-                                          <Link to='/managment/manager/malles'  className="col-5 m-1 btn btn-danger">anuler</Link>
+                                          <Link to='/managment/manager/parents'  className="col-5 m-1 btn btn-danger">anuler</Link>
                                         </div >
 
                             </div>

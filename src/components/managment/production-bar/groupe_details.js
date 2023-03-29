@@ -1,6 +1,6 @@
 import React from "react";
 import {useState,useEffect} from "react";
-import HeaderManagment from "../../parts/header/index-managment";
+import HeaderLogIn from "../../parts/header/index-loged-in";
 import Groupe from "./groupe";
 import { useParams } from 'react-router-dom';
 
@@ -30,7 +30,7 @@ function ProductionDetails(){
             })
             .then(data =>{
             if (data === false){
-              window.location.href="/managment/manager/femalles"
+              window.location.href="/managment/manager/production"
             }else { 
                
               setGroupe(data)
@@ -46,7 +46,7 @@ function ProductionDetails(){
 
     return(
     <div className="" style={{width:99+"%"}}>
-        <HeaderManagment/>
+        <HeaderLogIn/>
         <div  className="border-danger m-2 ">
 
         <div className="row justify-content-between">

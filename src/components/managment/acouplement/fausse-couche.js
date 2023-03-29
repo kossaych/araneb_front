@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import HeaderManagment from "../../parts/header/index-managment";
+import HeaderLogIn from "../../parts/header/index-loged-in";
 function FauseCoucheAcouplement(props){
   var today = new Date();
   var dd = String(today.getDate()).padStart(2, '0');
@@ -99,7 +99,7 @@ function FauseCoucheAcouplement(props){
 
     return(
       <div>
-        <HeaderManagment/>
+        <HeaderLogIn/>
         <div className=" card p-2 col-12 "  >
      
         
@@ -117,7 +117,7 @@ function FauseCoucheAcouplement(props){
                     
         <button onClick={()=>Test(id)}   className="col-5 btn btn-success"  >oui</button>
         
-        <Link to={"/managment/manager/femalles"} className="col-5 btn btn-danger">non</Link>
+        <Link to={"/"} className="col-5 btn btn-danger">non</Link>
       </div >
       </div>
       

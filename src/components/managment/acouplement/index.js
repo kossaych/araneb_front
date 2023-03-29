@@ -3,7 +3,7 @@ import {useState,useEffect} from "react";
 import add from "./icons/add.png";
 
 import { Link } from "react-router-dom";
-import HeaderManagment from "../../parts/header/index-managment";
+import HeaderLogIn from "../../parts/header/index-loged-in";
 import Acouplement from "./Acouplement";
 function AcouplementBar(){
     const [acouplements,setAcouplements]=useState([]);
@@ -46,7 +46,7 @@ function AcouplementBar(){
     
     return(
     <div>
-<HeaderManagment/>
+<HeaderLogIn/>
 
 
 

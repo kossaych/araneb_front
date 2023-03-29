@@ -10,30 +10,24 @@ import { useEffect } from "react";
 function Femalle(props){
   const [message,setMessage]=useState("")
   const [isWait,setIsWait]=useState(true)
+  const id=props.id
+
   const [TP,setTP]=useState("")
   const [TM,setTM]=useState("")
   const [TMN,setTMN]=useState("")
   const [TPNet,setTPNet]=useState("")
   const [DG,setDG]=useState("")
-  const [MPN,setMPN]=useState("")
-  const [TV,setTV]=useState("")
-  const [totalePrix,settoTalePrix]=useState("")
-  const [basPrix,setBasPrix]=useState("")
-  const [moyennePrix,setMoyennePrix]=useState("")
-  const [grandPrix,setGrandPrix]=useState("")
+ 
   const [consMoi,setConsMoi]=useState("")
   const [consAujourdhui,setConsAujourdhui]=useState("")
   const [coupConsMoi,setCoupConsMoi]=useState("")
   const [coupConsAujourdhui,setCoupConsAujourdhui]=useState("")
-  const id=props.id
-  var today = new Date();
-  var dd = String(today.getDate()).padStart(2, '0');
-  var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-  var yyyy = today.getFullYear();
+  
+
   const [dateNaissance,setDateNaissance]=useState("")
   const [dateVent,setDateVent]=useState("")
   const [prix,setPrix]=useState("")
-  const [dateMort,setDateMort]=useState(yyyy+"-"+mm+"-"+dd)
+  const [dateMort,setDateMort]=useState('')
   const [race,setRace]=useState("")
   const [cage,setCage]=useState("")
   const [age,setAge]=useState("")
@@ -57,7 +51,7 @@ function Femalle(props){
           })
           .then(data =>{
           if (data === false){
-            //window.location.href="/managment/manager/femalles"
+              //window.location.href="/managment/manager/parents"
           }else { 
               setTP(data.info.TP)
               setTM(data.info.TM)
@@ -65,28 +59,18 @@ function Femalle(props){
               setTPNet(data.info.TPnet)
               setDG(data.info.dernière_groupe)
 
-              setMPN(data.info.MPN)
-
-          
-              setTV(data.info.TV)
-              settoTalePrix(data.info.totale_prix)
-              setBasPrix(data.info.bas_prix)
-              setMoyennePrix(data.info.moy_prix)
-              setGrandPrix(data.info.grand_prix)
-
-
               setConsAujourdhui(data.info.cons_aujourdhui)
               setConsMoi(data.info.cons_moi)
               setCoupConsAujourdhui(data.info.coup_cons_aujourdhui)
               setCoupConsMoi(data.info.coup_cons_moi)
+              
               setDateNaissance(data.date_naissance)
               setRace(data.race)
               setCage(data.cage)
               setAge(data.age)
               setSate(data.state)
-
-
-
+              setDateMort(data.date_mort)
+              setDateVent(data.date_vent)
 
           }
           })
@@ -164,7 +148,7 @@ function Femalle(props){
   })
   .then(data =>{
     if (data === true){
-      window.location.href="/managment/manager/femalles"
+      window.location.href="/managment/manager/parents"
   }else {
     document.getElementById('message').style.display='block';
     setMessage(data)
@@ -196,7 +180,7 @@ function Femalle(props){
   })
   .then(data =>{
     if (data === true){
-      window.location.href="/managment/manager/femalles"
+      window.location.href="/managment/manager/parents"
   }else {
     document.getElementById('message').style.display='block';
     setMessage(data)
@@ -230,7 +214,7 @@ function Femalle(props){
     })
     .then(data =>{
         if (data === true){
-        window.location.href="/managment/manager/femalles"
+        window.location.href="/managment/manager/parents"
     }else {
 
         document.getElementById('message').style.display='block';
@@ -397,40 +381,7 @@ function Femalle(props){
                 
 
 
-                    <div className="m-auto mt-2 rounded p-1 bg-success bg-opacity-50 border border-dark"  style={{"width":90+"%"}}>
-                        <h3 className="text-dark">les ventes :</h3>
-                        <table class="table table-striped">                   
-                          
-                            <tbody>
-                              <tr>
-                                <th scope="row"> totale des ventes</th>
-                                <td className="text-dark">{TV}</td>
-                                
-                              </tr>
-                              <tr>
-                                <th scope="row">totale des prix</th>
-                                <td className="text-dark">{totalePrix}</td>
-                                
-                              </tr>
-                              <tr>
-                                <th scope="row">moyenne des prix</th>
-                                <td colspan="2" className="text-dark">{moyennePrix}</td>
-                                
-                              </tr>
-                              <tr>
-                                <th scope="row">le plus grand prix </th>
-                                <td colspan="2" className="text-dark">{basPrix}</td>
-                                
-                              </tr>
-                              <tr>
-                                <th scope="row">le plus bas prix </th>
-                                <td colspan="2" className="text-dark">{grandPrix}</td>
-                                
-                              </tr>
-                            </tbody>
-                          </table>
-                        
-                    </div>
+                  
                     
                   </div>
                       </div>     
@@ -460,7 +411,7 @@ function Femalle(props){
                                     
                                     <button onClick={()=>FemalleVent(id)}   className="col-5 btn btn-success"  >oui</button>
                                     
-                                    <Link to={"/managment/manager/femalles"} className="col-5 btn btn-danger">non</Link>
+                                    <Link to={"/managment/manager/parents"} className="col-5 btn btn-danger">non</Link>
                                   </div >
                         </div>
                 </div>
@@ -484,7 +435,7 @@ function Femalle(props){
                  
      <button onClick={()=>FemalleMorte(id)}   className="col-5 btn btn-success"  >oui</button>
      
-     <Link to={"/managment/manager/femalles"} className="col-5 btn btn-danger">non</Link>
+     <Link to={"/managment/manager/parents"} className="col-5 btn btn-danger">non</Link>
    </div >
                         </div>
                 </div>
@@ -516,7 +467,7 @@ function Femalle(props){
                                           </div>
                                                 
                                                 </button>}
-                                          <Link to='/managment/manager/femalles'  className="col-5 m-1 btn btn-danger">anuler</Link>
+                                          <Link to='/managment/manager/parents'  className="col-5 m-1 btn btn-danger">anuler</Link>
                                         </div >
 
                             </div>
@@ -526,10 +477,10 @@ function Femalle(props){
                 </div>
 
                 <div className="card-footer bg-success bg-opacity-75 row m-0 justify-content-around">
-                  { state=== "production" ? <button onClick={()=>statistiqueHandler(props.id)} className="col-2 button-hiden"><img style={{width:25+'px',}} src={details}></img></button>:""}
-                  { state=== "production" ? <button onClick={()=>updateHandler(props.id)} className="col-2 button-hiden"><img style={{width:25+'px',}} src={update} ></img></button>:""}
-                  { state=== "production" ? <button onClick={()=>ventHandler(props.id)} className="col-2 button-hiden"><img style={{width:25+'px',}} src={market} ></img></button> :""}
-                  { state=== "production" ? <button onClick={()=>mortHandler(props.id)} className="col-2 button-hiden"><img style={{width:25+'px',}} src={mort} ></img></button> :""}
+                  { props.state=== "production" ? <button onClick={()=>statistiqueHandler(props.id)} className="col-2 button-hiden"><img style={{width:25+'px',}} src={details}></img></button>:""}
+                  { props.state=== "production" ? <button onClick={()=>updateHandler(props.id)} className="col-2 button-hiden"><img style={{width:25+'px',}} src={update} ></img></button>:""}
+                  { props.state=== "production" ? <button onClick={()=>ventHandler(props.id)} className="col-2 button-hiden"><img style={{width:25+'px',}} src={market} ></img></button> :""}
+                  { props.state=== "production" ? <button onClick={()=>mortHandler(props.id)} className="col-2 button-hiden"><img style={{width:25+'px',}} src={mort} ></img></button> :""}
                   <button onClick={()=>deleteHandler(props.id)} className="col-2 button-hiden"><img style={{width:25+'px',}} src={deleteFemalle} ></img></button>
                 
                 </div>

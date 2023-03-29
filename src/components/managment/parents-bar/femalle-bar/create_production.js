@@ -1,6 +1,6 @@
 import React, { useState ,useEffect} from "react";
 import { Link } from "react-router-dom";
-import HeaderManagment from "../../../parts/header/index-managment";
+import HeaderLogIn from "../../../parts/header/index-loged-in";
 function CreateFemalleProduction(){
     const [isWait,setIsWait]=useState(true)
     const [message,setMessage]=useState('')
@@ -60,7 +60,7 @@ function CreateFemalleProduction(){
       })
       .then(data =>{
         if (data === true){
-        window.location.href='/managment/manager/femalles'
+        window.location.href='/managment/manager/parents'
       }else {
         document.getElementById('message').style.display='block';
         setMessage(data)
@@ -106,7 +106,7 @@ function CreateFemalleProduction(){
           })
           .then(data =>{
           if (data === false){
-               window.location.href="/managment/manager/femalles"
+               window.location.href="/managment/manager/parents"
           }else { 
               setCage(data.cage_vide)
           }
@@ -131,7 +131,7 @@ function CreateFemalleProduction(){
         })
         .then(data =>{
         if (data === false){
-             window.location.href="/managment/manager/femalles"
+             window.location.href="/managment/manager/parents"
         }else { 
             setLapins(data)
             setLapin(data[0].id)
@@ -148,7 +148,7 @@ function CreateFemalleProduction(){
 
     return(
         <div>
-            <HeaderManagment></HeaderManagment>
+            <HeaderLogIn></HeaderLogIn>
 
     <div className="mt-2 mb-2 row card bg-success bg-opacity-50 p-1 col-12 col-sm-6 m-auto">
      
@@ -189,7 +189,7 @@ function CreateFemalleProduction(){
         </div>
               
               </button>}
-        <Link to='/managment/manager/femalles'  className="col-5 m-1 btn btn-danger">anuler</Link>
+        <Link to='/managment/manager/parents'  className="col-5 m-1 btn btn-danger">anuler</Link>
        </div >
     
     </div>
