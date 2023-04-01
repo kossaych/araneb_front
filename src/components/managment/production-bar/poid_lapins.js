@@ -27,7 +27,7 @@ function PoidLapins(props){
 
 
   useEffect(()=>{
-    fetch("https://kossay.pythonanywhere.com/manager/groupes/"+id,{
+    fetch("http://localhost:8000/manager/groupes/"+id,{
         method:'get',
         headers: {
         'Content-Type': 'application/json',
@@ -79,7 +79,7 @@ function MesureHandler(valeur,lapin){
             }
           }
         
-    fetch("https://kossay.pythonanywhere.com/manager/groupes/groupe_poid/",{
+    fetch("http://localhost:8000/manager/groupes/groupe_poid/",{
   method:'post',
   headers: {
   'Content-Type': 'application/json',

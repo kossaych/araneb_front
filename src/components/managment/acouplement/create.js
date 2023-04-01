@@ -38,7 +38,7 @@ function CreateAcouplement(){
         document.getElementById('père').className="border border-success bg-success bg-opacity-25 rounded"
         document.getElementById('date_acouplage').className="border border-success bg-success bg-opacity-25 rounded"
       setIsWait(false)
-        fetch("https://kossay.pythonanywhere.com/manager/acouplements",{
+        fetch("http://localhost:8000/manager/acouplements",{
       method:'post',
       headers: {
       'Content-Type': 'application/json',
@@ -74,7 +74,7 @@ function CreateAcouplement(){
     }
     }   
     useEffect(()=>{
-      fetch("https://kossay.pythonanywhere.com/manager/femalles_acouplements",{
+      fetch("http://localhost:8000/manager/femalles_acouplements",{
         method:'get',
         headers: {
         'Content-Type': 'application/json',
@@ -111,7 +111,7 @@ function CreateAcouplement(){
 
 
     useEffect(()=>{
-      fetch("https://kossay.pythonanywhere.com/manager/malles_acouplements",{
+      fetch("http://localhost:8000/manager/malles_acouplements",{
         method:'get',
         headers: {
         'Content-Type': 'application/json',

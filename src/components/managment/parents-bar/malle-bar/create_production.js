@@ -30,7 +30,7 @@ function CreateMalleProduction(){
 
       
       setIsWait(false)
-      fetch("https://kossay.pythonanywhere.com/manager/api/malles/production",{
+      fetch("http://localhost:8000/manager/api/malles/production",{
       method:'post',
       headers: {
       'Content-Type': 'application/json',
@@ -86,7 +86,7 @@ function CreateMalleProduction(){
 
 
     useEffect(()=>{
-      fetch("https://kossay.pythonanywhere.com/manager/api/malle/cage_vide",{
+      fetch("http://localhost:8000/manager/api/malle/cage_vide",{
           method:'get',
           headers: {
           'Content-Type': 'application/json',
@@ -111,7 +111,7 @@ function CreateMalleProduction(){
 
 
     useEffect(()=>{
-        fetch("https://kossay.pythonanywhere.com/manager/api/malles/production",{
+        fetch("http://localhost:8000/manager/api/malles/production",{
             method:'get',
             headers: {
             'Content-Type': 'application/json',

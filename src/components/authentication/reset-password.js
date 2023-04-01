@@ -12,7 +12,7 @@ function ResetPassword(){
     
 function sendEmail(){
       setIsWait(false)
-        fetch("https://kossay.pythonanywhere.com/accounts/api/reset_password/",{
+        fetch("http://localhost:8000/accounts/api/reset_password/",{
     method:'post',
     headers: {
       'Content-Type': 'application/json',
@@ -48,7 +48,7 @@ function sendEmail(){
 })}
 function sendVirificationCode(){
     setIsWait(false)
-    fetch("https://kossay.pythonanywhere.com/accounts/api/check_code/",{
+    fetch("http://localhost:8000/accounts/api/check_code/",{
 method:'post',
 headers: {
   'Content-Type': 'application/json',
@@ -84,7 +84,7 @@ body:JSON.stringify({
 })}
 function sendPassword(){
   setIsWait(false)
-    fetch("https://kossay.pythonanywhere.com/accounts/api/set_password/",{
+    fetch("http://localhost:8000/accounts/api/set_password/",{
 method:'post',
 headers: {
   'Content-Type': 'application/json',

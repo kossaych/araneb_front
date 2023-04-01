@@ -15,7 +15,7 @@ function CreateGroupe(){
     const [message,setMessage]=useState(true)
     function createGroupe(){
         setIsWait(false)
-        fetch("https://kossay.pythonanywhere.com/manager/groupes",{
+        fetch("http://localhost:8000/manager/groupes",{
       method:'post',
       headers: {
       'Content-Type': 'application/json',

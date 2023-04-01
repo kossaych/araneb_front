@@ -31,7 +31,7 @@ function TestAcouplement(props){
 
   
   useEffect(()=>{
-    fetch("https://kossay.pythonanywhere.com/manager/accouplements/"+id,{
+    fetch("http://localhost:8000/manager/accouplements/"+id,{
         method:'get',
         headers: {
         'Content-Type': 'application/json',
@@ -66,7 +66,7 @@ function TestAcouplement(props){
 
   function Test(id){
     
-    fetch("https://kossay.pythonanywhere.com/manager/accouplements/test/"+id,{
+    fetch("http://localhost:8000/manager/accouplements/test/"+id,{
   method:'put',
   headers: {
   'Content-Type': 'application/json',

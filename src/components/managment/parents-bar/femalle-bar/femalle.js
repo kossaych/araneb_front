@@ -8,8 +8,14 @@ import close from "./icons/close.png"
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 function Femalle(props){
-  const [message,setMessage]=useState("")
-  const [isWait,setIsWait]=useState(true)
+  const [messageVent,setMessageVent]=useState("")
+  const [messageMort,setMessageMort]=useState("")
+  const [messageUpdate,setMessageUpdate]=useState("")
+
+  const [isWaitVent,setIsWaitVent]=useState(true)
+  const [isWaitMort,setIsWaitMort]=useState(true)
+  const [isWaitUpdate,setIsWaitUpdate]=useState(true)
+
   const id=props.id
 
   const [TP,setTP]=useState("")
@@ -22,7 +28,6 @@ function Femalle(props){
   const [consAujourdhui,setConsAujourdhui]=useState("")
   const [coupConsMoi,setCoupConsMoi]=useState("")
   const [coupConsAujourdhui,setCoupConsAujourdhui]=useState("")
-  
 
   const [dateNaissance,setDateNaissance]=useState("")
   const [dateVent,setDateVent]=useState("")
@@ -35,7 +40,7 @@ function Femalle(props){
 
 
   useEffect(()=>{
-      fetch("https://kossay.pythonanywhere.com/manager/api/femalle/"+id,{
+      fetch("http://localhost:8000/manager/api/femalle/"+id,{
           method:'get',
           headers: {
           'Content-Type': 'application/json',
@@ -51,7 +56,7 @@ function Femalle(props){
           })
           .then(data =>{
           if (data === false){
-              //window.location.href="/managment/manager/parents"
+              
           }else { 
               setTP(data.info.TP)
               setTM(data.info.TM)
@@ -75,10 +80,9 @@ function Femalle(props){
           }
           })
   },[])
-
   function FemalleDelete(id){
-    setIsWait(false)
-    fetch(`https://kossay.pythonanywhere.com/manager/api/femalle/${id.toString()}`,{
+
+    fetch(`http://localhost:8000/manager/api/femalle/${id.toString()}`,{
   method:'delete',
   headers: {
   'Content-Type': 'application/json',
@@ -100,9 +104,6 @@ function Femalle(props){
     if (data === true){
       //window.location.reload()
       document.getElementById("femalle-"+id).style.display="none"
-  }else {
-    document.getElementById('message').style.display='block';
-    setMessage(data)
   }
   })}
   function FemalleVent(id){
@@ -123,9 +124,9 @@ function Femalle(props){
       document.getElementById('prix').className="border border-success bg-success bg-opacity-25 rounded"
       document.getElementById('dateVent').className="border border-success bg-success bg-opacity-25 rounded"
     
-    setIsWait(false)
+    setIsWaitVent(false)
 
-    fetch("https://kossay.pythonanywhere.com/manager/api/femalle/vent/"+id,{
+    fetch("http://localhost:8000/manager/api/femalle/vent/"+id,{
   method:'put',
   headers: {
   'Content-Type': 'application/json',
@@ -138,11 +139,14 @@ function Femalle(props){
   },
   )
   .then(response =>{
+    
   if (response.status==202){
       return true
   }else if(response.status==500){
+    setIsWaitVent(true)
     return "server error 500"
   }else{
+    setIsWaitVent(true)
     return response.json()
   }
   })
@@ -150,14 +154,14 @@ function Femalle(props){
     if (data === true){
       window.location.href="/managment/manager/parents"
   }else {
-    document.getElementById('message').style.display='block';
-    setMessage(data)
+   
+    setMessageVent(data)
   }
   })}}
   function FemalleMorte(id){
-    setIsWait(false)
+    setIsWaitMort(false)
 
-    fetch("https://kossay.pythonanywhere.com/manager/api/femalle/mort/"+id,{
+    fetch("http://localhost:8000/manager/api/femalle/mort/"+id,{
   method:'put',
   headers: {
   'Content-Type': 'application/json',
@@ -170,11 +174,14 @@ function Femalle(props){
   },
   )
   .then(response =>{
+    
   if (response.status==202){
       return true
   }else if(response.status==500){
+    setIsWaitMort(true)
     return "server error 500"
   }else{
+    setIsWaitMort(true)
     return response.json()
   }
   })
@@ -182,13 +189,13 @@ function Femalle(props){
     if (data === true){
       window.location.href="/managment/manager/parents"
   }else {
-    document.getElementById('message').style.display='block';
-    setMessage(data)
+   
+    setMessageMort(data)
   }
   })}
   function FemalleUpdate(id){
-    setIsWait(false)
-    fetch("https://kossay.pythonanywhere.com/manager/api/femalle/"+id,{
+    setIsWaitUpdate(false)
+    fetch("http://localhost:8000/manager/api/femalle/"+id,{
     method:'put',
     headers: {
     'Content-Type': 'application/json',
@@ -205,10 +212,10 @@ function Femalle(props){
     if (response.status==202){
         return true
     }else if(response.status==500){
-      setIsWait(true)
+      setIsWaitUpdate(true)
         return "server error 500"
     }else{
-      setIsWait(true)
+      setIsWaitUpdate(true)
         return response.json()
     }
     })
@@ -217,10 +224,14 @@ function Femalle(props){
         window.location.href="/managment/manager/parents"
     }else {
 
-        document.getElementById('message').style.display='block';
-        setMessage(data)
+       
+        setMessageUpdate(data)
     }
   })}
+
+
+
+
   function Races  ()  {
     const options=[
         
@@ -249,7 +260,7 @@ function Femalle(props){
     document.getElementById("delete-alert-"+id).style.display='block';
     document.getElementById("layer-"+id).style.display='block'
   }
-  function hidenAlerts(id){
+  function hidenPopUps(id){
 
 
     document.getElementById("delete-alert-"+id).style.display='none';
@@ -288,12 +299,12 @@ function Femalle(props){
             <div className="col-12 col-sm-6 col-md-4 col-lg-3 mb-5 " id={`femalle-${props.id}`} >
               <div className="card h-100 border-success pb-2">
                
-                 <div onClick={()=>hidenAlerts(props.id)} style={{"display":"none","position":"fixed","top":"0",'bottom':'0','left':'0','right':'0',zIndex:20,"background": "rgba(0, 0, 0, 0.6)"}} id={`layer-${props.id}`} >
+                 <div onClick={()=>hidenPopUps(props.id)} style={{"display":"none","position":"fixed","top":"0",'bottom':'0','left':'0','right':'0',zIndex:20,"background": "rgba(0, 0, 0, 0.6)"}} id={`layer-${props.id}`} >
                  </div>
 
                 <div style={{"display":"none","position":"fixed","top":'35%','left':'0','right':'0',zIndex:20000,"background": "rgba(0, 0, 0, 0.0)"}} id={`delete-alert-${props.id}`} className=" col-12 col-sm-6 col-md-4 col-lg-3 m-auto ">
                 <div className="justify-content-end row" style={{"position":"relative","top":"35%"}}>
-                                <button onClick={()=>hidenAlerts(props.id)} className="col-4 button-hiden mt-2"><img style={{width:25+'px',}} src={close}></img></button>
+                                <button onClick={()=>hidenPopUps(props.id)} className="col-4 button-hiden mt-2"><img style={{width:25+'px',}} src={close}></img></button>
                         </div>
                       <div  class=" row   m-2 p-2"   style={{"position":"relative","top":"35%","background":"#FFFFFF","borderRadius":"10px",'height':150+'px','alignItems':'center'}} >
                           <div class="">
@@ -303,7 +314,7 @@ function Femalle(props){
                               </div>
                             
                               <div class="modal-footer justify-content-center">
-                                <button type="button" class="btn btn-secondary m-1" onClick={()=> hidenAlerts(props.id)}>Cancel</button>
+                                <button type="button" class="btn btn-secondary m-1" onClick={()=> hidenPopUps(props.id)}>Cancel</button>
                                 <button type="button" class="btn btn-danger" onClick={() => FemalleDelete(props.id)}>Delete</button>
                               </div>
                             </div>
@@ -313,7 +324,7 @@ function Femalle(props){
 
                 <div   style={{"display":"none","position":"fixed","top":'20%','left':'0','right':'0',zIndex:20000,"background": "rgba(0, 0, 0, 0.0)"}} id={`statistique-${props.id}`} className="col-12  m-auto ">
                     <div className="justify-content-end row" style={{"position":"relative","top":"10%"}}>
-                            <button onClick={()=>hidenAlerts(props.id)} className="col-4 button-hiden mt-2"><img style={{width:25+'px',}} src={close}></img></button>
+                            <button onClick={()=>hidenPopUps(props.id)} className="col-4 button-hiden mt-2"><img style={{width:25+'px',}} src={close}></img></button>
                     </div>
                     <div  class="row m-2 p-2"   style={{"position":"relative","top":"10%",'left':'2%',"width":"90%","opacity":"1","background":"#FFFFFF","borderRadius":"10px"}} >
                     <div style={{overflowY:"scroll",overflowX:"hidden",height:370+"px"}}>  
@@ -390,13 +401,13 @@ function Femalle(props){
 
                 <div className="col-12 m-auto  animate__animated  animate__backInUp "  style={{"display":"none","position":"fixed","top":'20%','left':'0','right':'0',zIndex:20000,"background": "rgba(0, 0, 0,0.0)","height":"10%","alignItems":"center"}} id={`vent-${props.id}`}  >
                         <div className="justify-content-end row" style={{"position":"relative","top":"10%"}}>
-                                    <button onClick={()=>hidenAlerts(props.id)} className="col-4 button-hiden mt-2"><img style={{width:25+'px',}} src={close}></img></button>
+                                    <button onClick={()=>hidenPopUps(props.id)} className="col-4 button-hiden mt-2"><img style={{width:25+'px',}} src={close}></img></button>
                         </div>
                         <div className="alert alert-primary m-2" style={{background:"white","height":"500px"}} role="alert">
                         <div className="alert alert-primary" role="alert">
                           est ce que tu est sur que cette  femalle {cage}
-                          est morte
-                          <h3>{message}</h3>
+                          a vendue
+                          <h4  className="text-danger" >{messageVent}</h4>
                         <br/>
                         <label>date de mort     :</label>
                         <input id="dateVent"  value={dateVent} onChange={e=>setDateVent(e.target.value)}  className="border border-success bg-success bg-opacity-25 m-2 " style={{borderRadius:5+'px',}}   type="date" /> <br/>
@@ -409,15 +420,17 @@ function Femalle(props){
 
                         <div className="row justify-content-around mt-2"> 
                                     
-                                    <button onClick={()=>FemalleVent(id)}   className="col-5 btn btn-success"  >oui</button>
-                                    
+                                    {isWaitVent ? <button  className="col-5 m-1 btn btn-success" onClick={()=>FemalleVent(id)}>oui</button>:<button  className="col-5 m-1 btn btn-success" disabled >
+                                    <div className="spinner-border text-primary" role="status">
+                                    <span className="sr-only"></span>
+                                    </div> </button>}
                                     <Link to={"/managment/manager/parents"} className="col-5 btn btn-danger">non</Link>
                                   </div >
                         </div>
                 </div>
                 <div className="col-12 m-auto  animate__animated  animate__backInUp "  style={{"display":"none","position":"fixed","top":'20%','left':'0','right':'0',zIndex:20000,"background": "rgba(0, 0, 0,0.0)","height":"10%","alignItems":"center"}} id={`mort-${props.id}`}  >
                         <div className="justify-content-end row" style={{"position":"relative","top":"10%"}}>
-                                    <button onClick={()=>hidenAlerts(props.id)} className="col-4 button-hiden mt-2"><img style={{width:25+'px',}} src={close}></img></button>
+                                    <button onClick={()=>hidenPopUps(props.id)} className="col-4 button-hiden mt-2"><img style={{width:25+'px',}} src={close}></img></button>
                         </div>
                         <div className="alert alert-primary m-2" style={{background:"white","height":"500px"}} role="alert" >
      
@@ -425,7 +438,7 @@ function Femalle(props){
      <div className="alert alert-danger" role="alert">
        est ce que tu est sur que cette  femalle {cage}
        est morte
-       <h3>{message}</h3>
+       <h4  className="text-danger" >{messageMort}</h4>
      <br/>
      <label>date de mort</label>
      <input   value={dateMort} onChange={e=>setDateMort(e.target.value)}  className="border border-danger bg-danger bg-opacity-25 " style={{borderRadius:5+'px',}}   type="date" />
@@ -433,22 +446,33 @@ function Femalle(props){
    
    <div className="row justify-content-around mt-2"> 
                  
-     <button onClick={()=>FemalleMorte(id)}   className="col-5 btn btn-success"  >oui</button>
+
+
+
+      {isWaitMort ? <button  className="col-5 m-1 btn btn-success" onClick={()=>FemalleMorte(id)}>oui</button>:<button  className="col-5 m-1 btn btn-success" disabled >
+      <div className="spinner-border text-primary" role="status">
+      <span className="sr-only"></span>
+      </div> </button>}
+
+
+
+
+
+
      
      <Link to={"/managment/manager/parents"} className="col-5 btn btn-danger">non</Link>
    </div >
                         </div>
                 </div>
-
                 <div className="col-12 m-auto  animate__animated  animate__backInUp "  style={{"display":"none","position":"fixed","top":'20%','left':'0','right':'0',zIndex:20000,"background": "rgba(0, 0, 0,0.0)","height":"10%","alignItems":"center"}} id={`update-${props.id}`}  >
                         <div className="justify-content-end row" style={{"position":"relative","top":"10%"}}>
-                                    <button onClick={()=>hidenAlerts(props.id)} className="col-4 button-hiden mt-2"><img style={{width:25+'px',}} src={close}></img></button>
+                                    <button onClick={()=>hidenPopUps(props.id)} className="col-4 button-hiden mt-2"><img style={{width:25+'px',}} src={close}></img></button>
                         </div>
                         <div className="alert alert-primary m-3" style={{background:"white","height":"500px"}} role="alert">
                             <div className=" row card bg-success bg-opacity-50 p-1 col-12 m-auto">
                                         
                                         <h4 className="text-dark">modifier la femalle {cage}</h4>
-                                        <h4 id="message" style={{display:"none"}} className="alert alert-danger">{message}</h4>
+                                        <h4  className="text-danger" >{messageUpdate}</h4>
                                         
 
                                         
@@ -461,12 +485,12 @@ function Femalle(props){
                                         <div className="row justify-content-around mt-2 col-12 m-auto"> 
                                                       
                                           
-                                          {isWait ? <button  className="col-5 m-1 btn btn-success" onClick={()=>FemalleUpdate(id)}>ajoputer</button>:<button  className="col-5 m-1 btn btn-success" disabled >
+                                          {isWaitUpdate ? <button  className="col-5 m-1 btn btn-success" onClick={()=>FemalleUpdate(id)}>ajoputer</button>:<button  className="col-5 m-1 btn btn-success" disabled >
                                               <div className="spinner-border text-primary" role="status">
                                             <span className="sr-only"></span>
-                                          </div>
-                                                
-                                                </button>}
+                                          </div> </button>}
+
+
                                           <Link to='/managment/manager/parents'  className="col-5 m-1 btn btn-danger">anuler</Link>
                                         </div >
 
@@ -475,6 +499,13 @@ function Femalle(props){
                        
                      
                 </div>
+
+
+
+
+
+
+
 
                 <div className="card-footer bg-success bg-opacity-75 row m-0 justify-content-around">
                   { props.state=== "production" ? <button onClick={()=>statistiqueHandler(props.id)} className="col-2 button-hiden"><img style={{width:25+'px',}} src={details}></img></button>:""}
@@ -485,7 +516,7 @@ function Femalle(props){
                 
                 </div>
                 <div className="card-body p-0">
-                <img style={{'width':'100%'}}src={"https://kossay.pythonanywhere.com/media/"+props.img}></img>
+                <img style={{'width':'100%'}}src={"http://localhost:8000/media/"+props.img}></img>
                   <div className="text-center">
                       <h5 className="m-0">lapin : {cage}</h5>
                       {props.race ? <p className="text-body m-0">race:{props.race}</p> :""}
@@ -498,7 +529,7 @@ function Femalle(props){
                 </div>
                 
               </div>
-          </div>
+            </div>
     );
 
 }

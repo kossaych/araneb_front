@@ -29,7 +29,7 @@ function UpdateAcouplement(props){
 
 
   useEffect(()=>{
-    fetch("https://kossay.pythonanywhere.com/manager/accouplements/"+id,{
+    fetch("http://localhost:8000/manager/accouplements/"+id,{
         method:'get',
         headers: {
         'Content-Type': 'application/json',
@@ -62,7 +62,7 @@ function UpdateAcouplement(props){
 
   function Update(id){
 
-    fetch("https://kossay.pythonanywhere.com/manager/accouplements/"+id,{
+    fetch("http://localhost:8000/manager/accouplements/"+id,{
   method:'put',
   headers: {
   'Content-Type': 'application/json',
@@ -103,7 +103,7 @@ function UpdateAcouplement(props){
 
 // load femalles libre a acouplet
   useEffect(()=>{
-    fetch("https://kossay.pythonanywhere.com/manager/femalles_acouplements",{
+    fetch("http://localhost:8000/manager/femalles_acouplements",{
       method:'get',
       headers: {
       'Content-Type': 'application/json',
@@ -139,7 +139,7 @@ function UpdateAcouplement(props){
 
 // load malles libre a acouplet
   useEffect(()=>{
-    fetch("https://kossay.pythonanywhere.com/manager/malles_acouplements",{
+    fetch("http://localhost:8000/manager/malles_acouplements",{
       method:'get',
       headers: {
       'Content-Type': 'application/json',

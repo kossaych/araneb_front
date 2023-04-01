@@ -21,7 +21,7 @@ function CreateMalle() {
       malle.append('race',race)
       malle.append('date_naissance',dateNaissance)
   
-      fetch("https://kossay.pythonanywhere.com/manager/api/malles",{
+      fetch("http://localhost:8000/manager/api/malles",{
       method:'post',
       headers: {
       'Authorization': 'token ' + JSON.parse(localStorage.getItem('token')),
@@ -73,7 +73,7 @@ function CreateMalle() {
     };
     /// function to prpose a cage for a the rabbit
     useEffect(()=>{
-      fetch("https://kossay.pythonanywhere.com/manager/api/malle/cage_vide",{
+      fetch("http://localhost:8000/manager/api/malle/cage_vide",{
           method:'get',
           headers: {
           'Content-Type': 'application/json',
@@ -117,7 +117,7 @@ function CreateMalle() {
               <br></br>
               <input onChange={e => setImg(e.target.files[0])} className="border border-success bg-success bg-opacity-25 " style={{borderRadius:5+'px',}} type="file" />
  
-              <Link to='/managment/manager//create/production'  className="col-11 mt-2 mb-2  m-auto alert alert-success">ajouter une malle a partir des lapins de production</Link>
+              <Link to='/managment/manager/malles/create/production'  className="col-11 mt-2 mb-2  m-auto alert alert-success">ajouter une malle a partir des lapins de production</Link>
 
               <div className="row justify-content-around mt-2 col-12 m-auto"> 
                             

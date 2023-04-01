@@ -12,7 +12,7 @@ function Acouplement(props){
 
   function deleteAcc(id){
     
-    fetch(`https://kossay.pythonanywhere.com/manager/accouplements/${id.toString()}`,{
+    fetch(`http://localhost:8000/manager/accouplements/${id.toString()}`,{
   method:'delete',
   headers: {
   'Content-Type': 'application/json',

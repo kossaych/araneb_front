@@ -19,7 +19,7 @@ function AcouplementBar(){
       }
       
 
-    fetch("https://kossay.pythonanywhere.com/manager/acouplements",{
+    fetch("http://localhost:8000/manager/acouplements",{
       method:'get',
       headers: {
         
@@ -47,18 +47,6 @@ function AcouplementBar(){
     return(
     <div>
 <HeaderLogIn/>
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     <div  className="row border-danger m-1">

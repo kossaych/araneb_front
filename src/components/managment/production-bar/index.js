@@ -17,7 +17,7 @@ function ProductionBar(){
       }
       
 
-    fetch("https://kossay.pythonanywhere.com/manager/groupes",{
+    fetch("http://localhost:8000/manager/groupes",{
       method:'get',
       headers: {
         

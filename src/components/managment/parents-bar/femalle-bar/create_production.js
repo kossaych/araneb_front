@@ -34,7 +34,7 @@ function CreateFemalleProduction(){
 
       
       setIsWait(false)
-      fetch("https://kossay.pythonanywhere.com/manager/api/femalles/production",{
+      fetch("http://localhost:8000/manager/api/femalles/production",{
       method:'post',
       headers: {
       'Content-Type': 'application/json',
@@ -90,7 +90,7 @@ function CreateFemalleProduction(){
 
 
     useEffect(()=>{
-      fetch("https://kossay.pythonanywhere.com/manager/api/femalle/cage_vide",{
+      fetch("http://localhost:8000/manager/api/femalle/cage_vide",{
           method:'get',
           headers: {
           'Content-Type': 'application/json',
@@ -115,7 +115,7 @@ function CreateFemalleProduction(){
 
 
   useEffect(()=>{
-    fetch("https://kossay.pythonanywhere.com/manager/api/femalles/production",{
+    fetch("http://localhost:8000/manager/api/femalles/production",{
         method:'get',
         headers: {
         'Content-Type': 'application/json',

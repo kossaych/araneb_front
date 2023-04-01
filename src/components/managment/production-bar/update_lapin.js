@@ -11,7 +11,7 @@ function LapinProductionUpdate(){
     const {cage}=useParams()
    
     useEffect(()=>{
-        fetch("https://kossay.pythonanywhere.com/manager/lapins_productions/"+id,{
+        fetch("http://localhost:8000/manager/lapins_productions/"+id,{
             method:'get',
             headers: {
             'Content-Type': 'application/json',
@@ -37,7 +37,7 @@ function LapinProductionUpdate(){
 
     function LapinProductionUpdate(id){
         
-    fetch("https://kossay.pythonanywhere.com/manager/lapins_productions/"+id,{
+    fetch("http://localhost:8000/manager/lapins_productions/"+id,{
     method:'put',
     headers: {
     'Content-Type': 'application/json',

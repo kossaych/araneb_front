@@ -20,7 +20,7 @@ function Parents(){
 
   useEffect(()=>{    
 
-      fetch("https://kossay.pythonanywhere.com/manager/api/malles",{
+      fetch("http://localhost:8000/manager/api/malles",{
         method:'get',
         headers: {
           
@@ -62,7 +62,7 @@ function Parents(){
     }
     
 
-  fetch("https://kossay.pythonanywhere.com/manager/api/femalles",{
+  fetch("http://localhost:8000/manager/api/femalles",{
     method:'get',
     headers: {
       
@@ -192,7 +192,7 @@ const showMortMalle=()=>{
       <div>
         <div className="col-10 m-auto row justify-content-between">
             <h4 className="text-danger col-1 p-0">femalles</h4>
-            <Link to="/managment/manager/femalle/create" className="col-1 p-0"><img style={{width:25+'px',margin:5+'px',}} src={add} ></img></Link>
+            <Link to="/managment/manager/femalles/create" className="col-1 p-0"><img style={{width:25+'px',margin:5+'px',}} src={add} ></img></Link>
         </div>   
         <div className="col-12 m-auto mb-2 row justify-content-between p-0 bg-secondary bg-opacity-25  rounded" style={{'border-bottom':'solid 1px'}}>
           <button style={{'border':'none','width':"33.3333333%",'border-bottom':'solid 1px'}} className=""    id='prod-button-femalle'  onClick={showProductionFemalle} >prod</button>
@@ -224,7 +224,7 @@ const showMortMalle=()=>{
       <div>
       <div className="col-12 m-auto row justify-content-between">
             <h4 className="text-danger col-1 p-0">malles</h4>
-            <Link to="/managment/manager//create" className="col-1 p-0"><img style={{width:25+'px',margin:5+'px',}} src={add} ></img></Link>
+            <Link to="/managment/manager/malles/create" className="col-1 p-0"><img style={{width:25+'px',margin:5+'px',}} src={add} ></img></Link>
         </div>   
         <div className="col-12 m-auto mb-2 row justify-content-between p-0 bg-secondary bg-opacity-25  rounded" style={{'border-bottom':'solid 1px'}}>
           <button style={{'border':'none','width':"33.3333333%",'border-bottom':'solid 1px'}} className=""    id='prod-button-malle'  onClick={showProductionMalle} >prod</button>

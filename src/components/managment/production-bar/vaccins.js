@@ -28,7 +28,7 @@ function VaccinLapins(props){
 
 
   useEffect(()=>{
-    fetch("https://kossay.pythonanywhere.com/manager/groupes/"+id,{
+    fetch("http://localhost:8000/manager/groupes/"+id,{
         method:'get',
         headers: {
         'Content-Type': 'application/json',
@@ -44,7 +44,7 @@ function VaccinLapins(props){
         })
         .then(data =>{
         if (data === false){
-          window.location.href="/managment/manager/production"
+        //  window.location.href="/managment/manager/production"
         }else { 
           let lapins=data.lapins
           for (let i=0;i<lapins.length;i++){
@@ -77,7 +77,7 @@ function VaccinLapins(props){
         lapins.push(listLapins[i].id)
       }
     }
-    fetch("https://kossay.pythonanywhere.com/manager/groupes/vaccin",{
+    fetch("http://localhost:8000/manager/groupes/vaccin",{
   method:'post',
   headers: {
   'Content-Type': 'application/json',

@@ -14,7 +14,7 @@ function ProductionDetails(){
 
 
     useEffect(()=>{
-        fetch("https://kossay.pythonanywhere.com/manager/groupes/"+id,{
+        fetch("http://localhost:8000/manager/groupes/"+id,{
             method:'get',
             headers: {
             'Content-Type': 'application/json',

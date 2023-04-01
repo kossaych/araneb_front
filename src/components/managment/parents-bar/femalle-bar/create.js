@@ -5,19 +5,31 @@ function CreateFemalle() {
     const [dateNaissance,setDateNaissance]=useState("")
     const [isWait,setIsWait]=useState(true)
     const [message,setMessage]=useState(true)
-    const [race,setRace]=useState('Gaint Flander')
+    const [race,setRace]=useState('')
     const [cage,setCage]=useState('')
     const [img,setImg]=useState('')
 
     function sendData(event){
+      document.getElementById('message').style.display='none';
       event.preventDefault()
+      if (img==="") {
+        document.getElementById('message').style.display='block';
+        setMessage('ajouter une image')
+        return false
+      }
+      if (dateNaissance==="") {
+        document.getElementById('message').style.display='block';
+        setMessage('ajouter le date de naissance')
+        document.getElementById('date_naissance_input').focus()
+        return false
+      }
       setIsWait(false)
       var malle = new FormData()
       malle.append('file', img )
       malle.append('race',race)
       malle.append('date_naissance',dateNaissance)
   
-      fetch("https://kossay.pythonanywhere.com/manager/api/femalles",{
+      fetch("http://localhost:8000/manager/api/femalles",{
       method:'post',
       headers: {
       'Authorization': 'token ' + JSON.parse(localStorage.getItem('token')),
@@ -39,6 +51,7 @@ function CreateFemalle() {
         if (data === true){
           window.location.href='/managment/manager/parents' 
         }else {
+          console.log('test')
           setIsWait(true)
           document.getElementById('message').style.display='block';
           setMessage(data)
@@ -56,8 +69,8 @@ function CreateFemalle() {
             {label:'New Zealand White',value:'New Zealand White'},
             {label:'California',value:'California'},
             {label:'Rex',value:'Rex'},
-
     ]
+    setRace(options[0].value)
         return (
             <select value={race} onChange={e => setRace(e.target.value)} className="border border-success bg-success bg-opacity-25 rounded">
               {options.map(o => (
@@ -69,7 +82,7 @@ function CreateFemalle() {
     };
     /// function to prpose a cage for a the rabbit
     useEffect(()=>{
-      fetch("https://kossay.pythonanywhere.com/manager/api/femalle/cage_vide",{
+      fetch("http://localhost:8000/manager/api/femalle/cage_vide",{
           method:'get',
           headers: {
           'Content-Type': 'application/json',
@@ -106,14 +119,14 @@ function CreateFemalle() {
           <input disabled className="border border-success bg-success bg-opacity-25 " style={{borderRadius:5+'px',}} value={cage} />
 
           <label>:تاريخ الولادة *</label>
-          <input onChange={e => setDateNaissance(e.target.value)} className="border border-success bg-success bg-opacity-25 " style={{borderRadius:5+'px',}} type="date" />
+          <input onChange={e => setDateNaissance(e.target.value)} className="border border-success bg-success bg-opacity-25 " style={{borderRadius:5+'px',}} type="date" id="date_naissance_input" />
 
           <label >:السلالة *</label>
           <Races/>
           <br></br>
-          <input onChange={e => setImg(e.target.files[0])} className="border border-success bg-success bg-opacity-25 " style={{borderRadius:5+'px',}} type="file" />
+          <input onChange={e => setImg(e.target.files[0])} className="border border-success bg-success bg-opacity-25 " style={{borderRadius:5+'px',}} type="file" id="image_input" />
 
-          <Link to='/managment/manager/femalle/create/production'  className="col-11 mt-2 mb-2  m-auto alert alert-success">إضافة أنثى من خلال أرانب الإنتاج</Link>
+          <Link to='/managment/manager/femalles/create/production'  className="col-11 mt-2 mb-2  m-auto alert alert-success">إضافة أنثى من خلال أرانب الإنتاج</Link>
 
           <div className="row justify-content-around mt-2 col-12 m-auto"> 
             {isWait ? 
