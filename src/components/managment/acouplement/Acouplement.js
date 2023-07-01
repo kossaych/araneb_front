@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import update from"./icons/update.png";
-import deleteFemalle from "./icons/delete.png";
-import birth from "./icons/birth.png";
-import mort from "./icons/mort.png";
-import test from "./icons/test.png";
+import update from"../../../assets/icons/update.png";
+import deleteFemalle from "../../../assets/icons/remove.png";
+import birth from "../../../assets/icons/birth.png";
+import mort from "../../../assets/icons/mort.png";
+import test from "../../../assets/icons/test.png";
 import { Link } from "react-router-dom";
 function Acouplement(props){
   const lapins=props.lapins
@@ -75,7 +75,7 @@ function Acouplement(props){
                             {props.test === "pas_enceinte" ? <span className="text-danger"><h4>{props.test}</h4></span> : ""}
                             {props.test != "enceinte" & props.test != "pas_enceinte"? <span className="text-dark">{props.test}</span> : ""}
                             {props.date_test != "null" ? <div><span className="text-primary">date test : {props.date_test}</span></div>: ""}
-                            {props.age>=9  ? <Link  to={"/managment/acouplement/test/"+props.id+"/"+props.num}  className="col-2"><img src={test} style={{width:25+"px"}}  ></img>test</Link> :""}
+                            <Link  to={"/managment/acouplement/test/"+props.id+"/"+props.num}  className="col-2"><img src={test} style={{width:25+"px"}}  ></img>test</Link> 
 
                           </td> 
                         
@@ -114,11 +114,11 @@ function Acouplement(props){
 
 
                 <div>
-                  {props.create_at<=1 ? <Link  to={"/managment/acouplement/update/"+props.id+"/"+props.num}  className="col-2"><img src={update} style={{width:25+"px"}}  ></img>update</Link>  :""}
+                   <Link  to={"/managment/acouplement/update/"+props.id+"/"+props.num}  className="col-2"><img src={update} style={{width:25+"px"}}  ></img>update</Link> 
             
                    <button onClick={()=>document.getElementById(`delete-alert-${props.id}`).style.display='block'} className="col-2 button-hiden"><img style={{width:25+'px',}} src={deleteFemalle} ></img> delete</button>
-                  {props.test==="enceinte" || props.test==="non_vérifié" ? <Link  to={"/managment/acouplement/fause-couche/"+props.id+"/"+props.num}  className="col-2"><img src={mort} style={{width:25+"px"}}  ></img>fausse-couche</Link> :""}
-                  {props.age>=27 & props.test==="enceinte" ? <Link  to={"/managment/manager/create/"+props.id+"/"+props.num}  className="col-2"><img src={birth} style={{width:25+"px"}}  ></img>naissance</Link> :""}
+                  <Link  to={"/managment/acouplement/fause-couche/"+props.id+"/"+props.num}  className="col-2"><img src={mort} style={{width:25+"px"}}  ></img>fausse-couche</Link> 
+                   <Link  to={"/managment/manager/create/"+props.id+"/"+props.num}  className="col-2"><img src={birth} style={{width:25+"px"}}  ></img>naissance</Link> 
                 </div>
            
                 </div>

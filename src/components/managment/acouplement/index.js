@@ -1,6 +1,6 @@
 import React from "react";
 import {useState,useEffect} from "react";
-import add from "./icons/add.png";
+import add from "../../../assets/icons/add.png";
 
 import { Link } from "react-router-dom";
 import HeaderLogIn from "../../parts/header/index-loged-in";

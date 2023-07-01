@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import HeaderLogIn from "../../parts/header/index-loged-in"; 
-import remove from "./icons/remove.png";
+import remove from "../../../assets/icons/remove.png";
 function VaccinLapins(props){
     
   var today = new Date();

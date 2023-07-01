@@ -1,13 +1,14 @@
 import React, { useState } from "react";
-import update from"./icons/update.png";
-import deleteFemalle from "./icons/delete.png";
-import market from "./icons/market.png";
-import mort from "./icons/mort.png";
-import details from "./icons/details.png";
-import close from "./icons/close.png"
+import update from"../../../../assets/icons/update.png";
+import deleteFemalle from "../../../../assets/icons/remove.png";
+import market from "../../../../assets/icons/market.png";
+import mort from "../../../../assets/icons/mort.png";
+import details from "../../../../assets/icons/details.png";
+import close from "../../../../assets/icons/close.png"
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 function Femalle(props){
+  
   const [messageVent,setMessageVent]=useState("")
   const [messageMort,setMessageMort]=useState("")
   const [messageUpdate,setMessageUpdate]=useState("")
@@ -296,31 +297,35 @@ function Femalle(props){
 
 
     return(
-            <div className="col-12 col-sm-6 col-md-4 col-lg-3 mb-5 " id={`femalle-${props.id}`} >
+            <div className="col-12 col-sm-6 col-md-4 col-lg-3 mb-5" id={`femalle-${props.id}`} >
               <div className="card h-100 border-success pb-2">
                
                  <div onClick={()=>hidenPopUps(props.id)} style={{"display":"none","position":"fixed","top":"0",'bottom':'0','left':'0','right':'0',zIndex:20,"background": "rgba(0, 0, 0, 0.6)"}} id={`layer-${props.id}`} >
                  </div>
 
-                <div style={{"display":"none","position":"fixed","top":'35%','left':'0','right':'0',zIndex:20000,"background": "rgba(0, 0, 0, 0.0)"}} id={`delete-alert-${props.id}`} className=" col-12 col-sm-6 col-md-4 col-lg-3 m-auto ">
-                <div className="justify-content-end row" style={{"position":"relative","top":"35%"}}>
-                                <button onClick={()=>hidenPopUps(props.id)} className="col-4 button-hiden mt-2"><img style={{width:25+'px',}} src={close}></img></button>
-                        </div>
-                      <div  class=" row   m-2 p-2"   style={{"position":"relative","top":"35%","background":"#FFFFFF","borderRadius":"10px",'height':150+'px','alignItems':'center'}} >
-                          <div class="">
-                            <div class="modal-content">
-                              <div class="modal-header flex-column mb-3">
-                                <h4 class="modal-title w-100">delete : {cage} </h4>	
-                              </div>
-                            
-                              <div class="modal-footer justify-content-center">
-                                <button type="button" class="btn btn-secondary m-1" onClick={()=> hidenPopUps(props.id)}>Cancel</button>
-                                <button type="button" class="btn btn-danger" onClick={() => FemalleDelete(props.id)}>Delete</button>
-                              </div>
-                            </div>
-                          </div>
-                      </div>  
-                </div>
+
+                 <div style={{ display: "none", position: "fixed", top: "35%", left: "0", right: "0", zIndex: 20000, background: "rgba(0, 0, 0, 0.0)" }} id={`delete-alert-${props.id}`} className="col-12 col-sm-6 col-md-4 col-lg-3 m-auto">
+  <div className="justify-content-end row" style={{ position: "relative", top: "35%" }}>
+    <button onClick={() => hidenPopUps(props.id)} className="col-4 button-hiden mt-2"><img style={{ width: 25 + 'px' }} src={close} alt="Close" /></button>
+  </div>
+  <div className="row m-2 p-2" style={{ position: "relative", top: "35%", background: "#FFFFFF", borderRadius: "10px", height: 150 + "px", alignItems: "center" }}>
+    <div className="col">
+      <div className="modal-content">
+        <div className="modal-header flex-column mb-3">
+          <h4 className="modal-title w-100">Delete: {cage}</h4>
+        </div>
+        <div className="modal-footer justify-content-center">
+          <button type="button" className="btn btn-secondary m-1" onClick={() => hidenPopUps(props.id)}>Cancel</button>
+          <button type="button" className="btn btn-danger" onClick={() => FemalleDelete(props.id)}>Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
 
                 <div   style={{"display":"none","position":"fixed","top":'20%','left':'0','right':'0',zIndex:20000,"background": "rgba(0, 0, 0, 0.0)"}} id={`statistique-${props.id}`} className="col-12  m-auto ">
                     <div className="justify-content-end row" style={{"position":"relative","top":"10%"}}>
@@ -435,34 +440,34 @@ function Femalle(props){
                         <div className="alert alert-primary m-2" style={{background:"white","height":"500px"}} role="alert" >
      
         
-     <div className="alert alert-danger" role="alert">
-       est ce que tu est sur que cette  femalle {cage}
-       est morte
-       <h4  className="text-danger" >{messageMort}</h4>
-     <br/>
-     <label>date de mort</label>
-     <input   value={dateMort} onChange={e=>setDateMort(e.target.value)}  className="border border-danger bg-danger bg-opacity-25 " style={{borderRadius:5+'px',}}   type="date" />
-     </div>
-   
-   <div className="row justify-content-around mt-2"> 
-                 
+                      <div className="alert alert-danger" role="alert">
+                        est ce que tu est sur que cette  femalle {cage}
+                        est morte
+                        <h4  className="text-danger" >{messageMort}</h4>
+                      <br/>
+                      <label>date de mort</label>
+                      <input   value={dateMort} onChange={e=>setDateMort(e.target.value)}  className="border border-danger bg-danger bg-opacity-25 " style={{borderRadius:5+'px',}}   type="date" />
+                      </div>
+        
+                      <div className="row justify-content-around mt-2"> 
+                                    
 
 
 
-      {isWaitMort ? <button  className="col-5 m-1 btn btn-success" onClick={()=>FemalleMorte(id)}>oui</button>:<button  className="col-5 m-1 btn btn-success" disabled >
-      <div className="spinner-border text-primary" role="status">
-      <span className="sr-only"></span>
-      </div> </button>}
+                          {isWaitMort ? <button  className="col-5 m-1 btn btn-success" onClick={()=>FemalleMorte(id)}>oui</button>:<button  className="col-5 m-1 btn btn-success" disabled >
+                          <div className="spinner-border text-primary" role="status">
+                          <span className="sr-only"></span>
+                          </div> </button>}
 
 
 
 
 
 
-     
-     <Link to={"/managment/manager/parents"} className="col-5 btn btn-danger">non</Link>
-   </div >
-                        </div>
+                        
+                        <Link to={"/managment/manager/parents"} className="col-5 btn btn-danger">non</Link>
+                      </div >
+                </div>
                 </div>
                 <div className="col-12 m-auto  animate__animated  animate__backInUp "  style={{"display":"none","position":"fixed","top":'20%','left':'0','right':'0',zIndex:20000,"background": "rgba(0, 0, 0,0.0)","height":"10%","alignItems":"center"}} id={`update-${props.id}`}  >
                         <div className="justify-content-end row" style={{"position":"relative","top":"10%"}}>
@@ -499,13 +504,6 @@ function Femalle(props){
                        
                      
                 </div>
-
-
-
-
-
-
-
 
                 <div className="card-footer bg-success bg-opacity-75 row m-0 justify-content-around">
                   { props.state=== "production" ? <button onClick={()=>statistiqueHandler(props.id)} className="col-2 button-hiden"><img style={{width:25+'px',}} src={details}></img></button>:""}

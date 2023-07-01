@@ -98,7 +98,7 @@ function Sevrage(props){
         
         <Link to={"/managment/manager/production"} className="col-5 btn btn-danger">non</Link>
       </div >
-      </div>
+        </div>
       
       </div>
     );

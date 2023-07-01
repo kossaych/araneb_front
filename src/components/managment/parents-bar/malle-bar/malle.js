@@ -1,31 +1,33 @@
 import React, { useState } from "react";
-import update from"./icons/update.png";
-import deletemalle from "./icons/delete.png";
-import market from "./icons/market.png";
-import mort from "./icons/mort.png";
-import details from "./icons/details.png";
-import close from "./icons/close.png"
+import update from"../../../../assets/icons/update.png";
+import deleteMalle from "../../../../assets/icons/remove.png";
+import market from "../../../../assets/icons/market.png";
+import mort from "../../../../assets/icons/mort.png";
+import details from "../../../../assets/icons/details.png";
+import close from "../../../../assets/icons/close.png"
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 function Malle(props){
-  const [message,setMessage]=useState("")
-  const [isWait,setIsWait]=useState(true)
- 
+
+  const [messageVent,setMessageVent]=useState("")
+  const [messageMort,setMessageMort]=useState("")
+  const [messageUpdate,setMessageUpdate]=useState("")
+
+  const [isWaitVent,setIsWaitVent]=useState(true)
+  const [isWaitMort,setIsWaitMort]=useState(true)
+  const [isWaitUpdate,setIsWaitUpdate]=useState(true)
+
   const id=props.id
-  var today = new Date();
-  var dd = String(today.getDate()).padStart(2, '0');
-  var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-  var yyyy = today.getFullYear();
 
 
   const [dateNaissance,setDateNaissance]=useState("")
   const [dateVent,setDateVent]=useState("")
   const [prix,setPrix]=useState("")
-  const [dateMort,setDateMort]=useState(yyyy+"-"+mm+"-"+dd)
+  const [dateMort,setDateMort]=useState('')
   const [race,setRace]=useState("")
   const [cage,setCage]=useState("")
   const [age,setAge]=useState("")
-  const [state,setSate]=useState("")
+ 
 
 
   useEffect(()=>{
@@ -45,23 +47,21 @@ function Malle(props){
           })
           .then(data =>{
           if (data === false){
-              window.location.href="/managment/manager/parents"
+              
           }else { 
 
-              setDateVent(data.date_vent)
-              setDateMort(data.date_mort)
               setDateNaissance(data.date_naissance)
               setRace(data.race)
               setCage(data.cage)
               setAge(data.age)
-              setSate(data.state)
+              setDateMort(data.date_mort)
+              setDateVent(data.date_vent)
 
           }
           })
   },[])
+  function MalleDelete(id){
 
-  function malleDelete(id){
-    setIsWait(false)
     fetch(`http://localhost:8000/manager/api/malle/${id.toString()}`,{
   method:'delete',
   headers: {
@@ -84,12 +84,9 @@ function Malle(props){
     if (data === true){
       //window.location.reload()
       document.getElementById("malle-"+id).style.display="none"
-  }else {
-    document.getElementById('message').style.display='block';
-    setMessage(data)
   }
   })}
-  function malleVent(id){
+  function MalleVent(id){
     if(prix===""){
       console.log('test1')
       document.getElementById('prix').focus()
@@ -107,7 +104,7 @@ function Malle(props){
       document.getElementById('prix').className="border border-success bg-success bg-opacity-25 rounded"
       document.getElementById('dateVent').className="border border-success bg-success bg-opacity-25 rounded"
     
-    setIsWait(false)
+    setIsWaitVent(false)
 
     fetch("http://localhost:8000/manager/api/malle/vent/"+id,{
   method:'put',
@@ -122,11 +119,14 @@ function Malle(props){
   },
   )
   .then(response =>{
+    
   if (response.status==202){
       return true
   }else if(response.status==500){
+    setIsWaitVent(true)
     return "server error 500"
   }else{
+    setIsWaitVent(true)
     return response.json()
   }
   })
@@ -134,12 +134,12 @@ function Malle(props){
     if (data === true){
       window.location.href="/managment/manager/parents"
   }else {
-    document.getElementById('message').style.display='block';
-    setMessage(data)
+   
+    setMessageVent(data)
   }
   })}}
-  function malleMorte(id){
-    setIsWait(false)
+  function MalleMorte(id){
+    setIsWaitMort(false)
 
     fetch("http://localhost:8000/manager/api/malle/mort/"+id,{
   method:'put',
@@ -154,11 +154,14 @@ function Malle(props){
   },
   )
   .then(response =>{
+    
   if (response.status==202){
       return true
   }else if(response.status==500){
+    setIsWaitMort(true)
     return "server error 500"
   }else{
+    setIsWaitMort(true)
     return response.json()
   }
   })
@@ -166,12 +169,12 @@ function Malle(props){
     if (data === true){
       window.location.href="/managment/manager/parents"
   }else {
-    document.getElementById('message').style.display='block';
-    setMessage(data)
+   
+    setMessageMort(data)
   }
   })}
-  function malleUpdate(id){
-    setIsWait(false)
+  function MalleUpdate(id){
+    setIsWaitUpdate(false)
     fetch("http://localhost:8000/manager/api/malle/"+id,{
     method:'put',
     headers: {
@@ -189,10 +192,10 @@ function Malle(props){
     if (response.status==202){
         return true
     }else if(response.status==500){
-      setIsWait(true)
+      setIsWaitUpdate(true)
         return "server error 500"
     }else{
-      setIsWait(true)
+      setIsWaitUpdate(true)
         return response.json()
     }
     })
@@ -201,10 +204,14 @@ function Malle(props){
         window.location.href="/managment/manager/parents"
     }else {
 
-        document.getElementById('message').style.display='block';
-        setMessage(data)
+       
+        setMessageUpdate(data)
     }
   })}
+
+
+
+
   function Races  ()  {
     const options=[
         
@@ -262,6 +269,7 @@ function Malle(props){
   }
 
 
+
     return(
             <div className="col-12 col-sm-6 col-md-4 col-lg-3 mb-5 " id={`malle-${props.id}`} >
               <div className="card h-100 border-success pb-2">
@@ -282,7 +290,7 @@ function Malle(props){
                             
                               <div class="modal-footer justify-content-center">
                                 <button type="button" class="btn btn-secondary m-1" onClick={()=> hidenPopUps(props.id)}>Cancel</button>
-                                <button type="button" class="btn btn-danger" onClick={() => malleDelete(props.id)}>Delete</button>
+                                <button type="button" class="btn btn-danger" onClick={() => MalleDelete(props.id)}>Delete</button>
                               </div>
                             </div>
                           </div>
@@ -296,8 +304,8 @@ function Malle(props){
                         <div className="alert alert-primary m-2" style={{background:"white","height":"500px"}} role="alert">
                         <div className="alert alert-primary" role="alert">
                           est ce que tu est sur que cette  malle {cage}
-                          est morte
-                          <h3>{message}</h3>
+                          a vendue
+                          <h4  className="text-danger" >{messageVent}</h4>
                         <br/>
                         <label>date de mort     :</label>
                         <input id="dateVent"  value={dateVent} onChange={e=>setDateVent(e.target.value)}  className="border border-success bg-success bg-opacity-25 m-2 " style={{borderRadius:5+'px',}}   type="date" /> <br/>
@@ -310,13 +318,14 @@ function Malle(props){
 
                         <div className="row justify-content-around mt-2"> 
                                     
-                                    <button onClick={()=>malleVent(id)}   className="col-5 btn btn-success"  >oui</button>
-                                    
+                                    {isWaitVent ? <button  className="col-5 m-1 btn btn-success" onClick={()=>MalleVent(id)}>oui</button>:<button  className="col-5 m-1 btn btn-success" disabled >
+                                    <div className="spinner-border text-primary" role="status">
+                                    <span className="sr-only"></span>
+                                    </div> </button>}
                                     <Link to={"/managment/manager/parents"} className="col-5 btn btn-danger">non</Link>
                                   </div >
                         </div>
                 </div>
-
                 <div className="col-12 m-auto  animate__animated  animate__backInUp "  style={{"display":"none","position":"fixed","top":'20%','left':'0','right':'0',zIndex:20000,"background": "rgba(0, 0, 0,0.0)","height":"10%","alignItems":"center"}} id={`mort-${props.id}`}  >
                         <div className="justify-content-end row" style={{"position":"relative","top":"10%"}}>
                                     <button onClick={()=>hidenPopUps(props.id)} className="col-4 button-hiden mt-2"><img style={{width:25+'px',}} src={close}></img></button>
@@ -327,7 +336,7 @@ function Malle(props){
      <div className="alert alert-danger" role="alert">
        est ce que tu est sur que cette  malle {cage}
        est morte
-       <h3>{message}</h3>
+       <h4  className="text-danger" >{messageMort}</h4>
      <br/>
      <label>date de mort</label>
      <input   value={dateMort} onChange={e=>setDateMort(e.target.value)}  className="border border-danger bg-danger bg-opacity-25 " style={{borderRadius:5+'px',}}   type="date" />
@@ -335,13 +344,24 @@ function Malle(props){
    
    <div className="row justify-content-around mt-2"> 
                  
-     <button onClick={()=>malleMorte(id)}   className="col-5 btn btn-success"  >oui</button>
+
+
+
+      {isWaitMort ? <button  className="col-5 m-1 btn btn-success" onClick={()=>MalleMorte(id)}>oui</button>:<button  className="col-5 m-1 btn btn-success" disabled >
+      <div className="spinner-border text-primary" role="status">
+      <span className="sr-only"></span>
+      </div> </button>}
+
+
+
+
+
+
      
      <Link to={"/managment/manager/parents"} className="col-5 btn btn-danger">non</Link>
    </div >
                         </div>
                 </div>
-
                 <div className="col-12 m-auto  animate__animated  animate__backInUp "  style={{"display":"none","position":"fixed","top":'20%','left':'0','right':'0',zIndex:20000,"background": "rgba(0, 0, 0,0.0)","height":"10%","alignItems":"center"}} id={`update-${props.id}`}  >
                         <div className="justify-content-end row" style={{"position":"relative","top":"10%"}}>
                                     <button onClick={()=>hidenPopUps(props.id)} className="col-4 button-hiden mt-2"><img style={{width:25+'px',}} src={close}></img></button>
@@ -350,7 +370,7 @@ function Malle(props){
                             <div className=" row card bg-success bg-opacity-50 p-1 col-12 m-auto">
                                         
                                         <h4 className="text-dark">modifier la malle {cage}</h4>
-                                        <h4 id="message" style={{display:"none"}} className="alert alert-danger">{message}</h4>
+                                        <h4  className="text-danger" >{messageUpdate}</h4>
                                         
 
                                         
@@ -363,12 +383,12 @@ function Malle(props){
                                         <div className="row justify-content-around mt-2 col-12 m-auto"> 
                                                       
                                           
-                                          {isWait ? <button  className="col-5 m-1 btn btn-success" onClick={()=>malleUpdate(id)}>ajoputer</button>:<button  className="col-5 m-1 btn btn-success" disabled >
+                                          {isWaitUpdate ? <button  className="col-5 m-1 btn btn-success" onClick={()=>MalleUpdate(id)}>ajoputer</button>:<button  className="col-5 m-1 btn btn-success" disabled >
                                               <div className="spinner-border text-primary" role="status">
                                             <span className="sr-only"></span>
-                                          </div>
-                                                
-                                                </button>}
+                                          </div> </button>}
+
+
                                           <Link to='/managment/manager/parents'  className="col-5 m-1 btn btn-danger">anuler</Link>
                                         </div >
 
@@ -378,32 +398,39 @@ function Malle(props){
                      
                 </div>
 
-
                 <div className="card-footer bg-success bg-opacity-75 row m-0 justify-content-around">
-                  { state=== "production" ? <button onClick={()=>updateHandler(props.id)} className="col-2 button-hiden"><img style={{width:25+'px',}} src={update} ></img></button>:""}
-                  { state=== "production" ? <button onClick={()=>ventHandler(props.id)} className="col-2 button-hiden"><img style={{width:25+'px',}} src={market} ></img></button> :""}
-                  { state=== "production" ? <button onClick={()=>mortHandler(props.id)} className="col-2 button-hiden"><img style={{width:25+'px',}} src={mort} ></img></button> :""}
-                  <button onClick={()=>deleteHandler(props.id)} className="col-2 button-hiden"><img style={{width:25+'px',}} src={deletemalle} ></img></button>
+                  { props.state=== "production" ? <button onClick={()=>updateHandler(props.id)} className="col-2 button-hiden"><img style={{width:25+'px',}} src={update} ></img></button>:""}
+                  { props.state=== "production" ? <button onClick={()=>ventHandler(props.id)} className="col-2 button-hiden"><img style={{width:25+'px',}} src={market} ></img></button> :""}
+                  { props.state=== "production" ? <button onClick={()=>mortHandler(props.id)} className="col-2 button-hiden"><img style={{width:25+'px',}} src={mort} ></img></button> :""}
+                  <button onClick={()=>deleteHandler(props.id)} className="col-2 button-hiden"><img style={{width:25+'px',}} src={deleteMalle} ></img></button>
+                
                 </div>
-
-
-
                 <div className="card-body p-0">
                 <img style={{'width':'100%'}}src={"http://localhost:8000/media/"+props.img}></img>
                   <div className="text-center">
                       <h5 className="m-0">lapin : {cage}</h5>
                       {props.race ? <p className="text-body m-0">race:{props.race}</p> :""}
+                      age: {age} 
                       {dateMort ? <p className="text-body m-0">date mort:{dateMort}</p> :""}
                       {dateVent ? <p className="text-body m-0">date vent:{dateVent}</p> :""}
 
                      
-
                     </div>
                 </div>
                 
               </div>
-          </div>
+            </div>
     );
 
 }
 export default Malle
+
+
+
+
+
+
+
+
+
+

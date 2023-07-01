@@ -1,14 +1,14 @@
 import React from "react";
 // import images
-import logo from "./icons/logo.png"
+import logo from "../../../assets/icons/logo.png"
 
-import home from "./icons/home.png"
-import logoutimg from "./icons/logout.png"
-import user from "./icons/user.png"
-import parent from "../../icons/parent.png"
-import statistique from "../../icons/statistique-2.png"
-import production from "../../icons/production.png"
-import acouplement from "../..//icons/acouplement.png"
+import home from "../../../assets/icons/home.png"
+import logoutimg from "../../../assets/icons/logout.png"
+import user from "../../../assets/icons/user.png"
+import parent from "../../../assets/icons/parent.png"
+import statistique from "../../../assets/icons/statistique-2.png"
+import production from "../../../assets/icons/production.png"
+import acouplement from "../../../assets/icons/acouplement.png"
 
 // end import images
 import { Link} from "react-router-dom";

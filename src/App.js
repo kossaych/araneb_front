@@ -26,7 +26,6 @@ import LapinProductionUpdate from "./components/managment/production-bar/update_
 import CreateMalleProduction from "./components/managment/parents-bar/malle-bar/create_production";
 import OFFLINE from "./components/pages/ofline";
 import Parents from "./components/managment/parents-bar/femalle-bar";
-
 function App()  {
 
   return (
@@ -69,7 +68,28 @@ function App()  {
 
           <Route path="home/statistique" element={<home/>}></Route>
 
+
+
+
+
+
+
+
+
+
+
       
+
+
+
+
+
+
+
+
+
+
+
       </Routes>
 
       <Footer />

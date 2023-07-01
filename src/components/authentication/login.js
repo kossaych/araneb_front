@@ -5,11 +5,12 @@ import { Link } from "react-router-dom";
 function Login(){
   let token = localStorage.getItem('token')
 
-  const [email,setEmail]=useState("")
-  const [password,setPassword]=useState("")
-  const [isWait,setIsWait]=useState(true)
-  const [message,setMessage]=useState("")
-  function sendLoginData(){
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isWait, setIsWait] = useState(true);
+  const [message, setMessage] = useState("");
+
+  const handleLogin = () => {
     setIsWait(false)
 
     fetch("http://localhost:8000/accounts/api/login/",{
@@ -50,42 +51,43 @@ function Login(){
     window.location.href="/"
   }else{
     return(
-
-    <section className="col-12 col-md-10 col-lg-10 col-xl-10">
-      <div className="container py-5 h-100 ">
-        <div className="row d-flex justify-content-center align-items-center h-100">
+      <div className="container py-5">
+        <div className="row justify-content-center">
           <div className="col-12 col-md-8 col-lg-6 col-xl-5">
-            <div className="card shadow-2-strong" style={{borderRadius:1+"rem"}}>
-              <div className="card-body p-2 text-center">
-    
-                <h3 className="mb-5">Sign in</h3>
-                <div id="message" className="alert alert-danger" style={{display:"none"}}>{message}</div>
-
-                <div className="form-outline mb-4 ">
-                  <input type="email" onChange={e => setEmail(e.target.value)}/><br/>
-                  <label className="form- "    >email</label>
+            <div className="card shadow-2-strong" style={{ borderRadius: "1rem" }}>
+              <div className="card-body p-4 text-center">
+                <h3 className="mb-4 text-primary">Sign In</h3>
+                {message && <div className="alert alert-danger">{message}</div>}
+                <div className="mb-3">
+                  <input type="email" className="form-control bg-light" onChange={(e) => setEmail(e.target.value)} />
+                  <label className="form-label">Email</label>
                 </div>
-                <div className="form-outline mb-4">
-                 <input type="password" onChange={e => setPassword(e.target.value)}/><br/>
-                <label className="form-label "   >password</label>
+                <div className="mb-3">
+                  <input type="password" className="form-control bg-light" onChange={(e) => setPassword(e.target.value)} />
+                  <label className="form-label">Password</label>
                 </div>
-               
-                <hr className="my-4"/>
-                <Link  to={"/reset_password"}>Forgot password?</Link><br/>
-                {isWait ? <button className="btn mt-2 btn-primary btn-lg btn-block" onClick={sendLoginData}>send</button>:<button className="btn mt-2 btn-primary btn-lg btn-block" disabled >
-                    <div className="spinner-border text-primary" role="status">
-                  <span className="sr-only"></span>
+                <div className="d-grid gap-2">
+                  {isWait ? (
+                    <button className="btn btn-primary" onClick={handleLogin}>
+                      Sign In
+                    </button>
+                  ) : (
+                    <button className="btn btn-primary" disabled>
+                      <div className="spinner-border text-primary" role="status">
+                        <span className="sr-only"></span>
+                      </div>
+                    </button>
+                  )}
                 </div>
-              </button>}
-              
-              
+                <div className="mt-3">
+                  <Link to="/reset_password" className="text-decoration-none">Forgot password?</Link>
+                </div>
               </div>
-            </div> 
+            </div>
           </div>
         </div>
       </div>
-    </section>  
-    
+
     )}
   }
 

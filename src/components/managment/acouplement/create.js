@@ -7,7 +7,7 @@ function CreateAcouplement(){
     const [mères,setMères]=useState([])
     const [pères,setPères]=useState([])
 
-    const [mère,setMère]=useState([])
+    const [mère,setMère]=useState("")
     const [père,setPère]=useState("")
 
     const [isWait,setIsWait]=useState(true)
@@ -97,19 +97,13 @@ function CreateAcouplement(){
           if (data === "server error 500") {
 
         }else{
-          const options=[]
-          for (let i=0;i<data.length;i++){
-            options.push({label:data[i].cage,value:data[i].id})
-          }
-          setMères(options)
-          setMère(options[0].value)
+          
+          setMère(data[0].id)
+          setMères(data)
+
         }
         })
     },[])
-
-
-
-
     useEffect(()=>{
       fetch("http://localhost:8000/manager/malles_acouplements",{
         method:'get',
@@ -134,17 +128,44 @@ function CreateAcouplement(){
           if (data === "server error 500") {
 
         }else{
-          const options=[]
-          for (let i=0;i<data.length;i++){
-            options.push({label:data[i].cage,value:data[i].id})
-          }
-          setPère(options[0].value)
-          setPères(options)
+          
+          setPère(data[0].id)
+          setPères(data)
           
         }
         })
     },[])
   
+
+    function Mères(){
+      const mèresData=[
+      ]
+      
+      for(let i=0;i<mères.length;i++){
+        mèresData.push(mères[i])
+
+      }
+      console.log(mèresData)
+      return( 
+      <select id='mère' style={{outline: "none"}} value={mère}  onChange={ e => setMère(e.target.value)} className="border border-success bg-success bg-opacity-25 rounded" >
+              {mèresData.map(o => (
+                <option key={o.id} value={o.id}>{o.cage}</option>
+              ))}    
+      </select>);
+    }
+    
+    function Pères(){
+      return(
+        <select id="père" style={{outline: "none"}} value={père} onChange={e => setPère(e.target.value)} className="border border-success bg-success bg-opacity-25 rounded">
+              {pères.map(o => (
+                <option key={o.id} value={o.id}>{o.cage}</option>
+              ))}          
+      </select>
+      )
+    }
+
+
+
 
 
     return(
@@ -159,18 +180,9 @@ function CreateAcouplement(){
   
     
       <label>mère :</label>
-      <select id='mère' style={{outline: "none"}} value={mère}  onChange={ e => setMère(e.target.value)} className="border border-success bg-success bg-opacity-25 rounded" >
-              {mères.map(o => (
-                <option key={o.value} id={o.value} value={o.value}>{o.label}</option>
-              ))}
-              
-      </select>
+      <Mères />
       <label>père :</label>
-      <select id="père" style={{outline: "none"}} value={père} onChange={e => setPère(e.target.value)} className="border border-success bg-success bg-opacity-25 rounded">
-              {pères.map(o => (
-                <option key={o.value} value={o.value}>{o.label}</option>
-              ))}          
-      </select>
+      <Pères />
 
        <label>date naissance</label>
        <input  style={{outline: "none"}} id="date_acouplage" onChange={e => setDateAcouplage(e.target.value)} className="border border-success  bg-success bg-opacity-25 rounded"  type="date" />

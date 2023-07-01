@@ -1,7 +1,7 @@
 import React from "react";
 import {useState,useEffect} from "react";
 import Femalle from "./femalle";
-import add from "./icons/add.png";
+import add from "../../../../assets/icons/add.png";
 import HeaderLogIn from "../../../parts/header/index-loged-in";
 import { Link } from "react-router-dom";
 import Malle from "../malle-bar/malle";
@@ -39,8 +39,8 @@ function Parents(){
     } 
   })
   .then(data =>{
-    setMalles(data)
     for(let i=0; i<data.length; i++){
+      console.log(data[i])
       if(data[i].state==="production"){
         setMallesProduction(mallesProduction => [...mallesProduction,data[i]] );
       }
@@ -48,8 +48,9 @@ function Parents(){
         setMallesVendue(mallesVendue => [...mallesVendue,data[i]] );
       }else if(data[i].state==="mort"){
         setMallesMort(mallesMort => [...mallesMort,data[i]] );
-      }
-    }
+      }}
+      console.log(data,mallesVendue,mallesMort,mallesProduction)
+  
 
     setIsWait(false)
   })},[])
@@ -184,82 +185,74 @@ const showMortMalle=()=>{
   
 }
     return(
+<div>
+  <HeaderLogIn></HeaderLogIn>
+
+  <div className="row border-danger m-1 dark-theme">
+
     <div>
-<HeaderLogIn></HeaderLogIn>
-
-    <div  className="row border-danger m-1">
-
-      <div>
-        <div className="col-10 m-auto row justify-content-between">
-            <h4 className="text-danger col-1 p-0">femalles</h4>
-            <Link to="/managment/manager/femalles/create" className="col-1 p-0"><img style={{width:25+'px',margin:5+'px',}} src={add} ></img></Link>
-        </div>   
-        <div className="col-12 m-auto mb-2 row justify-content-between p-0 bg-secondary bg-opacity-25  rounded" style={{'border-bottom':'solid 1px'}}>
-          <button style={{'border':'none','width':"33.3333333%",'border-bottom':'solid 1px'}} className=""    id='prod-button-femalle'  onClick={showProductionFemalle} >prod</button>
-          <button style={{'border':'none','width':"33.3333333%"}} className=""    id='ven-button-femalle' onClick={showVendueFemalle} >vendue</button>
-          <button style={{'border':'none','width':"33.3333333%"}} className=""    id='mort-button-femalle'  onClick={showMortFemalle} >mort</button>
-
-        </div> 
-        <div id="production-femalle">
-       { isWait ? <div className="text-center"><div className="spinner-border" role="status"><span className="sr-only"></span></div></div> : ""}
-       {femallesProduction && femallesProduction.map((femalle)=>(
-            <Femalle state={femalle.state} key={femalle.id} img={femalle.img} id={femalle.id} race={femalle.race} age={femalle.age}/>
-        ))}
-        </div>
-       <div id="mort-femalle" style={{'display':'none'}}>
-       { isWait ? <div className="text-center"><div className="spinner-border" role="status"><span className="sr-only"></span></div></div> : ""}
-       {femallesMort && femallesMort.map((femalle)=>(
-            <Femalle state={femalle.state} key={femalle.id} img={femalle.img} id={femalle.id} race={femalle.race} age={femalle.age}/>
-        ))}
-       </div>
-       <div id="vendue-femalle" style={{'display':'none'}}>
-       { isWait ? <div className="text-center"><div className="spinner-border" role="status"><span className="sr-only"></span></div></div> : ""}
-       {femallesVendue && femallesVendue.map((femalle)=>(
-            <Femalle state={femalle.state} key={femalle.id} img={femalle.img} id={femalle.id} race={femalle.race} age={femalle.age}/>
-        ))}
-        
-        </div>   
-      </div> 
-
-      <div>
-      <div className="col-12 m-auto row justify-content-between">
-            <h4 className="text-danger col-1 p-0">malles</h4>
-            <Link to="/managment/manager/malles/create" className="col-1 p-0"><img style={{width:25+'px',margin:5+'px',}} src={add} ></img></Link>
-        </div>   
-        <div className="col-12 m-auto mb-2 row justify-content-between p-0 bg-secondary bg-opacity-25  rounded" style={{'border-bottom':'solid 1px'}}>
-          <button style={{'border':'none','width':"33.3333333%",'border-bottom':'solid 1px'}} className=""    id='prod-button-malle'  onClick={showProductionMalle} >prod</button>
-          <button style={{'border':'none','width':"33.3333333%"}} className=""    id='ven-button-malle' onClick={showVendueMalle} >vendue</button>
-          <button style={{'border':'none','width':"33.3333333%"}} className=""    id='mort-button-malle'  onClick={showMortMalle} >mort</button>
-
-        </div> 
-
-
-        <div id="production-malle">
-       { isWait ? <div className="text-center"><div className="spinner-border" role="status"><span className="sr-only"></span></div></div> : ""}
-       {mallesProduction && mallesProduction.map((malle)=>(
-            <Malle key={malle.id} img={malle.img} id={malle.id} race={malle.race} age={malle.age}/>
-        ))}
-        </div>
-       <div id="mort-malle" style={{'display':'none'}}>
-       { isWait ? <div className="text-center"><div className="spinner-border" role="status"><span className="sr-only"></span></div></div> : ""}
-       {mallesMort && mallesMort.map((malle)=>(
-            <Malle key={malle.id} img={malle.img} id={malle.id} race={malle.race} age={malle.age}/>
-        ))}
-       </div>
-       <div id="vendue-malle" style={{'display':'none'}}>
-       { isWait ? <div className="text-center"><div className="spinner-border" role="status"><span className="sr-only"></span></div></div> : ""}
-       {mallesVendue && mallesVendue.map((malle)=>(
-            <Malle key={malle.id} img={malle.img} id={malle.id} race={malle.race} age={malle.age}/>
-        ))}
-        
-        </div>         
-        
+      <div className="col-10 m-auto row justify-content-between">
+        <h4 className="text-danger col-1 p-0">femalles</h4>
+        <Link to="/managment/manager/femalles/create" className="col-1 p-0"><img style={{ width: '25px', margin: '5px' }} src={add}></img></Link>
       </div>
-                
-         
-            
+      <div className="col-12 m-auto mb-2 row justify-content-between p-0 bg-dark bg-opacity-75 rounded" style={{ borderBottom: '1px solid #fff' }}>
+        <button style={{ border: 'none', width: '33.33%', borderBottom: '1px solid #fff', padding: '5px' }} className="" id='prod-button-femalle' onClick={showProductionFemalle}>Production</button>
+        <button style={{ border: 'none', width: '33.33%', borderBottom: '1px solid #fff', padding: '5px' }} className="" id='ven-button-femalle' onClick={showVendueFemalle}>Vendue</button>
+        <button style={{ border: 'none', width: '33.33%', borderBottom: '1px solid #fff', padding: '5px' }} className="" id='mort-button-femalle' onClick={showMortFemalle}>Mort</button>
+      </div>
+      <div id="production-femalle">
+        {isWait ? <div className="text-center"><div className="spinner-border" role="status"><span className="sr-only"></span></div></div> : ""}
+        {femallesProduction && femallesProduction.map((femalle) => (
+          <Femalle state={femalle.state} key={femalle.id} img={femalle.img} id={femalle.id} race={femalle.race} age={femalle.age} />
+        ))}
+      </div>
+      <div id="mort-femalle" style={{ display: 'none' }}>
+        {isWait ? <div className="text-center"><div className="spinner-border" role="status"><span className="sr-only"></span></div></div> : ""}
+        {femallesMort && femallesMort.map((femalle) => (
+          <Femalle state={femalle.state} key={femalle.id} img={femalle.img} id={femalle.id} race={femalle.race} age={femalle.age} />
+        ))}
+      </div>
+      <div id="vendue-femalle" style={{ display: 'none' }}>
+        {isWait ? <div className="text-center"><div className="spinner-border" role="status"><span className="sr-only"></span></div></div> : ""}
+        {femallesVendue && femallesVendue.map((femalle) => (
+          <Femalle state={femalle.state} key={femalle.id} img={femalle.img} id={femalle.id} race={femalle.race} age={femalle.age} />
+        ))}
+      </div>
     </div>
+
+    <div>
+      <div className="col-12 m-auto row justify-content-between">
+        <h4 className="text-danger col-1 p-0">malles</h4>
+        <Link to="/managment/manager/malles/create" className="col-1 p-0"><img style={{ width: '25px', margin: '5px' }} src={add}></img></Link>
+      </div>
+      <div className="col-12 m-auto mb-2 row justify-content-between p-0 bg-dark bg-opacity-75 rounded" style={{ borderBottom: '1px solid #fff' }}>
+        <button style={{ border: 'none', width: '33.33%', borderBottom: '1px solid #fff', padding: '5px' }} className="" id='prod-button-malle' onClick={showProductionMalle}>Production</button>
+        <button style={{ border: 'none', width: '33.33%', borderBottom: '1px solid #fff', padding: '5px' }} className="" id='ven-button-malle' onClick={showVendueMalle}>Vendue</button>
+        <button style={{ border: 'none', width: '33.33%', borderBottom: '1px solid #fff', padding: '5px' }} className="" id='mort-button-malle' onClick={showMortMalle}>Mort</button>
+      </div>
+      <div id="production-malle">
+        {isWait ? <div className="text-center"><div className="spinner-border" role="status"><span className="sr-only"></span></div></div> : ""}
+        {mallesProduction && mallesProduction.map((malle) => (
+          <Malle state={malle.state} key={malle.id} img={malle.img} id={malle.id} race={malle.race} />
+        ))}
+      </div>
+      <div id="mort-malle" style={{ display: 'none' }}>
+        {isWait ? <div className="text-center"><div className="spinner-border" role="status"><span className="sr-only"></span></div></div> : ""}
+        {mallesMort && mallesMort.map((malle) => (
+          <Malle state={malle.state} key={malle.id} img={malle.img} id={malle.id} race={malle.race} />
+        ))}
+      </div>
+      <div id="vendue-malle" style={{ display: 'none' }}>
+        {isWait ? <div className="text-center"><div className="spinner-border" role="status"><span className="sr-only"></span></div></div> : ""}
+        {mallesVendue && mallesVendue.map((malle) => (
+          <Malle state={malle.state} key={malle.id} img={malle.img} id={malle.id} race={malle.race} />
+        ))}
+      </div>
     </div>
+
+  </div>
+</div>
+
     );
 }
 export default Parents

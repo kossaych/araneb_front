@@ -34,6 +34,29 @@ function LapinProductionUpdate(){
             }
             })
     },[])
+    function Races  ()  {
+        const options=[
+            
+            {label:race,value:race},
+            {label:'Gaint Flander',value:'Gaint Flander'},
+            {label:'Flemish Giant',value:'Flemish Giant'},
+            {label:'Chinchilla',value:'Chinchilla'},
+            {label:'New Zealand White',value:'New Zealand White'},
+            {label:'California',value:'California'},
+            {label:'Rex',value:'Rex'},
+
+    ]
+        return (
+            <select value={race} onChange={e => setRace(e.target.value)} className="border border-success bg-success bg-opacity-25 rounded">
+            {options[0].value != null ?  <option key={options[0].value} value={options[0].value} >{options[0].label}</option> : ''}
+            {options.map(o => (
+            (o.value!=race) ?<option key={o.value} value={o.value} >{o.label}</option>:""
+                
+            ))}
+            
+            </select>
+        );
+    };
 
     function LapinProductionUpdate(id){
         
@@ -67,29 +90,7 @@ function LapinProductionUpdate(){
     }
     })}
  
-    function Races  ()  {
-        const options=[
-            
-            {label:race,value:race},
-            {label:'Gaint Flander',value:'Gaint Flander'},
-            {label:'Flemish Giant',value:'Flemish Giant'},
-            {label:'Chinchilla',value:'Chinchilla'},
-            {label:'New Zealand White',value:'New Zealand White'},
-            {label:'California',value:'California'},
-            {label:'Rex',value:'Rex'},
-
-    ]
-        return (
-            <select value={race} onChange={e => setRace(e.target.value)} className="border border-success bg-success bg-opacity-25 rounded">
-            {options[0].value != null ?  <option key={options[0].value} value={options[0].value} >{options[0].label}</option> : ''}
-            {options.map(o => (
-            (o.value!=race) ?<option key={o.value} value={o.value} >{o.label}</option>:""
-                
-            ))}
-            
-            </select>
-        );
-    };
+   
 
 return(
     <div>

@@ -4,12 +4,12 @@ import HeaderLogIn from "../../../parts/header/index-loged-in";
 function CreateFemalleProduction(){
     const [isWait,setIsWait]=useState(true)
     const [message,setMessage]=useState('')
+
     const [race,setRace]=useState('')
     const [cage,setCage]=useState('')
     const [lapin,setLapin]=useState("")
     const [lapins,setLapins]=useState([])
-
-
+    const [img,setImg]=useState('')
 
 
     function createFemalle(){
@@ -27,27 +27,25 @@ function CreateFemalleProduction(){
         document.getElementById('date_acouplage').className="border border-success bg-success bg-opacity-25 rounded"
       }
       else{
-        document.getElementById('race').className="border border-success bg-success bg-opacity-25 rounded"
-        document.getElementById('cage').className="border border-success bg-success bg-opacity-25 rounded"
-        document.getElementById('date_acouplage').className="border border-success bg-success bg-opacity-25 rounded"
-      
+        setIsWait(false)
+        var data = new FormData()
+        data.append('image', img )
+        data.append('race',race)
+        data.append('lapin',lapin)
 
-      
-      setIsWait(false)
+  
       fetch("http://localhost:8000/manager/api/femalles/production",{
       method:'post',
       headers: {
-      'Content-Type': 'application/json',
       'Authorization': 'token ' + JSON.parse(localStorage.getItem('token')),
-
       },
-      body:JSON.stringify({
-        "race":race,
-        "lapin":lapin,
-      })
-      
+      body:data
       },
       )
+
+
+
+
       .then(response =>{
         setIsWait(true)
       if (response.status===201){
@@ -88,63 +86,55 @@ function CreateFemalleProduction(){
         );
     };
 
+      useEffect(()=>{
+        fetch("http://localhost:8000/manager/api/femalle/cage_vide",{
+            method:'get',
+            headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'token ' + JSON.parse(localStorage.getItem('token')),
+            },},
+            )
+            .then(response =>{
+            if (response.status==200){
+                return response.json()
+            }else{
+            return false
+            }
+            })
+            .then(data =>{
+            if (data === false){
+                window.location.href="/managment/manager/parents"
+            }else { 
+                setCage(data.cage_vide)
+            }
+            })
+    },[])
 
-    useEffect(()=>{
-      fetch("http://localhost:8000/manager/api/femalle/cage_vide",{
-          method:'get',
-          headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'token ' + JSON.parse(localStorage.getItem('token')),
-          },},
-          )
-          .then(response =>{
-          if (response.status==200){
-              return response.json()
-          }else{
-          return false
-          }
-          })
-          .then(data =>{
-          if (data === false){
-               window.location.href="/managment/manager/parents"
-          }else { 
-              setCage(data.cage_vide)
-          }
-          })
-  },[])
-
-
-  useEffect(()=>{
-    fetch("http://localhost:8000/manager/api/femalles/production",{
-        method:'get',
-        headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'token ' + JSON.parse(localStorage.getItem('token')),
-        },},
-        )
-        .then(response =>{
-        if (response.status==200){
-            return response.json()
-        }else{
-        return false
-        }
-        })
-        .then(data =>{
-        if (data === false){
-             window.location.href="/managment/manager/parents"
-        }else { 
-            setLapins(data)
-            setLapin(data[0].id)
-        }
-        })
-},[])
-  
-  
-
-
-
-
-
+      useEffect(()=>{
+        fetch("http://localhost:8000/manager/api/femalles/production",{
+            method:'get',
+            headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'token ' + JSON.parse(localStorage.getItem('token')),
+            },},
+            )
+            .then(response =>{
+            if (response.status==200){
+                return response.json()
+            }else{
+            return false
+            }
+            })
+            .then(data =>{
+            if (data === false){
+                window.location.href="/managment/manager/parents"
+            }else { 
+                setLapins(data)
+                setLapin(data[0].id)
+            }
+            })
+    },[])
+    
 
     return(
         <div>
@@ -175,7 +165,9 @@ function CreateFemalleProduction(){
        <label >race *</label><br></br>
        <Races/>
        </div>
-       
+       <br></br>
+          <input onChange={e => setImg(e.target.files[0])} className="border border-success bg-success bg-opacity-25 " style={{borderRadius:5+'px',}} type="file" id="image_input" />
+
       
 
 

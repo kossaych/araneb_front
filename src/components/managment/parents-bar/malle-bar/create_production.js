@@ -4,46 +4,35 @@ import HeaderLogIn from "../../../parts/header/index-loged-in";
 function CreateMalleProduction(){
     const [isWait,setIsWait]=useState(true)
     const [message,setMessage]=useState('')
+
     const [race,setRace]=useState('')
     const [cage,setCage]=useState('')
     const [lapin,setLapin]=useState("")
     const [lapins,setLapins]=useState([])
-    function createMalle(){
-      if(race===""){
-        document.getElementById('race').focus()
-        document.getElementById('race').className="border border-danger bg-success bg-opacity-25 rounded"
-        document.getElementById('cage').className="border border-success bg-success bg-opacity-25 rounded"
-        document.getElementById('date_acouplage').className="border border-success bg-success bg-opacity-25 rounded"
+    const [img,setImg]=useState('')
 
-      }
-      else if(cage===""){
-        document.getElementById('cage').focus()
-        document.getElementById('race').className="border border-success bg-success bg-opacity-25 rounded"
-        document.getElementById('cage').className="border border-danger bg-success bg-opacity-25 rounded"
-        document.getElementById('date_acouplage').className="border border-success bg-success bg-opacity-25 rounded"
-      }
-      else{
-        document.getElementById('race').className="border border-success bg-success bg-opacity-25 rounded"
-        document.getElementById('cage').className="border border-success bg-success bg-opacity-25 rounded"
-        document.getElementById('date_acouplage').className="border border-success bg-success bg-opacity-25 rounded"
-      
 
-      
-      setIsWait(false)
+    function createmalle(){
+
+        setIsWait(false)
+        var data = new FormData()
+        data.append('image', img )
+        data.append('race',race)
+        data.append('lapin',lapin)
+
+  
       fetch("http://localhost:8000/manager/api/malles/production",{
       method:'post',
       headers: {
-      'Content-Type': 'application/json',
       'Authorization': 'token ' + JSON.parse(localStorage.getItem('token')),
-
       },
-      body:JSON.stringify({
-        "race":race,
-        "lapin":lapin,
-      })
-      
+      body:data
       },
       )
+
+
+
+
       .then(response =>{
         setIsWait(true)
       if (response.status===201){
@@ -61,7 +50,7 @@ function CreateMalleProduction(){
         document.getElementById('message').style.display='block';
         setMessage(data)
       }
-      })}
+      })
     }
 
     function Races  ()  {
@@ -73,7 +62,7 @@ function CreateMalleProduction(){
             {label:'California',value:'California'},
             {label:'Rex',value:'Rex'},
 
-    ]
+    ] 
         return (
             <select value={race} onChange={e => setRace(e.target.value)} className="border border-success bg-success bg-opacity-25 rounded">
               {options.map(o => (
@@ -84,33 +73,31 @@ function CreateMalleProduction(){
         );
     };
 
+      useEffect(()=>{
+        fetch("http://localhost:8000/manager/api/malle/cage_vide",{
+            method:'get',
+            headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'token ' + JSON.parse(localStorage.getItem('token')),
+            },},
+            )
+            .then(response =>{
+            if (response.status==200){
+                return response.json()
+            }else{
+            return false
+            }
+            })
+            .then(data =>{
+            if (data === false){
+                window.location.href="/managment/manager/parents"
+            }else { 
+                setCage(data.cage_vide)
+            }
+            })
+    },[])
 
-    useEffect(()=>{
-      fetch("http://localhost:8000/manager/api/malle/cage_vide",{
-          method:'get',
-          headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'token ' + JSON.parse(localStorage.getItem('token')),
-          },},
-          )
-          .then(response =>{
-          if (response.status==200){
-              return response.json()
-          }else{
-          return false
-          }
-          })
-          .then(data =>{
-          if (data === false){
-               window.location.href="/managment/manager/parents"
-          }else { 
-              setCage(data.cage_vide)
-          }
-          })
-  },[])
-
-
-    useEffect(()=>{
+      useEffect(()=>{
         fetch("http://localhost:8000/manager/api/malles/production",{
             method:'get',
             headers: {
@@ -134,13 +121,7 @@ function CreateMalleProduction(){
             }
             })
     },[])
-  
-  
-
-
-
-
-
+    
 
     return(
         <div>
@@ -171,7 +152,9 @@ function CreateMalleProduction(){
        <label >race *</label><br></br>
        <Races/>
        </div>
-       
+       <br></br>
+          <input onChange={e => setImg(e.target.files[0])} className="border border-success bg-success bg-opacity-25 " style={{borderRadius:5+'px',}} type="file" id="image_input" />
+
       
 
 
@@ -179,7 +162,7 @@ function CreateMalleProduction(){
        <div className="row justify-content-around mt-2 col-12 m-auto"> 
                     
         
-        {isWait ? <button  className="col-5 m-1 btn btn-success" onClick={createMalle}>ajoputer</button>:<button  className="col-5 m-1 btn btn-success" disabled >
+        {isWait ? <button  className="col-5 m-1 btn btn-success" onClick={createmalle}>ajoputer</button>:<button  className="col-5 m-1 btn btn-success" disabled >
             <div className="spinner-border text-primary" role="status">
           <span className="sr-only"></span>
         </div>

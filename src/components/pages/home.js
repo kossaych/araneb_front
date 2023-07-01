@@ -2,7 +2,6 @@ import React from "react";
 import HeaderLogIn from "../parts/header/index-loged-in";
 import HeaderLogOut from "../parts/header/index-loged-out";
 import { Link } from "react-router-dom";
-import afiche from "./icons/afiche-2.jpg"
 function Home(){
   
 

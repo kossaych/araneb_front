@@ -1,11 +1,11 @@
 import React from "react";
-import logo from "./icons/logo.png"
-import home from "./icons/home.png"
+import logo from "../../../assets/icons/logo.png"
+import home from "../../../assets/icons/home.png"
 import { Link} from "react-router-dom";
-import about from "../../icons/about.png"
-import login from "../../icons/login.png"
-import register from "../../icons/register.png"
-import contact from "../../icons/contact.png"
+import about from "../../../assets/icons/about.png"
+import login from "../../../assets/icons/login.png"
+import register from "../../../assets/icons/register.png"
+import contact from "../../../assets/icons/contact.png"
 function HeaderLogOut(){
     const iconStyle={width:"25px", margin:"5px"}
     return(
