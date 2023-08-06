@@ -349,11 +349,13 @@ function Femalle(props){
                                 
                               </tr>
                               <tr>
+                                
                                 <th scope="row">coup de consomation aujourd'hui</th>
                                 <td colspan="2" className="text-primary">{coupConsAujourdhui}</td>
                                 
                               </tr>
                               <tr>
+
                                 <th scope="row">coup de consomation ce moi</th>
                                 <td colspan="2" className="text-primary">{coupConsMoi}</td>
                                 
@@ -369,16 +371,19 @@ function Femalle(props){
                           
                             <tbody>
                               <tr>
+
                                 <th scope="row"> totale de production</th>
                                 <td className="text-danger">{TP}</td>
                                 
                               </tr>
                               <tr>
+
                                 <th scope="row">totale des mortalité</th>
                                 <td className="text-danger">{TM}</td>
                                 
                               </tr>
                               <tr>
+
                                 <th scope="row">totale des mortalité a la naissanc</th>
                                 <td colspan="2" className="text-danger">{TMN}</td>
                                 

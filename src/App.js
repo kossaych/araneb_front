@@ -26,6 +26,7 @@ import LapinProductionUpdate from "./components/managment/production-bar/update_
 import CreateMalleProduction from "./components/managment/parents-bar/malle-bar/create_production";
 import OFFLINE from "./components/pages/ofline";
 import Parents from "./components/managment/parents-bar/femalle-bar";
+import DataTable from "./components/pages/500";
 function App()  {
 
   return (
@@ -65,30 +66,9 @@ function App()  {
           <Route path="managment/groupe/vaccin/:id/:cage" element={<VaccinLapins/>}></Route>
           <Route path="managment/groupe/lapin/update/:id/:cage" element={<LapinProductionUpdate/>}></Route>
 
-
           <Route path="home/statistique" element={<home/>}></Route>
 
-
-
-
-
-
-
-
-
-
-
-      
-
-
-
-
-
-
-
-
-
-
+          <Route path="data" element={<DataTable/>}></Route>
 
       </Routes>
 
